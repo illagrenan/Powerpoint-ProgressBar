@@ -9,7 +9,7 @@ using ProgressBar.Illagrenan;
 using ProgressBar.ProgressShape;
 
 
-namespace ProgressBar.RunninPresentation
+namespace ProgressBar.RunningPresentation
 {
     internal class Presentation
     {

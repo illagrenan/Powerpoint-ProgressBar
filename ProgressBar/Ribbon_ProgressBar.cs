@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using ProgressBar.DataStructs;
-using ProgressBar.RunninPresentation;
+using ProgressBar.RunningPresentation;
 using ProgressBar.ProgressShape;
 using System.Threading;
 using System;

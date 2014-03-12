@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33B55426-68FD-4EEA-A4C6-A6A0FC406095}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -10,10 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgressBar", "ProgressBar\ProgressBar.csproj", "{65A87C25-470A-4A9C-91F8-0A622670FC5D}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ProgressBarUML", "ProgressBarUML\ProgressBarUML.modelproj", "{96221377-BAF2-4088-A0B0-FF5C740DD1B8}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = ProgressBar.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -23,8 +24,15 @@ Global
 		{65A87C25-470A-4A9C-91F8-0A622670FC5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A87C25-470A-4A9C-91F8-0A622670FC5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A87C25-470A-4A9C-91F8-0A622670FC5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ProgressBar.vsmdi
 	EndGlobalSection
 EndGlobal

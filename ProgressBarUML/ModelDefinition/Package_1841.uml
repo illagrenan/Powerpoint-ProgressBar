@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="c3411966-4f4b-45f8-ab63-32ecf8d6ccc9"
+  name="MVCCore" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="6a51a479-8ef7-4c45-a8ef-1ce1a25ab6b9"
+        name="IView"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="1cb8b98c-b98f-4a66-9d4e-6063c8adb253"
+        name="IView&lt;​TController, TModel​&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="1e7b0f98-b977-4058-9f3f-a723d7b0ce8a"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="6a51a479-8ef7-4c45-a8ef-1ce1a25ab6b9"
+              LastKnownName="IView"
+              LastKnownLocation="Package_1841.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributes>
+          <property
+            Id="b8cce1af-e778-4bdc-8164-ebee2119b909"
+            name="TController"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="7de02a7c-4b51-4027-993d-b0b8a6494ab3"
+                LastKnownName="IController"
+                LastKnownLocation="Package_1841.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation
+            Id="526474fe-634c-4526-991b-203fdad11d84"
+            name="Register"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3eb5e69c-6bfd-4620-bac1-aea468785af3"
+                  name="model"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="24d2a91c-b634-4f04-bf6f-c90f6c8049dc"
+                      LastKnownName="TModel"
+                      LastKnownLocation="ProgressBarUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5d9ddeb9-1422-401f-abf6-0c10a569c9e9"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5bb83057-938c-47fa-9aee-0e4b33fa5396"
+                      LastKnownName="void"
+                      LastKnownLocation="ProgressBarUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="36c8b673-bcd7-437d-9794-7ba1360075bb"
+            name="Release"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="abeec123-da02-4483-989a-14e7b3187df8"
+                  name="model"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="24d2a91c-b634-4f04-bf6f-c90f6c8049dc"
+                      LastKnownName="TModel"
+                      LastKnownLocation="ProgressBarUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c25afe97-b484-4aaa-b98d-00ef72bf85cc"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="5bb83057-938c-47fa-9aee-0e4b33fa5396"
+                      LastKnownName="void"
+                      LastKnownLocation="ProgressBarUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7de02a7c-4b51-4027-993d-b0b8a6494ab3"
+        name="IController"
+        isAbstract="false"
+        isLeaf="false">
+        <description>asdfa
+asdf
+</description>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="07f9f47c-fbfc-4767-b8e4-ea2072ab6f86"
+        name="IModel"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="8b4dae40-0208-4e0e-a506-d946595e32a6"
+        name="IController&lt;TModel&gt; : IController"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="ae1e1f87-7a23-4484-908c-fbcd75866f5c"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="7de02a7c-4b51-4027-993d-b0b8a6494ab3"
+              LastKnownName="IController"
+              LastKnownLocation="Package_1841.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributes>
+          <property
+            Id="58fae549-1a3e-4d03-a510-c542fac13781"
+            name="TModel"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="07f9f47c-fbfc-4767-b8e4-ea2072ab6f86"
+                LastKnownName="IModel"
+                LastKnownLocation="Package_1841.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
