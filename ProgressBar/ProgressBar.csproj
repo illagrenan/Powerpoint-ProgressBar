@@ -41,7 +41,7 @@
     <PublishUrl>D:\ProgressBar\</PublishUrl>
     <InstallUrl>http://www.presentation-progressbar.com/files/latest/</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.43</ApplicationVersion>
+    <ApplicationVersion>1.0.0.44</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>

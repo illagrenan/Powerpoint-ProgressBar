@@ -6,45 +6,76 @@
   <MessageClass Name="Error" Label="Error" Option="Show errors" />
   <MessageClass Name="Property" Label="Property" Option="Show metadata" />
   <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
-  <Message Timestamp="2014-03-09T14:11:19" Importance="High" Text="Code generation or text transformation started." />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="Name = ClassTemplate" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="Overwrite = True" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="ProjectPath = ..\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="TargetName = {Name}" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
-  <Message Timestamp="2014-03-09T14:11:20" Importance="Medium" Text="ProgressBarUML's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'ProgressBarUML::Presentation' -  (Class), 'ProgressBarUML::Slide' -  (Class), 'ProgressBarUML::BuiltInBars::DottedBar' -  (Class), 'ProgressBarUML::BuiltInBars::StripeBar' -  (Class) " />
-  <Message Timestamp="2014-03-09T14:11:33" Importance="Medium" Text="Project Added: D:\Programming\C#\Powerpoint-ProgressBar\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
-  <Message Timestamp="2014-03-09T14:11:33" Importance="Medium" Text="'ProgressBarUML::Presentation' -  (Class) : success (file created) - D:\Programming\C#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\Presentation.cs" />
-  <Message Timestamp="2014-03-09T14:11:34" Importance="Medium" Text="'ProgressBarUML::Slide' -  (Class) : success (file created) - D:\Programming\C#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\Slide.cs" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Medium" Text="'ProgressBarUML::BuiltInBars::DottedBar' -  (Class) : success (file created) - D:\Programming\C#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BuiltInBars\DottedBar.cs" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Medium" Text="'ProgressBarUML::BuiltInBars::StripeBar' -  (Class) : success (file created) - D:\Programming\C#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BuiltInBars\StripeBar.cs" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="Name = InterfaceTemplate" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="Overwrite = True" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="ProjectPath = ..\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="TargetName = {Name}" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
-  <Message Timestamp="2014-03-09T14:11:35" Importance="Medium" Text="ProgressBarUML's Text Template Binding: 'InterfaceTemplate' will apply InterfaceTemplate.t4 to: 'ProgressBarUML::IBar' -  (Interface) " />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Medium" Text="'ProgressBarUML::IBar' -  (Interface) : success (file created) - D:\Programming\C#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\IBar.cs" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="Name = StructTemplate" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="Overwrite = True" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="ProjectPath = ..\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="TargetName = {Name}" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Medium" Text="ProgressBarUML's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'ProgressBarUML::Presentation' -  (Class), 'ProgressBarUML::Slide' -  (Class), 'ProgressBarUML::BuiltInBars::DottedBar' -  (Class), 'ProgressBarUML::BuiltInBars::StripeBar' -  (Class) " />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="'ProgressBarUML::Presentation' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="'ProgressBarUML::Slide' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::DottedBar' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2014-03-09T14:11:36" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::StripeBar' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
-  <Message Timestamp="2014-03-09T14:11:37" Importance="Diagnostic" Text="The selection included 4 elements which were not bound to a template." />
-  <Message Timestamp="2014-03-09T14:11:37" Importance="Diagnostic" Text="'ProgressBarUML::' -  (Association): no bound template." />
-  <Message Timestamp="2014-03-09T14:11:37" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::' -  (InterfaceRealization): no bound template." />
-  <Message Timestamp="2014-03-09T14:11:37" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::' -  (InterfaceRealization): no bound template." />
-  <Message Timestamp="2014-03-09T14:11:37" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars' -  (Package): no bound template." />
-  <Message Timestamp="2014-03-09T14:11:37" Importance="High" Text="Code generation complete. Errors: 0. Warnings: 0." />
+  <Message Timestamp="2014-03-14T20:33:59" Importance="High" Text="Code generation or text transformation started." />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="Name = ClassTemplate" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="ProjectPath = ..\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-03-14T20:34:00" Importance="Medium" Text="ProgressBarUML's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'ProgressBarUML::PresentationInfo' -  (Class), 'ProgressBarUML::PositionOptions' -  (Class), 'ProgressBarUML::Form' -  (Class), 'ProgressBarUML::BarView' -  (Class), 'ProgressBarUML::BarController' -  (Class), 'ProgressBarUML::BarModel' -  (Class), 'ProgressBarUML::BuiltInBars::DottedBar' -  (Class), 'ProgressBarUML::BuiltInBars::StripeBar' -  (Class) " />
+  <Message Timestamp="2014-03-14T20:34:10" Importance="Medium" Text="Project Added: D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
+  <Message Timestamp="2014-03-14T20:34:10" Importance="Medium" Text="'ProgressBarUML::PresentationInfo' -  (Class) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\PresentationInfo.cs" />
+  <Message Timestamp="2014-03-14T20:34:11" Importance="Medium" Text="'ProgressBarUML::PositionOptions' -  (Class) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\PositionOptions.cs" />
+  <Message Timestamp="2014-03-14T20:34:12" Importance="Medium" Text="'ProgressBarUML::Form' -  (Class) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\Form.cs" />
+  <Message Timestamp="2014-03-14T20:34:13" Importance="Medium" Text="'ProgressBarUML::BarView' -  (Class) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BarView.cs" />
+  <Message Timestamp="2014-03-14T20:34:13" Importance="Medium" Text="'ProgressBarUML::BarController' -  (Class) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BarController.cs" />
+  <Message Timestamp="2014-03-14T20:34:14" Importance="Medium" Text="'ProgressBarUML::BarModel' -  (Class) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BarModel.cs" />
+  <Message Timestamp="2014-03-14T20:34:14" Importance="Medium" Text="'ProgressBarUML::BuiltInBars::DottedBar' -  (Class) : success (file replaced) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BuiltInBars\DottedBar.cs" />
+  <Message Timestamp="2014-03-14T20:34:14" Importance="Medium" Text="'ProgressBarUML::BuiltInBars::StripeBar' -  (Class) : success (file replaced) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\BuiltInBars\StripeBar.cs" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="Name = InterfaceTemplate" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="ProjectPath = ..\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Medium" Text="ProgressBarUML's Text Template Binding: 'InterfaceTemplate' will apply InterfaceTemplate.t4 to: 'ProgressBarUML::MVCCore::IView' -  (Interface), 'ProgressBarUML::MVCCore::IController' -  (Interface), 'ProgressBarUML::MVCCore::IModel' -  (Interface), 'ProgressBarUML::MVCCore::IView&lt;​TController, TModel​&gt;' -  (Interface), 'ProgressBarUML::MVCCore::IController&lt;TModel&gt; : IController' -  (Interface), 'ProgressBarUML::IBarView&lt;IBarController, IBarModel&gt;' -  (Interface), 'ProgressBarUML::IBarController' -  (Interface), 'ProgressBarUML::IBarModel' -  (Interface), 'ProgressBarUML::IBar' -  (Interface) " />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Medium" Text="'ProgressBarUML::MVCCore::IView' -  (Interface) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\MVCCore\IView.cs" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Medium" Text="'ProgressBarUML::MVCCore::IController' -  (Interface) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\MVCCore\IController.cs" />
+  <Message Timestamp="2014-03-14T20:34:15" Importance="Medium" Text="'ProgressBarUML::MVCCore::IModel' -  (Interface) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\MVCCore\IModel.cs" />
+  <Error Timestamp="2014-03-14T20:34:16" Importance="High" Text="'ProgressBarUML::MVCCore::IView&lt;​TController, TModel​&gt;' -  (Interface) : unable to create file, Illegal characters in path. - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\MVCCore\IView&lt;​TController, TModel​&gt;.cs" />
+  <Message Timestamp="2014-03-14T20:34:16" Importance="Diagnostic" Text="'ProgressBarUML::MVCCore::IView&lt;​TController, TModel​&gt;' -  (Interface): no file generated because the 'AppliesToElement' method of the template 'InterfaceTemplate.t4' evaluated to false." />
+  <Error Timestamp="2014-03-14T20:34:16" Importance="High" Text="'ProgressBarUML::MVCCore::IController&lt;TModel&gt; : IController' -  (Interface) : unable to create file, Illegal characters in path. - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\MVCCore\IController&lt;TModel&gt; : IController.cs" />
+  <Message Timestamp="2014-03-14T20:34:16" Importance="Diagnostic" Text="'ProgressBarUML::MVCCore::IController&lt;TModel&gt; : IController' -  (Interface): no file generated because the 'AppliesToElement' method of the template 'InterfaceTemplate.t4' evaluated to false." />
+  <Error Timestamp="2014-03-14T20:34:16" Importance="High" Text="'ProgressBarUML::IBarView&lt;IBarController, IBarModel&gt;' -  (Interface) : unable to create file, Illegal characters in path. - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\IBarView&lt;IBarController, IBarModel&gt;.cs" />
+  <Message Timestamp="2014-03-14T20:34:16" Importance="Diagnostic" Text="'ProgressBarUML::IBarView&lt;IBarController, IBarModel&gt;' -  (Interface): no file generated because the 'AppliesToElement' method of the template 'InterfaceTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:16" Importance="Medium" Text="'ProgressBarUML::IBarController' -  (Interface) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\IBarController.cs" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Medium" Text="'ProgressBarUML::IBarModel' -  (Interface) : success (file created) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\IBarModel.cs" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Medium" Text="'ProgressBarUML::IBar' -  (Interface) : success (file replaced) - D:\Programming\c#\Powerpoint-ProgressBar\ProgressBarUMLLib\GeneratedCode\IBar.cs" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="Name = StructTemplate" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="ProjectPath = ..\ProgressBarUMLLib\ProgressBarUMLLib.csproj" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-03-14T20:34:17" Importance="Medium" Text="ProgressBarUML's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'ProgressBarUML::PresentationInfo' -  (Class), 'ProgressBarUML::PositionOptions' -  (Class), 'ProgressBarUML::Form' -  (Class), 'ProgressBarUML::BarView' -  (Class), 'ProgressBarUML::BarController' -  (Class), 'ProgressBarUML::BarModel' -  (Class), 'ProgressBarUML::BuiltInBars::DottedBar' -  (Class), 'ProgressBarUML::BuiltInBars::StripeBar' -  (Class) " />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::PresentationInfo' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::PositionOptions' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::Form' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BarView' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BarController' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BarModel' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::DottedBar' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::StripeBar' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="The selection included 16 elements which were not bound to a template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'1e7b0f98-b977-4058-9f3f-a723d7b0ce8a' -  (Generalization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::MVCCore' -  (Package): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ae1e1f87-7a23-4484-908c-fbcd75866f5c' -  (Generalization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'34992ffe-88da-4465-ba91-9c510f81ec44' -  (Comment): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'1a0b3206-3d58-4b46-932a-d90f2897bb53' -  (Generalization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'4db98a43-b28a-43ba-aed8-6ba450de3236' -  (Generalization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'c82a6475-271d-4697-8efe-ab3658a082f5' -  (Generalization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'78aa1bf9-c31a-4ed2-9196-9ae4bd142ddf' -  (Generalization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::' -  (Association): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'ProgressBarUML::BuiltInBars' -  (Package): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="Diagnostic" Text="'52a76c19-9753-43a8-9ef4-c2b75cca2daa' -  (Comment): no bound template." />
+  <Message Timestamp="2014-03-14T20:34:18" Importance="High" Text="Code generation complete. Errors: 3. Warnings: 0." />
 </Log>
