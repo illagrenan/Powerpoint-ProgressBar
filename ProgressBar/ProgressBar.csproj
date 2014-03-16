@@ -239,9 +239,12 @@
     </Compile>
     <Compile Include="Adapter\IPowerPointAdapter.cs" />
     <Compile Include="Adapter\PowerPointAdapter.cs" />
+    <Compile Include="Bar\BasicShape.cs" />
     <Compile Include="Bar\IBar.cs" />
+    <Compile Include="Bar\IBasicShape.cs" />
     <Compile Include="Bar\PositionOptions.cs" />
     <Compile Include="Bar\PresentationInfo.cs" />
+    <Compile Include="Bar\ShapeName.cs" />
     <Compile Include="BuiltInPresentation\DottedBar.cs" />
     <Compile Include="BuiltInPresentation\StrippedBar.cs" />
     <Compile Include="Controller\BarController.cs" />

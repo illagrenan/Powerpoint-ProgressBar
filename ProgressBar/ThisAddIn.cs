@@ -10,6 +10,7 @@ using System.Diagnostics;
 using ProgressBar.Model;
 using ProgressBar.Controller;
 using ProgressBar.Adapter;
+using ProgressBar.Bar;
 
 namespace ProgressBar
 {
@@ -22,9 +23,11 @@ namespace ProgressBar
 
             IBarModel model = new BarModel();
             IBarController controller = new BarController(model);
-            IPowerPointAdapter ap = new PowerPointAdapter(Globals.ThisAddIn.Application);
 
-            Globals.Ribbons.Ribbon1.Setup(controller, model, ap);
+            ShapeName sn = new ShapeName();
+            IPowerPointAdapter ap = new PowerPointAdapter(Globals.ThisAddIn.Application, sn);
+
+            Globals.Ribbons.Ribbon1.Setup(controller, model, ap, sn);
 
             // Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(UpdateStatusBarMessage.ShowStatusMessage);
         }

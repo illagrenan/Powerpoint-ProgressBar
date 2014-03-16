@@ -55,6 +55,8 @@ namespace ProgressBar
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.colorDialog_Foreground = new System.Windows.Forms.ColorDialog();
+            this.colorDialog_Background = new System.Windows.Forms.ColorDialog();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
@@ -112,6 +114,7 @@ namespace ProgressBar
             this.btn_ChangeForeground.Label = "Foreground";
             this.btn_ChangeForeground.Name = "btn_ChangeForeground";
             this.btn_ChangeForeground.ShowImage = true;
+            this.btn_ChangeForeground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeForeground_Click);
             // 
             // btn_ChangeBackground
             // 
@@ -119,6 +122,7 @@ namespace ProgressBar
             this.btn_ChangeBackground.Label = "Background";
             this.btn_ChangeBackground.Name = "btn_ChangeBackground";
             this.btn_ChangeBackground.ShowImage = true;
+            this.btn_ChangeBackground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeBackground_Click);
             // 
             // dropDown_BarHeight
             // 
@@ -226,6 +230,14 @@ namespace ProgressBar
             this.button3.Name = "button3";
             this.button3.ShowImage = true;
             // 
+            // colorDialog_Foreground
+            // 
+            this.colorDialog_Foreground.AnyColor = true;
+            // 
+            // colorDialog_Background
+            // 
+            this.colorDialog_Background.AnyColor = true;
+            // 
             // BarRibbon1
             // 
             this.Name = "BarRibbon1";
@@ -271,6 +283,8 @@ namespace ProgressBar
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
+        private System.Windows.Forms.ColorDialog colorDialog_Foreground;
+        private System.Windows.Forms.ColorDialog colorDialog_Background;
     }
 
     partial class ThisRibbonCollection

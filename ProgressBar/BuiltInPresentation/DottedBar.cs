@@ -17,5 +17,11 @@ namespace ProgressBar.BuiltInPresentation
         {
             throw new NotImplementedException();
         }
+
+
+        List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo ppp)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

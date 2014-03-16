@@ -36,12 +36,34 @@ namespace ProgressBar.Controller
 
         public void RemoveBarClicked()
         {
-            throw new NotImplementedException();
+            this.Model.RemoveBar();
         }
 
         public void ResizeBarClicked()
         {
             throw new NotImplementedException();
+        }
+        
+        public int[] GetSizes()
+        {
+            return this.Model.GetSizes();
+        }
+
+
+        public int GetDefaultSize()
+        {
+            return this.Model.GetDefaultSize();
+        }
+
+
+        public System.Drawing.Color ForegroundDefaultColor()
+        {
+            return this.Model.ForegroundDefaultColor();
+        }
+
+        public System.Drawing.Color BackgroundDefaultColor()
+        {
+            return this.Model.BackgroundDefaultColor();
         }
     }
 }

@@ -10,6 +10,6 @@ namespace ProgressBar.Bar
     {
         PositionOptions GetPositionOptions();
 
-        List<Shape> Render(int currentPosition, PresentationInfo ppp);
+        List<IBasicShape> Render(int currentPosition, PresentationInfo ppp);
     }
 }

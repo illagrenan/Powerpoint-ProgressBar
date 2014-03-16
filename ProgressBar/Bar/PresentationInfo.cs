@@ -7,10 +7,12 @@ namespace ProgressBar.Bar
 {
     public sealed class PresentationInfo
     {
-        public int Height { get; set; }
+        public float Height { get; set; }
 
-        public int Width { get; set; }
+        public float Width { get; set; }
 
         public int SlidesCount { get; set; }
+
+        public float UserSize { get; set; }
     }
 }

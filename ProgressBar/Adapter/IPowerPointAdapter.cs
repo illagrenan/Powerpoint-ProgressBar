@@ -8,7 +8,16 @@ namespace ProgressBar.Adapter
 {
     interface IPowerPointAdapter
     {
-        int PresentationWidth();
+        float PresentationWidth();
+
+        float PresentationHeight();
+
         void InsertShape(Shape s);
+
+        List<Slide> VisibleSlides();
+
+        int HiddenSlidesCount();
+
+        List<Shape> AddinShapes();
     }
 }

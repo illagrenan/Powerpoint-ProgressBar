@@ -13,5 +13,13 @@ namespace ProgressBar.Controller
         void AddBarClicked();
         void RemoveBarClicked();
         void ResizeBarClicked();
+
+        int[] GetSizes();
+
+       int GetDefaultSize();
+
+       System.Drawing.Color ForegroundDefaultColor();
+
+       System.Drawing.Color BackgroundDefaultColor();
     }
 }

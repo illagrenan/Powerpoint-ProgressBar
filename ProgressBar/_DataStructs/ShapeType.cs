@@ -1,10 +1,9 @@
 ﻿
 namespace ProgressBar.DataStructs
 {
-    enum ShapeType
+    public enum ShapeType : int
     {
-        BACKGROUND,
-        PROGRESS_BAR,
-        UNKNOWN
+        BACKGROUND = 1,
+        PROGRESS_BAR = 2
     }
 }
