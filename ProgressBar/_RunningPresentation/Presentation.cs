@@ -106,6 +106,8 @@ namespace ProgressBar.RunningPresentation
             Microsoft.Office.Core.MsoAutoShapeType shapeBackground = Microsoft.Office.Core.MsoAutoShapeType.msoShapeRectangle;
             Microsoft.Office.Core.MsoAutoShapeType shapeForeground = Microsoft.Office.Core.MsoAutoShapeType.msoShapeRectangle;
 
+            // shapeBackground.
+
             int stepCounter = 1;
             SolidBar.Instance.CountOfSteps = PresentationSlides.Count - HiddenSlidesCount;
             SolidBar.Instance.SetStepWidth(SlideWidth);
@@ -151,6 +153,8 @@ namespace ProgressBar.RunningPresentation
                     {
                         if ((stepCounter - 1) == i)
                         {
+
+
                             addedShapeBackground = oneSlide.Shapes.AddShape(shapeForeground,
                                                 5 + (5 * i) + (i * SolidBar.Instance.Height), topMargin,
                                                 SolidBar.Instance.Height,

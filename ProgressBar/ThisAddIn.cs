@@ -7,30 +7,28 @@ using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools;
 using System.Diagnostics;
+using ProgressBar.Model;
+using ProgressBar.Controller;
+using ProgressBar.Adapter;
 
 namespace ProgressBar
-{   
+{
 
     public partial class ThisAddIn
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            ProgressBar_Ribbon rb = new ProgressBar_Ribbon();
-            rb.btn_Add.Visible = false;
+            // http://stackoverflow.com/a/12030801/752142
 
-           /* UserControl1 uc = new UserControl1();
-            CustomTaskPane ct = CustomTaskPanes.Add(uc, "Progress Bar");
-            ct.Visible = true;            */
-            //Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(ProgressBar_Ribbon.);
+            IBarModel model = new BarModel();
+            IBarController controller = new BarController(model);
+            IPowerPointAdapter ap = new PowerPointAdapter(Globals.ThisAddIn.Application);
 
-            Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(UpdateStatusBarMessage.ShowStatusMessage);
+            Globals.Ribbons.Ribbon1.Setup(controller, model, ap);
+
+            // Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(UpdateStatusBarMessage.ShowStatusMessage);
         }
 
-        void Application_PresentationOpen(PowerPoint.Presentation Pres)
-        {
-            //throw new NotImplementedException();
-            Debug.WriteLine("Yeah!");
-        }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
@@ -47,7 +45,7 @@ namespace ProgressBar
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
-        
+
         #endregion
     }
 }

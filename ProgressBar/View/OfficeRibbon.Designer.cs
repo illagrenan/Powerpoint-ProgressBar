@@ -1,17 +1,15 @@
-﻿namespace ProgressBar
+﻿using ProgressBar.Controller;
+using ProgressBar.Model;
+namespace ProgressBar
 {
-    partial class ProgressBar_Ribbon : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class BarRibbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        public ProgressBar_Ribbon()
-            : base(Globals.Factory.GetRibbonFactory())
-        {
-            InitializeComponent();
-        }
+        
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -34,7 +32,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             this.tab1 = this.Factory.CreateRibbonTab();
@@ -53,16 +50,11 @@
             this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
             this.Theme = this.Factory.CreateRibbonGroup();
             this.gallery1 = this.Factory.CreateRibbonGallery();
-            this.button4 = this.Factory.CreateRibbonButton();
             this.group4 = this.Factory.CreateRibbonGroup();
             this.menu1 = this.Factory.CreateRibbonMenu();
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
-            this.colorDialog_Background = new System.Windows.Forms.ColorDialog();
-            this.colorDialog_Foreground = new System.Windows.Forms.ColorDialog();
-            this.detectBar = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
@@ -120,7 +112,6 @@
             this.btn_ChangeForeground.Label = "Foreground";
             this.btn_ChangeForeground.Name = "btn_ChangeForeground";
             this.btn_ChangeForeground.ShowImage = true;
-            this.btn_ChangeForeground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeForeground_Click);
             // 
             // btn_ChangeBackground
             // 
@@ -128,13 +119,11 @@
             this.btn_ChangeBackground.Label = "Background";
             this.btn_ChangeBackground.Name = "btn_ChangeBackground";
             this.btn_ChangeBackground.ShowImage = true;
-            this.btn_ChangeBackground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeBackground_Click);
             // 
             // dropDown_BarHeight
             // 
             this.dropDown_BarHeight.Label = "Height";
             this.dropDown_BarHeight.Name = "dropDown_BarHeight";
-            this.dropDown_BarHeight.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDown1_SelectionChanged);
             // 
             // group3
             // 
@@ -153,7 +142,6 @@
             this.btn_AlignTop.Label = "Top";
             this.btn_AlignTop.Name = "btn_AlignTop";
             this.btn_AlignTop.ShowImage = true;
-            this.btn_AlignTop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
             // 
             // btn_AlinBottom
             // 
@@ -161,13 +149,11 @@
             this.btn_AlinBottom.Label = "Bottom";
             this.btn_AlinBottom.Name = "btn_AlinBottom";
             this.btn_AlinBottom.ShowImage = true;
-            this.btn_AlinBottom.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignBottom_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.Label = "Disable on First slide";
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.checkBox1_Click);
             // 
             // btn_AlignLeft
             // 
@@ -176,7 +162,6 @@
             this.btn_AlignLeft.Name = "btn_AlignLeft";
             this.btn_AlignLeft.ShowImage = true;
             this.btn_AlignLeft.Visible = false;
-            this.btn_AlignLeft.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignLeft_Click);
             // 
             // btn_AlignRight
             // 
@@ -185,12 +170,10 @@
             this.btn_AlignRight.Name = "btn_AlignRight";
             this.btn_AlignRight.ShowImage = true;
             this.btn_AlignRight.Visible = false;
-            this.btn_AlignRight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignRight_Click);
             // 
             // Theme
             // 
             this.Theme.Items.Add(this.gallery1);
-            this.Theme.Items.Add(this.button4);
             this.Theme.Label = "Theme";
             this.Theme.Name = "Theme";
             // 
@@ -207,16 +190,6 @@
             this.gallery1.Name = "gallery1";
             this.gallery1.ShowImage = true;
             this.gallery1.ShowItemSelection = true;
-            this.gallery1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gallery1_Click);
-            // 
-            // button4
-            // 
-            this.button4.Enabled = false;
-            this.button4.Image = global::ProgressBar.Properties.Resources.error;
-            this.button4.Label = "Selected theme is beta.";
-            this.button4.Name = "button4";
-            this.button4.ShowImage = true;
-            this.button4.Visible = false;
             // 
             // group4
             // 
@@ -238,7 +211,6 @@
             this.button1.Label = "Visit AddIn Website";
             this.button1.Name = "button1";
             this.button1.ShowImage = true;
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -246,7 +218,6 @@
             this.button2.Label = "Report Bug";
             this.button2.Name = "button2";
             this.button2.ShowImage = true;
-            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -254,31 +225,14 @@
             this.button3.Label = "About";
             this.button3.Name = "button3";
             this.button3.ShowImage = true;
-            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
-            // colorDialog_Background
+            // BarRibbon1
             // 
-            this.colorDialog_Background.AnyColor = true;
-            // 
-            // colorDialog_Foreground
-            // 
-            this.colorDialog_Foreground.AnyColor = true;
-            // 
-            // detectBar
-            // 
-            this.detectBar.Tick += new System.EventHandler(this.detectBar_Tick);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // ProgressBar_Ribbon
-            // 
-            this.Name = "ProgressBar_Ribbon";
+            this.Name = "BarRibbon1";
             this.RibbonType = "Microsoft.PowerPoint.Presentation";
             this.Tabs.Add(this.tab1);
-            this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.ProgressBar_Ribbon_Load);
+            this.Close += new System.EventHandler(this.BarRibbon1_Close);
+            this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.BarRibbon1_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
             this.group1.ResumeLayout(false);
@@ -301,28 +255,29 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Add;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Remove;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeBackground;
-        private System.Windows.Forms.ColorDialog colorDialog_Background;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeForeground;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeBackground;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_BarHeight;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group3;
-        private System.Windows.Forms.ColorDialog colorDialog_Foreground;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignTop;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlinBottom;
-        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_BarHeight;
         internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox checkBox1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Theme;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGallery gallery1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
-        private System.Windows.Forms.Timer detectBar;
-        private System.Windows.Forms.Timer timer1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Theme;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGallery gallery1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
     }
 
-
+    partial class ThisRibbonCollection
+    {
+        internal BarRibbon1 Ribbon1
+        {
+            get { return this.GetRibbon<BarRibbon1>(); }
+        }
+    }
 }
