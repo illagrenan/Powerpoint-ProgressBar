@@ -203,7 +203,14 @@ namespace ProgressBar
             {
                 colorDialog_Foreground.Color = colorDialog_Foreground.Color;
 
-                // TODO recolor
+                this.powerpointAdapter.AddInShapes().ForEach(
+                    shape =>
+                    {
+                        if (this.sn.IsShapeForegroundShape(shape.Name))
+                        {
+                            shape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
+                        }
+                    });
             }
         }
 
@@ -213,7 +220,15 @@ namespace ProgressBar
             {
                 colorDialog_Background.Color = colorDialog_Background.Color;
 
-                // TODO recolor
+                this.powerpointAdapter.AddInShapes().ForEach(
+                    shape =>
+                    {
+                        if (this.sn.IsShapeBackgroundShape(shape.Name))
+                        {
+                            shape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
+                        }
+                    });
+
             }
         }
     }
