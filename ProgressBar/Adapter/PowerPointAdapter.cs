@@ -11,12 +11,12 @@ namespace ProgressBar.Adapter
     class PowerPointAdapter : IPowerPointAdapter
     {
         private Microsoft.Office.Interop.PowerPoint.Application powerPointApp;
-        private Bar.ShapeName sn;
+        private Bar.ShapeNameHelper nameHelper;
 
-        public PowerPointAdapter(Microsoft.Office.Interop.PowerPoint.Application powerPointApp, Bar.ShapeName sn)
+        public PowerPointAdapter(Microsoft.Office.Interop.PowerPoint.Application powerPointApp, Bar.ShapeNameHelper nameHelper)
         {
             this.powerPointApp = powerPointApp;
-             this.sn = sn;
+            this.nameHelper = nameHelper;
         }
 
 
@@ -37,19 +37,19 @@ namespace ProgressBar.Adapter
 
         public List<Slide> VisibleSlides()
         {
-            List<Slide> s = new List<Slide>();
+            List<Slide> visibleSlides = new List<Slide>();
 
-            foreach (Slide item in powerPointApp.ActivePresentation.Slides)
+            foreach (Slide slide in powerPointApp.ActivePresentation.Slides)
             {
-                if (item.SlideShowTransition.Hidden == Microsoft.Office.Core.MsoTriState.msoTrue)
+                if (slide.SlideShowTransition.Hidden == Microsoft.Office.Core.MsoTriState.msoTrue)
                 {
                     continue;
                 }
 
-                s.Add(item);
+                visibleSlides.Add(slide);
             }
 
-            return s;
+            return visibleSlides;
         }
 
         public int HiddenSlidesCount()
@@ -69,27 +69,23 @@ namespace ProgressBar.Adapter
         }
 
 
-        public List<Shape> AddinShapes()
+        public List<Shape> AddInShapes()
         {
-            List<Shape> s = new List<Shape>();
+            List<Shape> addInShapes = new List<Shape>();
 
-            foreach (Slide item in this.VisibleSlides())
+            foreach (Slide slide in this.VisibleSlides())
             {
-
-                foreach (Shape sh in item.Shapes)
+                foreach (Shape shape in slide.Shapes)
                 {
 
-                    //if (this.)
-
-                    if (this.sn.IsAddInShape(sh.Name))
+                    if (this.nameHelper.IsShapeAddInShape(shape.Name))
                     {
-                        s.Add(sh);
+                        addInShapes.Add(shape);
                     }
-
                 }
             }
 
-            return s;
+            return addInShapes;
         }
     }
 }

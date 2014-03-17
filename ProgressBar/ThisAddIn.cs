@@ -21,13 +21,13 @@ namespace ProgressBar
         {
             // http://stackoverflow.com/a/12030801/752142
 
-            IBarModel model = new BarModel();
-            IBarController controller = new BarController(model);
+            IBarModel barModel = new BarModel();
+            IBarController barController = new BarController(barModel);
 
-            ShapeName sn = new ShapeName();
-            IPowerPointAdapter ap = new PowerPointAdapter(Globals.ThisAddIn.Application, sn);
+            ShapeNameHelper nameHelper = new ShapeNameHelper();
+            IPowerPointAdapter powerpointAdapter = new PowerPointAdapter(Globals.ThisAddIn.Application, nameHelper);
 
-            Globals.Ribbons.Ribbon1.Setup(controller, model, ap, sn);
+            Globals.Ribbons.Ribbon1.Setup(barController, barModel, powerpointAdapter, nameHelper);
 
             // Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(UpdateStatusBarMessage.ShowStatusMessage);
         }

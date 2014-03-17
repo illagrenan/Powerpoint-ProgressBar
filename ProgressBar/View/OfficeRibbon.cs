@@ -21,14 +21,14 @@ namespace ProgressBar
         private IBarModel model;
         public IBarController Controller { get; set; }
         private IPowerPointAdapter powerpointAdapter;
-        ShapeName sn;
+        ShapeNameHelper sn;
 
         #region MVCLogic
         internal void Setup(
                             IBarController controller,
                             IBarModel model,
                             IPowerPointAdapter powerpointAdapter,
-                            ShapeName sn
+                            ShapeNameHelper sn
                             )
         {
             this.model = new BarModel();
@@ -79,12 +79,12 @@ namespace ProgressBar
                     {
                         case ProgressBar.DataStructs.ShapeType.BACKGROUND:
                             addedShape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
-                            addedShape.Name = this.sn.GetBackgroundName();
+                            addedShape.Name = this.sn.GetBackgroundShapeName();
 
                             break;
                         case ProgressBar.DataStructs.ShapeType.PROGRESS_BAR:
                             addedShape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
-                            addedShape.Name = this.sn.GetForegroundName();
+                            addedShape.Name = this.sn.GetForegroundShapeName();
                             break;
                         default:
                             throw new InvalidStateException();
@@ -102,7 +102,7 @@ namespace ProgressBar
 
         void model_BarRemovedEvent()
         {
-            List<Shape> s = this.powerpointAdapter.AddinShapes();
+            List<Shape> s = this.powerpointAdapter.AddInShapes();
             s.ForEach(e => e.Delete());
         }
 
