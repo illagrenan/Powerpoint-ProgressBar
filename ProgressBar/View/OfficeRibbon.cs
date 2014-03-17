@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
-using ProgressBar.View;
-using ProgressBar.Model;
-using ProgressBar.Controller;
-using System.Windows.Forms;
-using System.Diagnostics;
 using ProgressBar.Adapter;
-using Microsoft.Office.Interop.PowerPoint;
 using ProgressBar.Bar;
-using System.Drawing;
+using ProgressBar.Controller;
 using ProgressBar.CustomExceptions;
+using ProgressBar.Model;
+using ProgressBar.View;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace ProgressBar
 {
@@ -21,7 +19,7 @@ namespace ProgressBar
         private IBarModel model;
         public IBarController Controller { get; set; }
         private IPowerPointAdapter powerpointAdapter;
-        ShapeNameHelper sn;
+        ShapeNameHelper nameHelper;
 
         #region MVCLogic
         internal void Setup(
@@ -34,7 +32,7 @@ namespace ProgressBar
             this.model = new BarModel();
             this.Controller = new BarController(this.model);
             this.powerpointAdapter = powerpointAdapter;
-            this.sn = sn;
+            this.nameHelper = sn;
         }
 
         public void Register(IBarModel model)
@@ -79,12 +77,12 @@ namespace ProgressBar
                     {
                         case ProgressBar.DataStructs.ShapeType.BACKGROUND:
                             addedShape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
-                            addedShape.Name = this.sn.GetBackgroundShapeName();
+                            addedShape.Name = this.nameHelper.GetBackgroundShapeName();
 
                             break;
                         case ProgressBar.DataStructs.ShapeType.PROGRESS_BAR:
                             addedShape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
-                            addedShape.Name = this.sn.GetForegroundShapeName();
+                            addedShape.Name = this.nameHelper.GetForegroundShapeName();
                             break;
                         default:
                             throw new InvalidStateException();
@@ -198,7 +196,6 @@ namespace ProgressBar
 
         private void btn_ChangeForeground_Click(object sender, RibbonControlEventArgs e)
         {
-
             if (DialogResult.OK == colorDialog_Foreground.ShowDialog())
             {
                 colorDialog_Foreground.Color = colorDialog_Foreground.Color;
@@ -206,7 +203,7 @@ namespace ProgressBar
                 this.powerpointAdapter.AddInShapes().ForEach(
                     shape =>
                     {
-                        if (this.sn.IsShapeForegroundShape(shape.Name))
+                        if (this.nameHelper.IsShapeForegroundShape(shape.Name))
                         {
                             shape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
                         }
@@ -223,7 +220,7 @@ namespace ProgressBar
                 this.powerpointAdapter.AddInShapes().ForEach(
                     shape =>
                     {
-                        if (this.sn.IsShapeBackgroundShape(shape.Name))
+                        if (this.nameHelper.IsShapeBackgroundShape(shape.Name))
                         {
                             shape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
                         }
