@@ -11,5 +11,7 @@ namespace ProgressBar.Bar
         PositionOptions GetPositionOptions();
 
         List<IBasicShape> Render(int currentPosition, PresentationInfo ppp);
+
+        IBarInfo GetInfo();
     }
 }

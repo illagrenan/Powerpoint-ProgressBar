@@ -239,8 +239,10 @@
     </Compile>
     <Compile Include="Adapter\IPowerPointAdapter.cs" />
     <Compile Include="Adapter\PowerPointAdapter.cs" />
+    <Compile Include="Bar\BarInfo.cs" />
     <Compile Include="Bar\BasicShape.cs" />
     <Compile Include="Bar\IBar.cs" />
+    <Compile Include="Bar\IBarInfo.cs" />
     <Compile Include="Bar\IBasicShape.cs" />
     <Compile Include="Bar\PositionOptions.cs" />
     <Compile Include="Bar\PresentationInfo.cs" />
@@ -262,6 +264,8 @@
       <DependentUpon>OfficeRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IBarView.cs" />
+    <Compile Include="_CustomExceptions\NoActiveBarException.cs" />
+    <Compile Include="_CustomExceptions\NoRegisteredBarException.cs" />
     <Compile Include="_DataStructs\Theme.cs" />
     <Compile Include="_ProgressShape\DottedBar.cs" />
     <Compile Include="_ProgressShape\PresentationBar.cs" />

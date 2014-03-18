@@ -1,4 +1,6 @@
-﻿using ProgressBar.Model;
+﻿using ProgressBar.Bar;
+using ProgressBar.CustomExceptions;
+using ProgressBar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,6 @@ namespace ProgressBar.Controller
             this.model = model;
         }
 
-        public void PlusButtonClicked(int a, int b)
-        {
-            this.model.Add(a, b);
-        }
 
         public IBarModel Model
         {
@@ -28,10 +26,16 @@ namespace ProgressBar.Controller
             }
         }
 
-
-        public void AddBarClicked()
+        public void AddBarClicked(string selectedTheme)
         {
-            this.Model.CreateStrippedPresentation();
+            IBar newTheme = GetBarByString(selectedTheme);
+
+            if (this.Model.HasProgressBar())
+            {
+                this.Model.RemoveBar();
+            }
+
+            this.Model.Add(newTheme);
         }
 
         public void RemoveBarClicked()
@@ -43,7 +47,7 @@ namespace ProgressBar.Controller
         {
             throw new NotImplementedException();
         }
-        
+
         public int[] GetSizes()
         {
             return this.Model.GetSizes();
@@ -64,6 +68,43 @@ namespace ProgressBar.Controller
         public System.Drawing.Color BackgroundDefaultColor()
         {
             return this.Model.BackgroundDefaultColor();
+        }
+
+
+        public void ChangeTheme(string selectedTheme)
+        {
+            IBar newTheme = GetBarByString(selectedTheme);
+
+            if (this.Model.HasProgressBar() && (newTheme.GetInfo().Name != this.Model.GetCurrentBar().GetInfo().Name))
+            {
+                this.Model.ChangeTheme(newTheme);
+            }
+
+        }
+
+        private IBar GetBarByString(string selectedTheme)
+        {
+            IBar newTheme = null;
+
+            foreach (var item in this.Model.GetRegisteredBars())
+            {
+                if (selectedTheme == item.GetInfo().Name)
+                {
+                    newTheme = item;
+                }
+            }
+
+            if (newTheme == null)
+            {
+                // TODO Explain why
+                throw new InvalidStateException();
+            }
+            return newTheme;
+        }
+
+        public void GetRegistered()
+        {
+            this.Model.RegisterBars();
         }
     }
 }

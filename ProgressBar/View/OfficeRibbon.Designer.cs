@@ -32,8 +32,6 @@ namespace ProgressBar
         /// </summary>
         private void InitializeComponent()
         {
-            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
-            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btn_Add = this.Factory.CreateRibbonButton();
@@ -184,16 +182,11 @@ namespace ProgressBar
             // gallery1
             // 
             this.gallery1.Image = global::ProgressBar.Properties.Resources.select_by_color;
-            ribbonDropDownItemImpl1.Image = global::ProgressBar.Properties.Resources.theme_solid;
-            ribbonDropDownItemImpl1.Label = "Solid";
-            ribbonDropDownItemImpl2.Image = global::ProgressBar.Properties.Resources.theme_dotted;
-            ribbonDropDownItemImpl2.Label = "Dotted";
-            this.gallery1.Items.Add(ribbonDropDownItemImpl1);
-            this.gallery1.Items.Add(ribbonDropDownItemImpl2);
             this.gallery1.Label = "Bar theme";
             this.gallery1.Name = "gallery1";
             this.gallery1.ShowImage = true;
             this.gallery1.ShowItemSelection = true;
+            this.gallery1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gallery1_Click);
             // 
             // group4
             // 

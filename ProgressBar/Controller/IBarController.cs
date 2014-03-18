@@ -9,17 +9,22 @@ namespace ProgressBar.Controller
 {
     public interface IBarController : IController<IBarModel>
     {
-        void PlusButtonClicked(int a, int b);
-        void AddBarClicked();
+
+
         void RemoveBarClicked();
         void ResizeBarClicked();
+        void GetRegistered();
 
         int[] GetSizes();
 
-       int GetDefaultSize();
+        int GetDefaultSize();
 
-       System.Drawing.Color ForegroundDefaultColor();
+        System.Drawing.Color ForegroundDefaultColor();
 
-       System.Drawing.Color BackgroundDefaultColor();
+        System.Drawing.Color BackgroundDefaultColor();
+
+        void ChangeTheme(string selectedTheme);
+
+        void AddBarClicked(string selectedTheme);
     }
 }

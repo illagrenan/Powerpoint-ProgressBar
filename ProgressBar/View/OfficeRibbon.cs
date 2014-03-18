@@ -39,6 +39,14 @@ namespace ProgressBar
         {
             model.BarCreatedEvent += model_BarCreatedEvent;
             model.BarRemovedEvent += model_BarRemovedEvent;
+            model.RegisteredBarsEvent += model_RegisteredBarEvents;
+            model.BarChangedEvent += model_Changed;
+        }
+
+        private void model_Changed(IBar obj)
+        {
+            this.Controller.RemoveBarClicked();
+            this.model_BarCreatedEvent(obj);
         }
 
 
@@ -78,13 +86,16 @@ namespace ProgressBar
                         case ProgressBar.DataStructs.ShapeType.BACKGROUND:
                             addedShape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
                             addedShape.Name = this.nameHelper.GetBackgroundShapeName();
-
                             break;
+
                         case ProgressBar.DataStructs.ShapeType.PROGRESS_BAR:
                             addedShape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
                             addedShape.Name = this.nameHelper.GetForegroundShapeName();
                             break;
+
                         default:
+
+                            // TODO Explain what happened
                             throw new InvalidStateException();
                     }
 
@@ -100,8 +111,8 @@ namespace ProgressBar
 
         void model_BarRemovedEvent()
         {
-            List<Shape> s = this.powerpointAdapter.AddInShapes();
-            s.ForEach(e => e.Delete());
+            List<Shape> shape = this.powerpointAdapter.AddInShapes();
+            shape.ForEach(e => e.Delete());
         }
 
 
@@ -129,7 +140,22 @@ namespace ProgressBar
 
             this.FillDropDown();
             this.SetDropDownDefaultSize();
-            this.SetDefaultColors(); ;
+            this.SetDefaultColors();
+
+            this.Controller.GetRegistered();
+        }
+
+        private void model_RegisteredBarEvents(List<IBar> bars)
+        {
+            foreach (IBar item in bars)
+            {
+
+                Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItem = this.Factory.CreateRibbonDropDownItem();
+                ribbonDropDownItem.Image = item.GetInfo().Image;
+                ribbonDropDownItem.Label = item.GetInfo().Name;
+
+                this.gallery1.Items.Add(ribbonDropDownItem);
+            }
         }
 
         private void SetDefaultColors()
@@ -186,7 +212,8 @@ namespace ProgressBar
 
         private void btn_Add_Click(object sender, RibbonControlEventArgs e)
         {
-            this.Controller.AddBarClicked();
+            string selectedTheme = GetSelectedTheme();
+            this.Controller.AddBarClicked(selectedTheme);
         }
 
         private void btn_Remove_Click(object sender, RibbonControlEventArgs e)
@@ -227,6 +254,18 @@ namespace ProgressBar
                     });
 
             }
+        }
+
+        private void gallery1_Click(object sender, RibbonControlEventArgs e)
+        {
+            string selectedTheme = GetSelectedTheme();
+            this.Controller.ChangeTheme(selectedTheme);
+        }
+
+        private string GetSelectedTheme()
+        {
+            string selectedTheme = gallery1.SelectedItem.ToString();
+            return selectedTheme;
         }
     }
 }

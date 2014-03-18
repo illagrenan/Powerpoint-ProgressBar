@@ -1,6 +1,7 @@
 ﻿using ProgressBar.Bar;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -10,11 +11,18 @@ namespace ProgressBar.BuiltInPresentation
     {
         private PresentationInfo presentationInfo;
         private PositionOptions p;
+        private IBarInfo info;
 
         public StrippedBar()
         {
             this.p = new PositionOptions();
             this.p.Bottom = this.p.Left = this.p.Right = this.p.Top = true;
+
+
+            Image im = global::ProgressBar.Properties.Resources.theme_solid;
+            string lab = "Stripped Bar";
+
+            this.info = new BarInfo(im, lab);
         }
 
         public PositionOptions GetPositionOptions()
@@ -70,6 +78,12 @@ namespace ProgressBar.BuiltInPresentation
             shapes.Add(this.MakeProgressBar(currentPosition));
 
             return shapes;
+        }
+
+
+        public IBarInfo GetInfo()
+        {
+            return this.info;
         }
     }
 }

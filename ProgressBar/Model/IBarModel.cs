@@ -10,13 +10,19 @@ namespace ProgressBar.Model
     public interface IBarModel : IModel
     {
         event Action<IBar> BarCreatedEvent;
+        event Action<List<IBar>> RegisteredBarsEvent;
         event Action BarRemovedEvent;
-        int Add(int a, int b);
+        event Action<Bar.IBar> BarChangedEvent;
+        void Add(IBar barToAdd);
 
         void CreateStrippedPresentation();
 
         void RemoveBar();
 
+        bool HasProgressBar();
+
+        List<IBar> GetRegisteredBars();
+        void RegisterBars();
 
         int[] GetSizes();
 
@@ -25,5 +31,9 @@ namespace ProgressBar.Model
         System.Drawing.Color ForegroundDefaultColor();
 
         System.Drawing.Color BackgroundDefaultColor();
+
+        void ChangeTheme(IBar t);
+
+        IBar GetCurrentBar();
     }
 }
