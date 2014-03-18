@@ -3,6 +3,7 @@ using ProgressBar.CustomExceptions;
 using ProgressBar.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -30,9 +31,12 @@ namespace ProgressBar.Controller
         {
             IBar newTheme = GetBarByString(selectedTheme);
 
+            Debug.WriteLine(string.Format("AddBarClicked theme=\"{0}\"", newTheme.GetInfo().Name));
+
             if (this.Model.HasProgressBar())
             {
                 this.Model.RemoveBar();
+                Debug.WriteLine("AddBarClicked: Removing old theme");
             }
 
             this.Model.Add(newTheme);
@@ -40,6 +44,7 @@ namespace ProgressBar.Controller
 
         public void RemoveBarClicked()
         {
+            Debug.WriteLine("RemoveBarClicked");
             this.Model.RemoveBar();
         }
 
@@ -71,15 +76,25 @@ namespace ProgressBar.Controller
         }
 
 
-        public void ChangeTheme(string selectedTheme)
+        public void ChangeThemeClicked(string selectedTheme)
         {
             IBar newTheme = GetBarByString(selectedTheme);
 
+            Debug.WriteLine(string.Format("ChangeThemeClicked param=\"{0}\"", selectedTheme));
+
             if (this.Model.HasProgressBar() && (newTheme.GetInfo().Name != this.Model.GetCurrentBar().GetInfo().Name))
             {
+                Debug.WriteLine(String.Format("Changing theme FROM=\"{0}\" TO=\"{1}\"",
+                                                this.Model.GetCurrentBar().GetInfo().Name,
+                                                newTheme.GetInfo().Name));
+
+                this.Model.RemoveBar();
                 this.Model.ChangeTheme(newTheme);
             }
-
+            else
+            {
+                Debug.WriteLine("Ignoring change theme event. Nothing changed");
+            }
         }
 
         private IBar GetBarByString(string selectedTheme)

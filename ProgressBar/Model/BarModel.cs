@@ -102,7 +102,13 @@ namespace ProgressBar.Model
 
         public void ChangeTheme(Bar.IBar t)
         {
-            throw new NotImplementedException();
+            this.currentBar = t;
+            this.hasBar = true;
+
+            if (this.BarChangedEvent != null)
+            {
+                this.BarChangedEvent(t);
+            }
         }
 
         public Bar.IBar GetCurrentBar()

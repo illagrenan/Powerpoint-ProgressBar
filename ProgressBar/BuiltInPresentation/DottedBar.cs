@@ -34,7 +34,18 @@ namespace ProgressBar.BuiltInPresentation
 
         List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo ppp)
         {
-            throw new NotImplementedException();
+            List<IBasicShape> shapes = new List<IBasicShape>();
+
+            IBasicShape i = new BasicShape();
+            i.Height = i.Width = 42;
+            i.Top = 0;
+            i.Left = 0;
+            i.Type = Microsoft.Office.Core.MsoAutoShapeType.msoShapeRectangle;
+            i.ColorType = DataStructs.ShapeType.BACKGROUND;
+
+            shapes.Add(i);
+
+            return shapes;
         }
 
 

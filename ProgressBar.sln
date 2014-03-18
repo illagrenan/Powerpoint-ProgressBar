@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgressBar", "ProgressBar\
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ProgressBarUML", "ProgressBarUML\ProgressBarUML.modelproj", "{96221377-BAF2-4088-A0B0-FF5C740DD1B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgressBarTest", "ProgressBarTest\ProgressBarTest.csproj", "{C66517E9-4D94-49A6-AF76-6524667A1D59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96221377-BAF2-4088-A0B0-FF5C740DD1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C66517E9-4D94-49A6-AF76-6524667A1D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C66517E9-4D94-49A6-AF76-6524667A1D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C66517E9-4D94-49A6-AF76-6524667A1D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C66517E9-4D94-49A6-AF76-6524667A1D59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

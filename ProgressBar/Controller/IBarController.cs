@@ -23,7 +23,7 @@ namespace ProgressBar.Controller
 
         System.Drawing.Color BackgroundDefaultColor();
 
-        void ChangeTheme(string selectedTheme);
+        void ChangeThemeClicked(string selectedTheme);
 
         void AddBarClicked(string selectedTheme);
     }

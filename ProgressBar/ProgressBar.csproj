@@ -231,6 +231,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox1.Designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
     <Compile Include="AboutInformations.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,7 @@
     <Compile Include="Controller\BarController.cs" />
     <Compile Include="Controller\IBarController.cs" />
     <Compile Include="Controller\_StatusBarMessage\UpdateStatusBarMessage.cs" />
+    <Compile Include="extension\ExtensionMethods.cs" />
     <Compile Include="Model\BarModel.cs" />
     <Compile Include="Model\IBarModel.cs" />
     <Compile Include="MVC\IController.cs" />
@@ -266,6 +273,7 @@
     <Compile Include="View\IBarView.cs" />
     <Compile Include="_CustomExceptions\NoActiveBarException.cs" />
     <Compile Include="_CustomExceptions\NoRegisteredBarException.cs" />
+    <Compile Include="_CustomExceptions\ObsoleteException.cs" />
     <Compile Include="_DataStructs\Theme.cs" />
     <Compile Include="_ProgressShape\DottedBar.cs" />
     <Compile Include="_ProgressShape\PresentationBar.cs" />
@@ -285,6 +293,9 @@
     <Compile Include="Ribbon_ProgressBar.Designer.cs">
       <DependentUpon>Ribbon_ProgressBar.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AboutInformations.resx">
       <DependentUpon>AboutInformations.cs</DependentUpon>
     </EmbeddedResource>

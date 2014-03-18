@@ -37,6 +37,10 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
+            this.colorDialog_Background = new System.Windows.Forms.ColorDialog();
+            this.colorDialog_Foreground = new System.Windows.Forms.ColorDialog();
+            this.detectBar = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btn_Add = this.Factory.CreateRibbonButton();
@@ -59,16 +63,29 @@
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
-            this.colorDialog_Background = new System.Windows.Forms.ColorDialog();
-            this.colorDialog_Foreground = new System.Windows.Forms.ColorDialog();
-            this.detectBar = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
             this.group3.SuspendLayout();
             this.Theme.SuspendLayout();
             this.group4.SuspendLayout();
+            // 
+            // colorDialog_Background
+            // 
+            this.colorDialog_Background.AnyColor = true;
+            // 
+            // colorDialog_Foreground
+            // 
+            this.colorDialog_Foreground.AnyColor = true;
+            // 
+            // detectBar
+            // 
+            this.detectBar.Tick += new System.EventHandler(this.detectBar_Tick);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tab1
             // 
@@ -255,23 +272,6 @@
             this.button3.Name = "button3";
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
-            // 
-            // colorDialog_Background
-            // 
-            this.colorDialog_Background.AnyColor = true;
-            // 
-            // colorDialog_Foreground
-            // 
-            this.colorDialog_Foreground.AnyColor = true;
-            // 
-            // detectBar
-            // 
-            this.detectBar.Tick += new System.EventHandler(this.detectBar_Tick);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ProgressBar_Ribbon
             // 

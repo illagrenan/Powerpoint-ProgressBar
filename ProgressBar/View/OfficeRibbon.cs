@@ -1,5 +1,6 @@
 ﻿using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
+using ProgressBar._CustomExceptions;
 using ProgressBar.Adapter;
 using ProgressBar.Bar;
 using ProgressBar.Controller;
@@ -45,7 +46,6 @@ namespace ProgressBar
 
         private void model_Changed(IBar obj)
         {
-            this.Controller.RemoveBarClicked();
             this.model_BarCreatedEvent(obj);
         }
 
@@ -143,6 +143,7 @@ namespace ProgressBar
             this.SetDefaultColors();
 
             this.Controller.GetRegistered();
+
         }
 
         private void model_RegisteredBarEvents(List<IBar> bars)
@@ -214,15 +215,27 @@ namespace ProgressBar
         {
             string selectedTheme = GetSelectedTheme();
             this.Controller.AddBarClicked(selectedTheme);
+            SwapB();
+        }
+
+        private void SwapB()
+        {
+            this.btn_Add.Enabled = !(this.btn_Add.Enabled);
+            this.btn_Remove.Enabled = !(this.btn_Remove.Enabled);
         }
 
         private void btn_Remove_Click(object sender, RibbonControlEventArgs e)
         {
             this.Controller.RemoveBarClicked();
+            this.SwapB();
         }
 
         private void btn_ChangeForeground_Click(object sender, RibbonControlEventArgs e)
         {
+
+            // Microsoft.Office.Tools.Ribbon.RibbonButton b = (Microsoft.Office.Tools.Ribbon.RibbonButton)sender;
+                       // title.Contains("string", StringComparison.OrdinalIgnoreCase);
+
             if (DialogResult.OK == colorDialog_Foreground.ShowDialog())
             {
                 colorDialog_Foreground.Color = colorDialog_Foreground.Color;
@@ -240,6 +253,7 @@ namespace ProgressBar
 
         private void btn_ChangeBackground_Click(object sender, RibbonControlEventArgs e)
         {
+            
             if (DialogResult.OK == colorDialog_Background.ShowDialog())
             {
                 colorDialog_Background.Color = colorDialog_Background.Color;
@@ -259,13 +273,24 @@ namespace ProgressBar
         private void gallery1_Click(object sender, RibbonControlEventArgs e)
         {
             string selectedTheme = GetSelectedTheme();
-            this.Controller.ChangeTheme(selectedTheme);
+            this.Controller.ChangeThemeClicked(selectedTheme);
         }
 
         private string GetSelectedTheme()
         {
             string selectedTheme = gallery1.SelectedItem.ToString();
             return selectedTheme;
+        }
+
+        private void button3_Click(object sender, RibbonControlEventArgs e)
+        {
+            AboutBox1 f = new AboutBox1();
+            f.ShowDialog();
+        }
+
+        private void checkBox1_Click(object sender, RibbonControlEventArgs e)
+        {
+
         }
     }
 }
