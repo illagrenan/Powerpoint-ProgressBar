@@ -220,8 +220,23 @@ namespace ProgressBar
 
         private void SwapB()
         {
-            this.btn_Add.Enabled = !(this.btn_Add.Enabled);
-            this.btn_Remove.Enabled = !(this.btn_Remove.Enabled);
+            // http://soltechs.net/CustomUI/imageMso01.asp
+
+            this.btn_Remove.Enabled = this.Controller.HasBar();
+            this.gallery1.Enabled = this.Controller.HasBar();
+
+            if (this.Controller.HasBar())
+            {
+                this.btn_Add.Label = "Refresh";
+                this.btn_Add.Image = null;
+                this.btn_Add.OfficeImageId = "Refresh";
+              //  this.btn_Add.Image = Microsoft.Office.Interop.PowerPoint.Application.CommandBars.GetImageMso("ImageMSO", 16, 16);
+            }
+            else
+            {
+                this.btn_Add.Image = global::ProgressBar.Properties.Resources.progressbar;
+                this.btn_Add.Label = "Add";
+            }
         }
 
         private void btn_Remove_Click(object sender, RibbonControlEventArgs e)
@@ -234,7 +249,7 @@ namespace ProgressBar
         {
 
             // Microsoft.Office.Tools.Ribbon.RibbonButton b = (Microsoft.Office.Tools.Ribbon.RibbonButton)sender;
-                       // title.Contains("string", StringComparison.OrdinalIgnoreCase);
+            // title.Contains("string", StringComparison.OrdinalIgnoreCase);
 
             if (DialogResult.OK == colorDialog_Foreground.ShowDialog())
             {
@@ -253,7 +268,7 @@ namespace ProgressBar
 
         private void btn_ChangeBackground_Click(object sender, RibbonControlEventArgs e)
         {
-            
+
             if (DialogResult.OK == colorDialog_Background.ShowDialog())
             {
                 colorDialog_Background.Color = colorDialog_Background.Color;

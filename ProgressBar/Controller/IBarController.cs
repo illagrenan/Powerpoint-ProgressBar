@@ -26,5 +26,7 @@ namespace ProgressBar.Controller
         void ChangeThemeClicked(string selectedTheme);
 
         void AddBarClicked(string selectedTheme);
+
+        bool HasBar();
     }
 }

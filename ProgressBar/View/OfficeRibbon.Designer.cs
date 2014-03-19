@@ -199,6 +199,8 @@ namespace ProgressBar
             // 
             // gallery1
             // 
+            this.gallery1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.gallery1.Enabled = false;
             this.gallery1.Image = global::ProgressBar.Properties.Resources.select_by_color;
             this.gallery1.Label = "Bar theme";
             this.gallery1.Name = "gallery1";
@@ -219,6 +221,8 @@ namespace ProgressBar
             this.menu1.Items.Add(this.button3);
             this.menu1.Label = "Help and Support";
             this.menu1.Name = "menu1";
+            this.menu1.OfficeImageId = "Help";
+            this.menu1.ShowImage = true;
             // 
             // button1
             // 

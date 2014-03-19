@@ -121,5 +121,11 @@ namespace ProgressBar.Controller
         {
             this.Model.RegisterBars();
         }
+
+
+        public bool HasBar()
+        {
+            return this.Model.HasProgressBar();
+        }
     }
 }
