@@ -29,9 +29,9 @@ namespace ProgressBar.Controller
 
         public void AddBarClicked(string selectedTheme)
         {
-            IBar newTheme = GetBarByString(selectedTheme);
+            IBar newTheme = GetThemeByString(selectedTheme);
 
-            Debug.WriteLine(string.Format("AddBarClicked theme=\"{0}\"", newTheme.GetInfo().Name));
+            Debug.WriteLine(string.Format("AddBarClicked theme=\"{0}\"", newTheme.GetInfo().FriendlyName));
 
             if (this.Model.HasProgressBar())
             {
@@ -78,15 +78,15 @@ namespace ProgressBar.Controller
 
         public void ChangeThemeClicked(string selectedTheme)
         {
-            IBar newTheme = GetBarByString(selectedTheme);
+            IBar newTheme = GetThemeByString(selectedTheme);
 
             Debug.WriteLine(string.Format("ChangeThemeClicked param=\"{0}\"", selectedTheme));
 
-            if (this.Model.HasProgressBar() && (newTheme.GetInfo().Name != this.Model.GetCurrentBar().GetInfo().Name))
+            if (this.Model.HasProgressBar() && (newTheme.GetInfo().FriendlyName != this.Model.GetCurrentBar().GetInfo().FriendlyName))
             {
                 Debug.WriteLine(String.Format("Changing theme FROM=\"{0}\" TO=\"{1}\"",
-                                                this.Model.GetCurrentBar().GetInfo().Name,
-                                                newTheme.GetInfo().Name));
+                                                this.Model.GetCurrentBar().GetInfo().FriendlyName,
+                                                newTheme.GetInfo().FriendlyName));
 
                 this.Model.RemoveBar();
                 this.Model.ChangeTheme(newTheme);
@@ -97,13 +97,13 @@ namespace ProgressBar.Controller
             }
         }
 
-        private IBar GetBarByString(string selectedTheme)
+        private IBar GetThemeByString(string selectedTheme)
         {
             IBar newTheme = null;
 
             foreach (var item in this.Model.GetRegisteredBars())
             {
-                if (selectedTheme == item.GetInfo().Name)
+                if (selectedTheme == item.GetInfo().FriendlyName)
                 {
                     newTheme = item;
                 }
@@ -126,6 +126,27 @@ namespace ProgressBar.Controller
         public bool HasBar()
         {
             return this.Model.HasProgressBar();
+        }
+
+
+        public void PositionOptionsChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PositionOptionsChanged(PositionOptions po)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PositionOptionsChanged(bool p1, bool p2, bool p3, bool p4)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangeHeightClicked()
+        {
+            throw new NotImplementedException();
         }
     }
 }

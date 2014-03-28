@@ -11,6 +11,7 @@ namespace ProgressBar.BuiltInPresentation
     {
 
         private IBarInfo info;
+        private PositionOptions p;
 
         public DottedBar()
         {
@@ -18,12 +19,20 @@ namespace ProgressBar.BuiltInPresentation
             string lab = "Dotted Bar";
 
             this.info = new BarInfo(im, lab);
+
+            this.p = new PositionOptions();
+
+            // (enabled, checked)
+            this.p.Top = new Location(true, true);
+            this.p.Right = new Location(true, false);
+            this.p.Bottom = new Location(true, false);
+            this.p.Left = new Location(true, true);
         }
 
 
         public PositionOptions GetPositionOptions()
         {
-            throw new NotImplementedException();
+            return this.p;
         }
 
         public List<Microsoft.Office.Interop.PowerPoint.Shape> Render(int currentPosition, PresentationInfo ppp)

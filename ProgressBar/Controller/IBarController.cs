@@ -28,5 +28,13 @@ namespace ProgressBar.Controller
         void AddBarClicked(string selectedTheme);
 
         bool HasBar();
+
+        void PositionOptionsChanged();
+
+        void PositionOptionsChanged(Bar.PositionOptions po);
+
+        void PositionOptionsChanged(bool p1, bool p2, bool p3, bool p4);
+
+        void ChangeHeightClicked();
     }
 }

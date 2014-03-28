@@ -1,17 +1,35 @@
-﻿using System;
+﻿using ProgressBar.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace ProgressBar.Bar
 {
-    public sealed class PositionOptions
+    public sealed class PositionOptions : IPositionOptions
     {
-        public bool Bottom { get; set; }
-        public bool Top { get; set; }
+        public ILocation Bottom
+        {
+            get;
+            set;
+        }
 
-        public bool Right { get; set; }
+        public ILocation Top
+        {
+            get;
+            set;
+        }
 
-        public bool Left { get; set; }
+        public ILocation Right
+        {
+            get;
+            set;
+        }
+
+        public ILocation Left
+        {
+            get;
+            set;
+        }
     }
 }

@@ -43,11 +43,7 @@ namespace ProgressBar
             this.btn_ChangeBackground = this.Factory.CreateRibbonButton();
             this.dropDown_BarHeight = this.Factory.CreateRibbonDropDown();
             this.positionGroup = this.Factory.CreateRibbonGroup();
-            this.btn_AlignTop = this.Factory.CreateRibbonToggleButton();
-            this.btn_AlinBottom = this.Factory.CreateRibbonToggleButton();
             this.checkBox1 = this.Factory.CreateRibbonCheckBox();
-            this.btn_AlignLeft = this.Factory.CreateRibbonToggleButton();
-            this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
             this.themeGroup = this.Factory.CreateRibbonGroup();
             this.themeGallery = this.Factory.CreateRibbonGallery();
             this.group4 = this.Factory.CreateRibbonGroup();
@@ -55,6 +51,10 @@ namespace ProgressBar
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
+            this.btn_AlignLeft = this.Factory.CreateRibbonToggleButton();
+            this.btn_AlinBottom = this.Factory.CreateRibbonToggleButton();
+            this.btn_AlignTop = this.Factory.CreateRibbonToggleButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.styleGroup.SuspendLayout();
@@ -138,6 +138,7 @@ namespace ProgressBar
             this.dropDown_BarHeight.Enabled = false;
             this.dropDown_BarHeight.Label = "Height";
             this.dropDown_BarHeight.Name = "dropDown_BarHeight";
+            this.dropDown_BarHeight.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDown_BarHeight_SelectionChanged);
             // 
             // positionGroup
             // 
@@ -149,47 +150,12 @@ namespace ProgressBar
             this.positionGroup.Label = "Bar Position";
             this.positionGroup.Name = "positionGroup";
             // 
-            // btn_AlignTop
-            // 
-            this.btn_AlignTop.Checked = true;
-            this.btn_AlignTop.Enabled = false;
-            this.btn_AlignTop.Image = global::ProgressBar.Properties.Resources.border_2_top;
-            this.btn_AlignTop.Label = "Top";
-            this.btn_AlignTop.Name = "btn_AlignTop";
-            this.btn_AlignTop.ShowImage = true;
-            // 
-            // btn_AlinBottom
-            // 
-            this.btn_AlinBottom.Enabled = false;
-            this.btn_AlinBottom.Image = global::ProgressBar.Properties.Resources.border_2_bottom;
-            this.btn_AlinBottom.Label = "Bottom";
-            this.btn_AlinBottom.Name = "btn_AlinBottom";
-            this.btn_AlinBottom.ShowImage = true;
-            // 
             // checkBox1
             // 
             this.checkBox1.Enabled = false;
             this.checkBox1.Label = "Disable on First slide";
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.checkBox1_Click);
-            // 
-            // btn_AlignLeft
-            // 
-            this.btn_AlignLeft.Enabled = false;
-            this.btn_AlignLeft.Image = global::ProgressBar.Properties.Resources.border_2_left;
-            this.btn_AlignLeft.Label = "Left";
-            this.btn_AlignLeft.Name = "btn_AlignLeft";
-            this.btn_AlignLeft.ShowImage = true;
-            this.btn_AlignLeft.Visible = false;
-            // 
-            // btn_AlignRight
-            // 
-            this.btn_AlignRight.Enabled = false;
-            this.btn_AlignRight.Image = global::ProgressBar.Properties.Resources.border_2_right;
-            this.btn_AlignRight.Label = "Right";
-            this.btn_AlignRight.Name = "btn_AlignRight";
-            this.btn_AlignRight.ShowImage = true;
-            this.btn_AlignRight.Visible = false;
             // 
             // themeGroup
             // 
@@ -246,6 +212,43 @@ namespace ProgressBar
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonAbout_Click);
             // 
+            // btn_AlignRight
+            // 
+            this.btn_AlignRight.Enabled = false;
+            this.btn_AlignRight.Image = global::ProgressBar.Properties.Resources.border_2_right;
+            this.btn_AlignRight.Label = "Right";
+            this.btn_AlignRight.Name = "btn_AlignRight";
+            this.btn_AlignRight.ShowImage = true;
+            this.btn_AlignRight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
+            // 
+            // btn_AlignLeft
+            // 
+            this.btn_AlignLeft.Enabled = false;
+            this.btn_AlignLeft.Image = global::ProgressBar.Properties.Resources.border_2_left;
+            this.btn_AlignLeft.Label = "Left";
+            this.btn_AlignLeft.Name = "btn_AlignLeft";
+            this.btn_AlignLeft.ShowImage = true;
+            this.btn_AlignLeft.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
+            // 
+            // btn_AlinBottom
+            // 
+            this.btn_AlinBottom.Enabled = false;
+            this.btn_AlinBottom.Image = global::ProgressBar.Properties.Resources.border_2_bottom;
+            this.btn_AlinBottom.Label = "Bottom";
+            this.btn_AlinBottom.Name = "btn_AlinBottom";
+            this.btn_AlinBottom.ShowImage = true;
+            this.btn_AlinBottom.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
+            // 
+            // btn_AlignTop
+            // 
+            this.btn_AlignTop.Checked = true;
+            this.btn_AlignTop.Enabled = false;
+            this.btn_AlignTop.Image = global::ProgressBar.Properties.Resources.border_2_top;
+            this.btn_AlignTop.Label = "Top";
+            this.btn_AlignTop.Name = "btn_AlignTop";
+            this.btn_AlignTop.ShowImage = true;
+            this.btn_AlignTop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
+            // 
             // BarRibbon1
             // 
             this.Name = "BarRibbon1";
@@ -279,11 +282,7 @@ namespace ProgressBar
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeBackground;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_BarHeight;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup positionGroup;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignTop;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlinBottom;
         internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox checkBox1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup themeGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonGallery themeGallery;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
@@ -293,6 +292,10 @@ namespace ProgressBar
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
         private System.Windows.Forms.ColorDialog colorDialog_Foreground;
         private System.Windows.Forms.ColorDialog colorDialog_Background;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignTop;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlinBottom;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
     }
 
     partial class ThisRibbonCollection

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 
 namespace ProgressBar.Bar
 {
-    public interface IBarInfo
+    public interface ILocation
     {
-        Image Image { get; }
-        string FriendlyName { get;  }
+        bool Enabled { get; set; }
+        bool Checked { get; set; }
     }
 }

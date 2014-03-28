@@ -12,7 +12,7 @@ namespace ProgressBar.Model
     public class BarModel : IBarModel
     {
         public event Action<Bar.IBar> BarCreatedEvent;
-        public event Action<Bar.IBar> BarChangedEvent;
+        public event Action<Bar.IBar> BarThemeChangedEvent;
         public event Action BarRemovedEvent;
 
         private List<Bar.IBar> registeredBars = new List<Bar.IBar>();
@@ -105,9 +105,9 @@ namespace ProgressBar.Model
             this.currentBar = t;
             this.hasBar = true;
 
-            if (this.BarChangedEvent != null)
+            if (this.BarThemeChangedEvent != null)
             {
-                this.BarChangedEvent(t);
+                this.BarThemeChangedEvent(t);
             }
         }
 
@@ -123,5 +123,8 @@ namespace ProgressBar.Model
 
 
 
+
+
+        public event Action<IPositionOptions> AlignmentOptionsChanged;
     }
 }

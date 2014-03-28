@@ -12,7 +12,7 @@ namespace ProgressBar.Model
         event Action<IBar> BarCreatedEvent;
         event Action<List<IBar>> RegisteredBarsEvent;
         event Action BarRemovedEvent;
-        event Action<Bar.IBar> BarChangedEvent;
+        event Action<Bar.IBar> BarThemeChangedEvent;
         void Add(IBar barToAdd);
 
         void CreateStrippedPresentation();
@@ -35,5 +35,7 @@ namespace ProgressBar.Model
         void ChangeTheme(IBar t);
 
         IBar GetCurrentBar();
+
+        event Action<IPositionOptions> AlignmentOptionsChanged;
     }
 }

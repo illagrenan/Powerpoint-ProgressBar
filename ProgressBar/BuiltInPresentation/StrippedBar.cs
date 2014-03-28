@@ -10,24 +10,28 @@ namespace ProgressBar.BuiltInPresentation
     class StrippedBar : IBar
     {
         private PresentationInfo presentationInfo;
-        private PositionOptions p;
+        private PositionOptions positionInfo;
         private IBarInfo info;
 
         public StrippedBar()
         {
-            this.p = new PositionOptions();
-            this.p.Bottom = this.p.Left = this.p.Right = this.p.Top = true;
+            this.positionInfo = new PositionOptions();
 
+            // (enabled, checked)
+            this.positionInfo.Top = new Location(true, true);
+            this.positionInfo.Right = new Location(false, false);
+            this.positionInfo.Bottom = new Location(true, false);
+            this.positionInfo.Left = new Location(false, false);
 
-            Image im = global::ProgressBar.Properties.Resources.theme_solid;
-            string lab = "Stripped Bar";
+            Image thumbnailImage = global::ProgressBar.Properties.Resources.theme_solid;
+            string friendlyName = "Stripped Bar";
 
-            this.info = new BarInfo(im, lab);
+            this.info = new BarInfo(thumbnailImage, friendlyName);
         }
 
         public PositionOptions GetPositionOptions()
         {
-            return this.p;
+            return this.positionInfo;
         }
 
         public List<Microsoft.Office.Interop.PowerPoint.Shape> Render(int currentPosition, PresentationInfo ppp)
@@ -40,6 +44,7 @@ namespace ProgressBar.BuiltInPresentation
             IBasicShape shapeStub = new BasicShape();
 
             shapeStub.Height = presentation.UserSize;
+
             shapeStub.Top = 0;
             shapeStub.Left = 0;
             shapeStub.Type = Microsoft.Office.Core.MsoAutoShapeType.msoShapeRectangle;
@@ -75,7 +80,7 @@ namespace ProgressBar.BuiltInPresentation
         }
 
         private float CalculateWidthOfBarOnOneSlide()
-        { 
+        {
             int slidesCount = this.presentationInfo.DisableOnFirstSlide ? (this.presentationInfo.SlidesCount - 1) : this.presentationInfo.SlidesCount;
             return this.presentationInfo.Width / slidesCount;
         }

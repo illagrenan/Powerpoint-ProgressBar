@@ -42,12 +42,35 @@ namespace ProgressBar
             model.BarCreatedEvent += model_BarCreatedEvent;
             model.BarRemovedEvent += model_BarRemovedEvent;
             model.RegisteredBarsEvent += model_RegisteredBarEvents;
-            model.BarChangedEvent += model_Changed;
+            model.BarThemeChangedEvent += model_themeChanged;
+            model.AlignmentOptionsChanged += model_AlignmentOptionsChanged;
         }
 
-        private void model_Changed(IBar obj)
+        private void model_AlignmentOptionsChanged(IPositionOptions obj)
         {
+            this.btn_AlignTop.Enabled = obj.Top.Enabled;
+            this.btn_AlignTop.Checked = obj.Top.Checked;
+
+            this.btn_AlignRight.Enabled = obj.Right.Enabled;
+            this.btn_AlignRight.Checked = obj.Right.Checked;
+
+            this.btn_AlinBottom.Enabled = obj.Bottom.Enabled;
+            this.btn_AlinBottom.Checked = obj.Bottom.Checked;
+
+            this.btn_AlignLeft.Enabled = obj.Left.Enabled;
+            this.btn_AlignLeft.Checked = obj.Left.Checked;
+        }
+
+
+        private void model_themeChanged(IBar obj)
+        {
+            SetPositionOptions(obj);
             this.model_BarCreatedEvent(obj);
+        }
+
+        private void SetPositionOptions(IBar obj)
+        {
+          
         }
 
 
@@ -63,13 +86,8 @@ namespace ProgressBar
             int slideCounter = 1;
             List<Slide> visibleSlides = this.powerpointAdapter.VisibleSlides();
 
-            PresentationInfo presentationInfo = new PresentationInfo();
-
-            presentationInfo.Height = this.powerpointAdapter.PresentationHeight();
-            presentationInfo.Width = this.powerpointAdapter.PresentationWidth();
-            presentationInfo.SlidesCount = visibleSlides.Count();
-            presentationInfo.UserSize = this.BarSize();
-            presentationInfo.DisableOnFirstSlide = this.checkBox1.Checked;
+            PresentationInfo presentationInfo = CreateInfo(visibleSlides);
+            SetPositionOptions(createdBar);
 
             foreach (Slide slide in visibleSlides)
             {
@@ -109,6 +127,18 @@ namespace ProgressBar
 
                 slideCounter++;
             }
+        }
+
+        private PresentationInfo CreateInfo(List<Slide> visibleSlides)
+        {
+            PresentationInfo presentationInfo = new PresentationInfo();
+
+            presentationInfo.Height = this.powerpointAdapter.PresentationHeight();
+            presentationInfo.Width = this.powerpointAdapter.PresentationWidth();
+            presentationInfo.SlidesCount = visibleSlides.Count();
+            presentationInfo.UserSize = this.BarSize();
+            presentationInfo.DisableOnFirstSlide = this.checkBox1.Checked;
+            return presentationInfo;
         }
 
         void model_BarRemovedEvent()
@@ -172,7 +202,7 @@ namespace ProgressBar
 
                 Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItem = this.Factory.CreateRibbonDropDownItem();
                 ribbonDropDownItem.Image = item.GetInfo().Image;
-                ribbonDropDownItem.Label = item.GetInfo().Name;
+                ribbonDropDownItem.Label = item.GetInfo().FriendlyName;
 
                 this.themeGallery.Items.Add(ribbonDropDownItem);
             }
@@ -259,16 +289,19 @@ namespace ProgressBar
 
         private void SwapStateBarRelatedItems()
         {
-            SwapItemsStateInGroup(this.styleGroup.Items);
-            SwapItemsStateInGroup(this.positionGroup.Items);
-            SwapItemsStateInGroup(this.themeGroup.Items);
+
+            bool newState = this.Controller.HasBar();
+
+            SwapItemsStateInGroup(this.styleGroup.Items, newState);
+            SwapItemsStateInGroup(this.positionGroup.Items, newState);
+            SwapItemsStateInGroup(this.themeGroup.Items, newState);
         }
 
-        private static void SwapItemsStateInGroup(IList<RibbonControl> groupItems)
+        private static void SwapItemsStateInGroup(IList<RibbonControl> groupItems, bool newState)
         {
             foreach (var anItem in groupItems)
             {
-                anItem.Enabled = !(anItem.Enabled);
+                anItem.Enabled = newState;
             }
         }
 
@@ -369,6 +402,21 @@ namespace ProgressBar
         private void button3_Click(object sender, RibbonControlEventArgs e)
         {
 
+        }
+
+        private void dropDown_BarHeight_SelectionChanged(object sender, RibbonControlEventArgs e)
+        {
+            this.Controller.ChangeHeightClicked();
+        }
+
+        private void btn_AlignTop_Click(object sender, RibbonControlEventArgs e)
+        {
+            this.Controller.PositionOptionsChanged(
+                                                    this.btn_AlignTop.Checked,
+                                                    this.btn_AlignRight.Enabled,
+                                                    this.btn_AlinBottom.Enabled,
+                                                    this.btn_AlignLeft.Enabled
+                                                   );
         }
     }
 }

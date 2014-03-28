@@ -250,6 +250,8 @@
     <Compile Include="Bar\IBar.cs" />
     <Compile Include="Bar\IBarInfo.cs" />
     <Compile Include="Bar\IBasicShape.cs" />
+    <Compile Include="Bar\ILocation.cs" />
+    <Compile Include="Bar\Location.cs" />
     <Compile Include="Bar\PositionOptions.cs" />
     <Compile Include="Bar\PresentationInfo.cs" />
     <Compile Include="Bar\ShapeName.cs" />
@@ -261,6 +263,7 @@
     <Compile Include="extension\ExtensionMethods.cs" />
     <Compile Include="Model\BarModel.cs" />
     <Compile Include="Model\IBarModel.cs" />
+    <Compile Include="Model\IPositionOptions.cs" />
     <Compile Include="MVC\IController.cs" />
     <Compile Include="MVC\IModel.cs" />
     <Compile Include="MVC\IView.cs" />
