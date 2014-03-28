@@ -37,5 +37,9 @@ namespace ProgressBar.Model
         IBar GetCurrentBar();
 
         event Action<IPositionOptions> AlignmentOptionsChanged;
+
+        void Reposition(PositionOptions positionOptions);
+
+        void Resize(int newSize);
     }
 }

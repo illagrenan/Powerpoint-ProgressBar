@@ -23,6 +23,11 @@ namespace ProgressBar.Bar
             this.Checked = cheked;
         }
 
+        public Location(bool cheked)
+        {
+            this.Checked = cheked;
+        }
+
         public bool Enabled
         {
             get;

@@ -111,8 +111,8 @@ namespace ProgressBar.Controller
 
             if (newTheme == null)
             {
-                // TODO Explain why
-                throw new InvalidStateException();
+                string message = String.Format("Given \"{0}\" is not valid registered theme", selectedTheme);
+                throw new InvalidStateException(message);
             }
             return newTheme;
         }
@@ -129,24 +129,21 @@ namespace ProgressBar.Controller
         }
 
 
-        public void PositionOptionsChanged()
+        public void PositionOptionsChanged(bool top, bool right, bool bottom, bool left)
         {
-            throw new NotImplementedException();
+            PositionOptions positionOptions = new PositionOptions();
+
+            positionOptions.Top = new Location(top);
+            positionOptions.Right = new Location(right);
+            positionOptions.Bottom = new Location(bottom);
+            positionOptions.Left = new Location(left);
+
+            this.Model.Reposition(positionOptions);
         }
 
-        public void PositionOptionsChanged(PositionOptions po)
+        public void ChangeSizeClicked(int newSize)
         {
-            throw new NotImplementedException();
-        }
-
-        public void PositionOptionsChanged(bool p1, bool p2, bool p3, bool p4)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ChangeHeightClicked()
-        {
-            throw new NotImplementedException();
+            this.Model.Resize(newSize);
         }
     }
 }

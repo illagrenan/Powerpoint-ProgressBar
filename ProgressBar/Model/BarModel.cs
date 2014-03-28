@@ -14,6 +14,7 @@ namespace ProgressBar.Model
         public event Action<Bar.IBar> BarCreatedEvent;
         public event Action<Bar.IBar> BarThemeChangedEvent;
         public event Action BarRemovedEvent;
+        public event Action<IPositionOptions> AlignmentOptionsChanged;
 
         private List<Bar.IBar> registeredBars = new List<Bar.IBar>();
 
@@ -82,8 +83,7 @@ namespace ProgressBar.Model
         {
             if (this.registeredBars.Count() == 0)
             {
-                // TODO Explain why
-                throw new NoRegisteredBarException();
+                throw new NoRegisteredBarException("All bars you want to user must be registered in method \"RegisterBars\". Currently no bars are registered.");
             }
 
             return this.registeredBars;
@@ -121,10 +121,14 @@ namespace ProgressBar.Model
             return this.currentBar;
         }
 
+        public void Reposition(PositionOptions positionOptions)
+        {
+            throw new NotImplementedException();
+        }
 
-
-
-
-        public event Action<IPositionOptions> AlignmentOptionsChanged;
+        public void Resize(int newSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

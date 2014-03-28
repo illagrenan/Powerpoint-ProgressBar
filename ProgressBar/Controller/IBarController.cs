@@ -29,12 +29,8 @@ namespace ProgressBar.Controller
 
         bool HasBar();
 
-        void PositionOptionsChanged();
+        void PositionOptionsChanged(bool topChecked, bool rightChecked, bool bottomChecked, bool leftChecked);
 
-        void PositionOptionsChanged(Bar.PositionOptions po);
-
-        void PositionOptionsChanged(bool p1, bool p2, bool p3, bool p4);
-
-        void ChangeHeightClicked();
+        void ChangeSizeClicked(int newSize);
     }
 }

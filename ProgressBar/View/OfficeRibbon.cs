@@ -70,7 +70,7 @@ namespace ProgressBar
 
         private void SetPositionOptions(IBar obj)
         {
-          
+
         }
 
 
@@ -406,7 +406,7 @@ namespace ProgressBar
 
         private void dropDown_BarHeight_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
-            this.Controller.ChangeHeightClicked();
+            this.Controller.ChangeSizeClicked(this.BarSize());
         }
 
         private void btn_AlignTop_Click(object sender, RibbonControlEventArgs e)
