@@ -77,7 +77,6 @@ namespace ProgressBar.Adapter
             {
                 foreach (Shape shape in slide.Shapes)
                 {
-
                     if (this.nameHelper.IsShapeAddInShape(shape.Name))
                     {
                         addInShapes.Add(shape);
@@ -86,6 +85,19 @@ namespace ProgressBar.Adapter
             }
 
             return addInShapes;
+        }
+
+
+        public bool HasSlides
+        {
+            get
+            {
+                return (powerPointApp.ActivePresentation.Slides.Count > 0);
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

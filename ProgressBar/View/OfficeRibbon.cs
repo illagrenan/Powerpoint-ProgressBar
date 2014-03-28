@@ -9,6 +9,7 @@ using ProgressBar.Model;
 using ProgressBar.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -68,6 +69,7 @@ namespace ProgressBar
             presentationInfo.Width = this.powerpointAdapter.PresentationWidth();
             presentationInfo.SlidesCount = visibleSlides.Count();
             presentationInfo.UserSize = this.BarSize();
+            presentationInfo.DisableOnFirstSlide = this.checkBox1.Checked;
 
             foreach (Slide slide in visibleSlides)
             {
@@ -137,6 +139,7 @@ namespace ProgressBar
 
             Globals.ThisAddIn.Application.AfterNewPresentation += AfterNewPresentationHandle;
             Globals.ThisAddIn.Application.AfterPresentationOpen += AfterPresentationOpenHandle;
+            Globals.ThisAddIn.Application.SlideSelectionChanged += OnSlidesChanged;
 
             this.FillDropDown();
             this.SetDropDownDefaultSize();
@@ -144,6 +147,22 @@ namespace ProgressBar
 
             this.Controller.GetRegistered();
 
+        }
+
+        private void OnSlidesChanged(SlideRange SldRange)
+        {
+            if (this.powerpointAdapter.HasSlides == false && this.Controller.HasBar())
+            {
+                // When a user deletes all slides,
+                // we can simulate Remove Event with button
+                this.btn_Remove_Click(null, null);
+            }
+
+            Debug.WriteLine(String.Format(
+                "OnSlidesChanged={0}",
+                this.powerpointAdapter.VisibleSlides().Count()
+                ));
+            // http://social.msdn.microsoft.com/Forums/en-US/22a64e2b-32eb-4eab-930f-f3ca526d9d3b/powerpoint-events-for-adding-a-shape-deleting-a-shape-and-deleting-a-slide?forum=vsto
         }
 
         private void model_RegisteredBarEvents(List<IBar> bars)
@@ -155,7 +174,7 @@ namespace ProgressBar
                 ribbonDropDownItem.Image = item.GetInfo().Image;
                 ribbonDropDownItem.Label = item.GetInfo().Name;
 
-                this.gallery1.Items.Add(ribbonDropDownItem);
+                this.themeGallery.Items.Add(ribbonDropDownItem);
             }
         }
 
@@ -213,6 +232,18 @@ namespace ProgressBar
 
         private void btn_Add_Click(object sender, RibbonControlEventArgs e)
         {
+            if (this.powerpointAdapter.HasSlides == false)
+            {
+                MessageBox.Show(
+                                "This presentation has no slides.",
+                                "Unable to add bar",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                                );
+                return;
+            }
+
+
             string selectedTheme = GetSelectedTheme();
             this.Controller.AddBarClicked(selectedTheme);
 
@@ -306,25 +337,36 @@ namespace ProgressBar
             }
         }
 
-        private void gallery1_Click(object sender, RibbonControlEventArgs e)
+        private void galleryTheme_Click(object sender, RibbonControlEventArgs e)
         {
-            string selectedTheme = GetSelectedTheme();
+            string selectedTheme = this.GetSelectedTheme();
             this.Controller.ChangeThemeClicked(selectedTheme);
         }
 
         private string GetSelectedTheme()
         {
-            string selectedTheme = gallery1.SelectedItem.ToString();
+            string selectedTheme = themeGallery.SelectedItem.ToString();
             return selectedTheme;
         }
 
-        private void button3_Click(object sender, RibbonControlEventArgs e)
+        private void buttonAbout_Click(object sender, RibbonControlEventArgs e)
         {
-            AboutBox1 f = new AboutBox1();
-            f.ShowDialog();
+            AboutBox1 aboutBox = new AboutBox1();
+            aboutBox.ShowDialog();
         }
 
         private void checkBox1_Click(object sender, RibbonControlEventArgs e)
+        {
+            string selectedTheme = GetSelectedTheme();
+            this.Controller.AddBarClicked(selectedTheme);
+        }
+
+        private void gallery1_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, RibbonControlEventArgs e)
         {
 
         }

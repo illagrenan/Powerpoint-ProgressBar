@@ -61,18 +61,35 @@ namespace ProgressBar.BuiltInPresentation
         {
             IBasicShape backgroundShape = this.MakeShapeStub(this.presentationInfo);
 
-            backgroundShape.Width = (this.presentationInfo.Width / this.presentationInfo.SlidesCount) * currentPosition;
+
+            if (this.presentationInfo.DisableOnFirstSlide)
+            {
+                currentPosition -= 1;
+            }
+
+
+            backgroundShape.Width = (CalculateWidthOfBarOnOneSlide()) * currentPosition;
             backgroundShape.ColorType = DataStructs.ShapeType.PROGRESS_BAR;
 
             return backgroundShape;
         }
 
+        private float CalculateWidthOfBarOnOneSlide()
+        { 
+            int slidesCount = this.presentationInfo.DisableOnFirstSlide ? (this.presentationInfo.SlidesCount - 1) : this.presentationInfo.SlidesCount;
+            return this.presentationInfo.Width / slidesCount;
+        }
 
         List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
         {
             this.presentationInfo = presentationInfo;
 
             List<IBasicShape> shapes = new List<IBasicShape>();
+
+            if (presentationInfo.DisableOnFirstSlide && currentPosition == 1)
+            {
+                return shapes;
+            }
 
             shapes.Add(this.MakeBackground());
             shapes.Add(this.MakeProgressBar(currentPosition));

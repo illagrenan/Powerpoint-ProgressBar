@@ -102,7 +102,7 @@
             // 
             this.group1.Items.Add(this.btn_Add);
             this.group1.Items.Add(this.btn_Remove);
-            this.group1.Label = "Progress Bar";
+            this.group1.Label = "OLD";
             this.group1.Name = "group1";
             // 
             // btn_Add
@@ -128,7 +128,7 @@
             this.group2.Items.Add(this.btn_ChangeForeground);
             this.group2.Items.Add(this.btn_ChangeBackground);
             this.group2.Items.Add(this.dropDown_BarHeight);
-            this.group2.Label = "Style";
+            this.group2.Label = "OLD";
             this.group2.Name = "group2";
             // 
             // btn_ChangeForeground
@@ -160,7 +160,7 @@
             this.group3.Items.Add(this.checkBox1);
             this.group3.Items.Add(this.btn_AlignLeft);
             this.group3.Items.Add(this.btn_AlignRight);
-            this.group3.Label = "Bar Position";
+            this.group3.Label = "OLD";
             this.group3.Name = "group3";
             // 
             // btn_AlignTop
@@ -208,7 +208,7 @@
             // 
             this.Theme.Items.Add(this.gallery1);
             this.Theme.Items.Add(this.button4);
-            this.Theme.Label = "Theme";
+            this.Theme.Label = "OLD";
             this.Theme.Name = "Theme";
             // 
             // gallery1
@@ -238,7 +238,7 @@
             // group4
             // 
             this.group4.Items.Add(this.menu1);
-            this.group4.Label = "Help and Support";
+            this.group4.Label = "OLD";
             this.group4.Name = "group4";
             // 
             // menu1

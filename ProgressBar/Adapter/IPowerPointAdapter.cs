@@ -19,5 +19,7 @@ namespace ProgressBar.Adapter
         int HiddenSlidesCount();
 
         List<Shape> AddInShapes();
+
+        bool HasSlides { get; set; }
     }
 }

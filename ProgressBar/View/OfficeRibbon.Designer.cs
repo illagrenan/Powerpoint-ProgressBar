@@ -49,7 +49,7 @@ namespace ProgressBar
             this.btn_AlignLeft = this.Factory.CreateRibbonToggleButton();
             this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
             this.themeGroup = this.Factory.CreateRibbonGroup();
-            this.gallery1 = this.Factory.CreateRibbonGallery();
+            this.themeGallery = this.Factory.CreateRibbonGallery();
             this.group4 = this.Factory.CreateRibbonGroup();
             this.menu1 = this.Factory.CreateRibbonMenu();
             this.button1 = this.Factory.CreateRibbonButton();
@@ -193,20 +193,20 @@ namespace ProgressBar
             // 
             // themeGroup
             // 
-            this.themeGroup.Items.Add(this.gallery1);
+            this.themeGroup.Items.Add(this.themeGallery);
             this.themeGroup.Label = "Theme";
             this.themeGroup.Name = "themeGroup";
             // 
-            // gallery1
+            // themeGallery
             // 
-            this.gallery1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.gallery1.Enabled = false;
-            this.gallery1.Image = global::ProgressBar.Properties.Resources.select_by_color;
-            this.gallery1.Label = "Bar theme";
-            this.gallery1.Name = "gallery1";
-            this.gallery1.ShowImage = true;
-            this.gallery1.ShowItemSelection = true;
-            this.gallery1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.gallery1_Click);
+            this.themeGallery.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.themeGallery.Enabled = false;
+            this.themeGallery.Image = global::ProgressBar.Properties.Resources.select_by_color;
+            this.themeGallery.Label = "Bar theme";
+            this.themeGallery.Name = "themeGallery";
+            this.themeGallery.ShowImage = true;
+            this.themeGallery.ShowItemSelection = true;
+            this.themeGallery.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.galleryTheme_Click);
             // 
             // group4
             // 
@@ -244,7 +244,7 @@ namespace ProgressBar
             this.button3.Label = "About";
             this.button3.Name = "button3";
             this.button3.ShowImage = true;
-            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
+            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonAbout_Click);
             // 
             // BarRibbon1
             // 
@@ -285,7 +285,7 @@ namespace ProgressBar
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup themeGroup;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGallery gallery1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGallery themeGallery;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;

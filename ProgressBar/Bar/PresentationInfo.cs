@@ -14,5 +14,7 @@ namespace ProgressBar.Bar
         public int SlidesCount { get; set; }
 
         public float UserSize { get; set; }
+
+        public bool DisableOnFirstSlide { get; set; }
     }
 }
