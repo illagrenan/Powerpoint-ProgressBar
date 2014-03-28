@@ -38,17 +38,17 @@ namespace ProgressBar
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btn_Add = this.Factory.CreateRibbonButton();
             this.btn_Remove = this.Factory.CreateRibbonButton();
-            this.group2 = this.Factory.CreateRibbonGroup();
+            this.styleGroup = this.Factory.CreateRibbonGroup();
             this.btn_ChangeForeground = this.Factory.CreateRibbonButton();
             this.btn_ChangeBackground = this.Factory.CreateRibbonButton();
             this.dropDown_BarHeight = this.Factory.CreateRibbonDropDown();
-            this.group3 = this.Factory.CreateRibbonGroup();
+            this.positionGroup = this.Factory.CreateRibbonGroup();
             this.btn_AlignTop = this.Factory.CreateRibbonToggleButton();
             this.btn_AlinBottom = this.Factory.CreateRibbonToggleButton();
             this.checkBox1 = this.Factory.CreateRibbonCheckBox();
             this.btn_AlignLeft = this.Factory.CreateRibbonToggleButton();
             this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
-            this.Theme = this.Factory.CreateRibbonGroup();
+            this.themeGroup = this.Factory.CreateRibbonGroup();
             this.gallery1 = this.Factory.CreateRibbonGallery();
             this.group4 = this.Factory.CreateRibbonGroup();
             this.menu1 = this.Factory.CreateRibbonMenu();
@@ -57,9 +57,9 @@ namespace ProgressBar
             this.button3 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
-            this.group2.SuspendLayout();
-            this.group3.SuspendLayout();
-            this.Theme.SuspendLayout();
+            this.styleGroup.SuspendLayout();
+            this.positionGroup.SuspendLayout();
+            this.themeGroup.SuspendLayout();
             this.group4.SuspendLayout();
             // 
             // colorDialog_Foreground
@@ -74,9 +74,9 @@ namespace ProgressBar
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.group1);
-            this.tab1.Groups.Add(this.group2);
-            this.tab1.Groups.Add(this.group3);
-            this.tab1.Groups.Add(this.Theme);
+            this.tab1.Groups.Add(this.styleGroup);
+            this.tab1.Groups.Add(this.positionGroup);
+            this.tab1.Groups.Add(this.themeGroup);
             this.tab1.Groups.Add(this.group4);
             this.tab1.Label = "Progress Bar";
             this.tab1.Name = "tab1";
@@ -107,13 +107,13 @@ namespace ProgressBar
             this.btn_Remove.ShowImage = true;
             this.btn_Remove.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_Remove_Click);
             // 
-            // group2
+            // styleGroup
             // 
-            this.group2.Items.Add(this.btn_ChangeForeground);
-            this.group2.Items.Add(this.btn_ChangeBackground);
-            this.group2.Items.Add(this.dropDown_BarHeight);
-            this.group2.Label = "Style";
-            this.group2.Name = "group2";
+            this.styleGroup.Items.Add(this.btn_ChangeForeground);
+            this.styleGroup.Items.Add(this.btn_ChangeBackground);
+            this.styleGroup.Items.Add(this.dropDown_BarHeight);
+            this.styleGroup.Label = "Style";
+            this.styleGroup.Name = "styleGroup";
             // 
             // btn_ChangeForeground
             // 
@@ -139,15 +139,15 @@ namespace ProgressBar
             this.dropDown_BarHeight.Label = "Height";
             this.dropDown_BarHeight.Name = "dropDown_BarHeight";
             // 
-            // group3
+            // positionGroup
             // 
-            this.group3.Items.Add(this.btn_AlignTop);
-            this.group3.Items.Add(this.btn_AlinBottom);
-            this.group3.Items.Add(this.checkBox1);
-            this.group3.Items.Add(this.btn_AlignLeft);
-            this.group3.Items.Add(this.btn_AlignRight);
-            this.group3.Label = "Bar Position";
-            this.group3.Name = "group3";
+            this.positionGroup.Items.Add(this.btn_AlignTop);
+            this.positionGroup.Items.Add(this.btn_AlinBottom);
+            this.positionGroup.Items.Add(this.checkBox1);
+            this.positionGroup.Items.Add(this.btn_AlignLeft);
+            this.positionGroup.Items.Add(this.btn_AlignRight);
+            this.positionGroup.Label = "Bar Position";
+            this.positionGroup.Name = "positionGroup";
             // 
             // btn_AlignTop
             // 
@@ -191,11 +191,11 @@ namespace ProgressBar
             this.btn_AlignRight.ShowImage = true;
             this.btn_AlignRight.Visible = false;
             // 
-            // Theme
+            // themeGroup
             // 
-            this.Theme.Items.Add(this.gallery1);
-            this.Theme.Label = "Theme";
-            this.Theme.Name = "Theme";
+            this.themeGroup.Items.Add(this.gallery1);
+            this.themeGroup.Label = "Theme";
+            this.themeGroup.Name = "themeGroup";
             // 
             // gallery1
             // 
@@ -257,12 +257,12 @@ namespace ProgressBar
             this.tab1.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
-            this.group2.ResumeLayout(false);
-            this.group2.PerformLayout();
-            this.group3.ResumeLayout(false);
-            this.group3.PerformLayout();
-            this.Theme.ResumeLayout(false);
-            this.Theme.PerformLayout();
+            this.styleGroup.ResumeLayout(false);
+            this.styleGroup.PerformLayout();
+            this.positionGroup.ResumeLayout(false);
+            this.positionGroup.PerformLayout();
+            this.themeGroup.ResumeLayout(false);
+            this.themeGroup.PerformLayout();
             this.group4.ResumeLayout(false);
             this.group4.PerformLayout();
 
@@ -274,17 +274,17 @@ namespace ProgressBar
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Add;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_Remove;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup styleGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeForeground;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeBackground;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_BarHeight;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup positionGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignTop;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlinBottom;
         internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox checkBox1;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup Theme;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup themeGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonGallery gallery1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu1;

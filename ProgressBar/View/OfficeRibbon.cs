@@ -215,22 +215,42 @@ namespace ProgressBar
         {
             string selectedTheme = GetSelectedTheme();
             this.Controller.AddBarClicked(selectedTheme);
-            SwapB();
+
+            // Enable items only when adding new bar
+            // If users is refresing bar, all items remain enabled
+            if (this.btn_Add.Label == "Add")
+            {
+                SwapStateBarRelatedItems();
+            }
+
+            SwapAddRefreshButton();
         }
 
-        private void SwapB()
+        private void SwapStateBarRelatedItems()
         {
-            // http://soltechs.net/CustomUI/imageMso01.asp
+            SwapItemsStateInGroup(this.styleGroup.Items);
+            SwapItemsStateInGroup(this.positionGroup.Items);
+            SwapItemsStateInGroup(this.themeGroup.Items);
+        }
 
+        private static void SwapItemsStateInGroup(IList<RibbonControl> groupItems)
+        {
+            foreach (var anItem in groupItems)
+            {
+                anItem.Enabled = !(anItem.Enabled);
+            }
+        }
+
+
+        private void SwapAddRefreshButton()
+        {
             this.btn_Remove.Enabled = this.Controller.HasBar();
-            this.gallery1.Enabled = this.Controller.HasBar();
 
             if (this.Controller.HasBar())
             {
                 this.btn_Add.Label = "Refresh";
                 this.btn_Add.Image = null;
                 this.btn_Add.OfficeImageId = "Refresh";
-              //  this.btn_Add.Image = Microsoft.Office.Interop.PowerPoint.Application.CommandBars.GetImageMso("ImageMSO", 16, 16);
             }
             else
             {
@@ -242,7 +262,8 @@ namespace ProgressBar
         private void btn_Remove_Click(object sender, RibbonControlEventArgs e)
         {
             this.Controller.RemoveBarClicked();
-            this.SwapB();
+            this.SwapAddRefreshButton();
+            this.SwapStateBarRelatedItems();
         }
 
         private void btn_ChangeForeground_Click(object sender, RibbonControlEventArgs e)
