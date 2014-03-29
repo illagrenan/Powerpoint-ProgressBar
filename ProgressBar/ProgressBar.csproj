@@ -274,19 +274,19 @@
       <DependentUpon>OfficeRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IBarView.cs" />
-    <Compile Include="_CustomExceptions\NoActiveBarException.cs" />
-    <Compile Include="_CustomExceptions\NoRegisteredBarException.cs" />
-    <Compile Include="_CustomExceptions\ObsoleteException.cs" />
+    <Compile Include="CustomExceptions\NoActiveBarException.cs" />
+    <Compile Include="CustomExceptions\NoRegisteredBarException.cs" />
+    <Compile Include="CustomExceptions\ObsoleteException.cs" />
     <Compile Include="_DataStructs\Theme.cs" />
     <Compile Include="_ProgressShape\DottedBar.cs" />
     <Compile Include="_ProgressShape\PresentationBar.cs" />
     <Compile Include="_RunningPresentation\Presentation.cs" />
-    <Compile Include="_CustomExceptions\InvalidArgumentException.cs" />
+    <Compile Include="CustomExceptions\InvalidArgumentException.cs" />
     <Compile Include="_DataStructs\BarAlign.cs" />
     <Compile Include="_DataStructs\BarColorableAreas.cs" />
     <Compile Include="_ProgressShape\SolidBar.cs" />
     <Compile Include="_DataStructs\ShapeType.cs" />
-    <Compile Include="_CustomExceptions\InvalidStateException.cs" />
+    <Compile Include="CustomExceptions\InvalidStateException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

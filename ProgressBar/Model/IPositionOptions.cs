@@ -1,8 +1,8 @@
-﻿using ProgressBar.Bar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region
+
+using ProgressBar.Bar;
+
+#endregion
 
 namespace ProgressBar.Model
 {

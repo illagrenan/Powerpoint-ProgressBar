@@ -1,41 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ProgressBar.Bar
+﻿namespace ProgressBar.Bar
 {
     internal sealed class ShapeNameHelper
     {
-        private string SHAPE_PREFIX = "PG_634722689";
-        private string FOREGROUND_SUFFIX = "789_BAR";
-        private string BACKGROUND_SUFFIX = "789_BACK";
+        private const string BackgroundSuffix = "789_BACK";
+        private const string ForegroundSuffix = "789_BAR";
+        private const string ShapePrefix = "PG_634722689";
 
 
         public bool IsShapeAddInShape(string nameToCheck)
         {
-            return nameToCheck.StartsWith(this.SHAPE_PREFIX);
+            return nameToCheck.StartsWith(ShapePrefix);
         }
 
         public bool IsShapeForegroundShape(string nameToCheck)
         {
-            return nameToCheck.EndsWith(this.FOREGROUND_SUFFIX);
+            return nameToCheck.EndsWith(ForegroundSuffix);
         }
 
         public bool IsShapeBackgroundShape(string nameToCheck)
         {
-            return nameToCheck.EndsWith(this.BACKGROUND_SUFFIX);
+            return nameToCheck.EndsWith(BackgroundSuffix);
         }
 
 
         internal string GetBackgroundShapeName()
         {
-            return string.Format("{0}{1}", SHAPE_PREFIX, BACKGROUND_SUFFIX);
+            return string.Format("{0}{1}", ShapePrefix, BackgroundSuffix);
         }
 
         internal string GetForegroundShapeName()
         {
-            return string.Format("{0}{1}", SHAPE_PREFIX, FOREGROUND_SUFFIX);
+            return string.Format("{0}{1}", ShapePrefix, ForegroundSuffix);
         }
     }
 }

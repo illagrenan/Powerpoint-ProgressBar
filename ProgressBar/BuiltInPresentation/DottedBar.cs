@@ -8,7 +8,7 @@ using ProgressBar.Bar;
 using ProgressBar.DataStructs;
 using ProgressBar.Model;
 using ProgressBar.Properties;
-using ProgressBar._CustomExceptions;
+using ProgressBar.CustomExceptions;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 #endregion

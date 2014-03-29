@@ -1,10 +1,9 @@
 ﻿using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
-using ProgressBar._CustomExceptions;
+using ProgressBar.CustomExceptions;
 using ProgressBar.Adapter;
 using ProgressBar.Bar;
 using ProgressBar.Controller;
-using ProgressBar.CustomExceptions;
 using ProgressBar.Model;
 using ProgressBar.View;
 using System;

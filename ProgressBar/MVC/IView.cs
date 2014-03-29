@@ -1,17 +1,10 @@
-﻿using ProgressBar.MVC;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ProgressBar.MVC
+﻿namespace ProgressBar.MVC
 {
     public interface IView
     {
     }
 
-    public interface IView<TController, TModel> : IView
+    public interface IView<TController, in TModel> : IView
         where TController : IController
         where TModel : IModel
     {

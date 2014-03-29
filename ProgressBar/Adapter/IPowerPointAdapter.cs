@@ -1,13 +1,15 @@
-﻿using Microsoft.Office.Interop.PowerPoint;
-using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Office.Interop.PowerPoint;
+
+#endregion
 
 namespace ProgressBar.Adapter
 {
-    interface IPowerPointAdapter
+    internal interface IPowerPointAdapter
     {
+        bool HasSlides { get; set; }
         float PresentationWidth();
 
         float PresentationHeight();
@@ -19,7 +21,5 @@ namespace ProgressBar.Adapter
         int HiddenSlidesCount();
 
         List<Shape> AddInShapes();
-
-        bool HasSlides { get; set; }
     }
 }

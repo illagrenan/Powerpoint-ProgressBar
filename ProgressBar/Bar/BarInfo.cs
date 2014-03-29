@@ -1,41 +1,37 @@
-﻿using ProgressBar.CustomExceptions;
+﻿#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
+using ProgressBar.CustomExceptions;
+
+#endregion
 
 namespace ProgressBar.Bar
 {
     public class BarInfo : IBarInfo
     {
-        private System.Drawing.Image thumbnailImage;
-        private string friendlyName;
+        private readonly string _friendlyName;
+        private readonly Image _thumbnailImage;
 
-        public BarInfo(System.Drawing.Image thumbnailImage, string friendlyName)
+        public BarInfo(Image thumbnailImage, string friendlyName)
         {
             if (friendlyName == String.Empty)
             {
                 throw new InvalidArgumentException("Friendly name cannot be empty - it is important for users.");
             }
 
-            this.thumbnailImage = thumbnailImage;
-            this.friendlyName = friendlyName;
+            _thumbnailImage = thumbnailImage;
+            _friendlyName = friendlyName;
         }
 
-        public System.Drawing.Image Image
+        public Image Image
         {
-            get
-            {
-                return this.thumbnailImage;
-            }
+            get { return _thumbnailImage; }
         }
 
         public string FriendlyName
         {
-            get
-            {
-                return this.friendlyName;
-            }
+            get { return _friendlyName; }
         }
     }
 }

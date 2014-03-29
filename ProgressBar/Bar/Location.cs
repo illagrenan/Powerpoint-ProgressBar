@@ -1,12 +1,12 @@
-﻿using ProgressBar.CustomExceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region
+
+using ProgressBar.CustomExceptions;
+
+#endregion
 
 namespace ProgressBar.Bar
 {
-    class Location : ILocation
+    internal class Location : ILocation
     {
         public Location()
         {
@@ -19,25 +19,17 @@ namespace ProgressBar.Bar
                 throw new InvalidArgumentException("Location cannot be disabled and checked.");
             }
 
-            this.Enabled = enabled;
-            this.Checked = cheked;
+            Enabled = enabled;
+            Checked = cheked;
         }
 
         public Location(bool cheked)
         {
-            this.Checked = cheked;
+            Checked = cheked;
         }
 
-        public bool Enabled
-        {
-            get;
-            set;
-        }
+        public bool Enabled { get; set; }
 
-        public bool Checked
-        {
-            get;
-            set;
-        }
+        public bool Checked { get; set; }
     }
 }

@@ -1,14 +1,13 @@
-﻿using ProgressBar.Controller;
+﻿#region
+
+using ProgressBar.Controller;
 using ProgressBar.Model;
 using ProgressBar.MVC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+#endregion
 
 namespace ProgressBar.View
 {
-
     public interface IBarView : IView<IBarController, IBarModel>
     {
     }

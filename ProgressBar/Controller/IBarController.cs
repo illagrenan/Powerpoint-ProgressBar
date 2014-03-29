@@ -1,9 +1,9 @@
-﻿using ProgressBar.Model;
+﻿#region
+
+using ProgressBar.Model;
 using ProgressBar.MVC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+#endregion
 
 namespace ProgressBar.Controller
 {
@@ -14,8 +14,6 @@ namespace ProgressBar.Controller
         void GetRegistered();
 
         void SetupSizes();
-
-        void SetupDefaultSize();
 
         void ChangeThemeClicked(string selectedTheme);
 

@@ -1,15 +1,16 @@
-﻿using ProgressBar.Bar;
+﻿#region
+
+using System;
+using System.Diagnostics;
+using ProgressBar.Bar;
 using ProgressBar.CustomExceptions;
 using ProgressBar.Model;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+
+#endregion
 
 namespace ProgressBar.Controller
 {
-    class BarController : IBarController
+    internal class BarController : IBarController
     {
         private readonly IBarModel model;
 
@@ -21,10 +22,7 @@ namespace ProgressBar.Controller
 
         public IBarModel Model
         {
-            get
-            {
-                return this.model;
-            }
+            get { return model; }
         }
 
         public void AddBarClicked(string selectedTheme)
@@ -33,20 +31,19 @@ namespace ProgressBar.Controller
 
             Debug.WriteLine(string.Format("AddBarClicked theme=\"{0}\"", newTheme.GetInfo().FriendlyName));
 
-            this.Model.Add(newTheme);
+            Model.Add(newTheme);
         }
 
         public void RemoveBarClicked()
         {
             Debug.WriteLine("RemoveBarClicked");
-            this.Model.RemoveBar();
+            Model.RemoveBar();
         }
 
         public void ResizeBarClicked()
         {
             throw new NotImplementedException();
         }
-
 
 
         public void ChangeThemeClicked(string selectedTheme)
@@ -56,14 +53,51 @@ namespace ProgressBar.Controller
             Debug.WriteLine(string.Format("ChangeThemeClicked param=\"{0}\"", selectedTheme));
 
 
-            this.Model.ChangeTheme(newTheme);
-            }
+            Model.ChangeTheme(newTheme);
+        }
+
+        public void GetRegistered()
+        {
+            Model.RegisterBars();
+        }
+
+
+        public void PositionOptionsChanged(bool top, bool right, bool bottom, bool left)
+        {
+            PositionOptions positionOptions = new PositionOptions();
+
+            positionOptions.Top = new Location(top);
+            positionOptions.Right = new Location(right);
+            positionOptions.Bottom = new Location(bottom);
+            positionOptions.Left = new Location(left);
+
+            Model.Reposition(positionOptions);
+        }
+
+        public void ChangeSizeClicked(int newSize)
+        {
+            Model.Resize(newSize);
+        }
+
+
+        public void SetupColors()
+        {
+            Model.SetupColors();
+        }
+
+
+        void IBarController.SetupSizes()
+        {
+            Model.SetupSizes();
+            Model.SetupDefaultSize();
+        }
+
 
         private IBar GetThemeByString(string selectedTheme)
         {
             IBar newTheme = null;
 
-            foreach (var item in this.Model.GetRegisteredBars())
+            foreach (var item in Model.GetRegisteredBars())
             {
                 if (selectedTheme == item.GetInfo().FriendlyName)
                 {
@@ -76,50 +110,8 @@ namespace ProgressBar.Controller
                 string message = String.Format("Given \"{0}\" is not valid registered theme", selectedTheme);
                 throw new InvalidStateException(message);
             }
+
             return newTheme;
-        }
-
-        public void GetRegistered()
-        {
-            this.Model.RegisterBars();
-        }
-
-
-
-        public void PositionOptionsChanged(bool top, bool right, bool bottom, bool left)
-        {
-            PositionOptions positionOptions = new PositionOptions();
-
-            positionOptions.Top = new Location(top);
-            positionOptions.Right = new Location(right);
-            positionOptions.Bottom = new Location(bottom);
-            positionOptions.Left = new Location(left);
-
-            this.Model.Reposition(positionOptions);
-        }
-
-        public void ChangeSizeClicked(int newSize)
-        {
-            this.Model.Resize(newSize);
-        }
-
-
-        public void SetupColors()
-        {
-            this.Model.SetupColors();
-        }
-
-
-        void IBarController.SetupSizes()
-        {
-            this.Model.SetupSizes();
-            this.Model.SetupDefaultSize();
-        }
-
-
-        void IBarController.SetupDefaultSize()
-        {
-            throw new NotImplementedException();
         }
     }
 }

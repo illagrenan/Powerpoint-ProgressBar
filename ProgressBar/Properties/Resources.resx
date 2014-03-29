@@ -172,4 +172,10 @@
   <data name="update" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BarRibbon1_btn_Add_Click_This_presentation_has_no_slides_" xml:space="preserve">
+    <value>This presentation has no slides.</value>
+  </data>
+  <data name="BarRibbon1_btn_Add_Click_Unable_to_add_bar" xml:space="preserve">
+    <value>Unable to add bar</value>
+  </data>
 </root>

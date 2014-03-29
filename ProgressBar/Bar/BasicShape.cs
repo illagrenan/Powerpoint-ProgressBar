@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region
+
+using Microsoft.Office.Core;
+using ProgressBar.DataStructs;
+
+#endregion
 
 namespace ProgressBar.Bar
 {
     public sealed class BasicShape : IBasicShape
     {
-
-        public Microsoft.Office.Core.MsoAutoShapeType Type { get; set; }
-        public DataStructs.ShapeType ColorType { get; set; }
+        public MsoAutoShapeType Type { get; set; }
+        public ShapeType ColorType { get; set; }
 
         public float Left { get; set; }
 
@@ -18,8 +19,5 @@ namespace ProgressBar.Bar
         public float Width { get; set; }
 
         public float Height { get; set; }
-
-
-
     }
 }

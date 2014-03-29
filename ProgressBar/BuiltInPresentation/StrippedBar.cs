@@ -1,6 +1,5 @@
 ﻿#region
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Microsoft.Office.Core;
@@ -8,8 +7,6 @@ using ProgressBar.Bar;
 using ProgressBar.DataStructs;
 using ProgressBar.Model;
 using ProgressBar.Properties;
-using ProgressBar.CustomExceptions;
-using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 #endregion
 
@@ -17,29 +14,30 @@ namespace ProgressBar.BuiltInPresentation
 {
     internal class StrippedBar : IBar
     {
-        private readonly IBarInfo info;
-        private readonly PositionOptions positionInfo;
-        private PresentationInfo presentationInfo;
+        private readonly IBarInfo _info;
+        private readonly PositionOptions _positionInfo;
+        private PresentationInfo _presentationInfo;
 
         public StrippedBar()
         {
-            positionInfo = new PositionOptions();
-
-            // (enabled, checked)
-            positionInfo.Top = new Location(true, true);
-            positionInfo.Right = new Location(false, false);
-            positionInfo.Bottom = new Location(true, false);
-            positionInfo.Left = new Location(false, false);
+            _positionInfo = new PositionOptions
+            {
+                // (enabled, checked)
+                Top = new Location(true, true),
+                Right = new Location(false, false),
+                Bottom = new Location(true, false),
+                Left = new Location(false, false)
+            };
 
             Image thumbnailImage = Resources.theme_solid;
-            string friendlyName = "Stripped Bar";
+            const string friendlyName = "Stripped Bar";
 
-            info = new BarInfo(thumbnailImage, friendlyName);
+            _info = new BarInfo(thumbnailImage, friendlyName);
         }
 
         List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
         {
-            this.presentationInfo = presentationInfo;
+            _presentationInfo = presentationInfo;
 
             List<IBasicShape> shapes = new List<IBasicShape>();
 
@@ -51,7 +49,7 @@ namespace ProgressBar.BuiltInPresentation
             shapes.Add(MakeBackground());
             shapes.Add(MakeProgressBar(currentPosition));
 
-            if (positionInfo.Bottom.Checked)
+            if (_positionInfo.Bottom.Checked)
             {
                 foreach (IBasicShape basicShape in shapes)
                 {
@@ -65,27 +63,12 @@ namespace ProgressBar.BuiltInPresentation
 
         public IBarInfo GetInfo()
         {
-            return info;
+            return _info;
         }
 
         IPositionOptions IBar.GetPositionOptions()
         {
-            return positionInfo;
-        }
-
-        public IPositionOptions GetPositionOptions(IPositionOptions positionOptions)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PositionOptions GetPositionOptions()
-        {
-            throw new ObsoleteException();
-        }
-
-        public List<Shape> Render(int currentPosition, PresentationInfo ppp)
-        {
-            throw new NotImplementedException();
+            return _positionInfo;
         }
 
         private IBasicShape MakeShapeStub(PresentationInfo presentation)
@@ -103,9 +86,9 @@ namespace ProgressBar.BuiltInPresentation
 
         private IBasicShape MakeBackground()
         {
-            IBasicShape backgroundShape = MakeShapeStub(presentationInfo);
+            IBasicShape backgroundShape = MakeShapeStub(_presentationInfo);
 
-            backgroundShape.Width = presentationInfo.Width;
+            backgroundShape.Width = _presentationInfo.Width;
             backgroundShape.ColorType = ShapeType.BACKGROUND;
 
             return backgroundShape;
@@ -113,10 +96,10 @@ namespace ProgressBar.BuiltInPresentation
 
         private IBasicShape MakeProgressBar(int currentPosition)
         {
-            IBasicShape backgroundShape = MakeShapeStub(presentationInfo);
+            IBasicShape backgroundShape = MakeShapeStub(_presentationInfo);
 
 
-            if (presentationInfo.DisableOnFirstSlide)
+            if (_presentationInfo.DisableOnFirstSlide)
             {
                 currentPosition -= 1;
             }
@@ -130,10 +113,10 @@ namespace ProgressBar.BuiltInPresentation
 
         private float CalculateWidthOfBarOnOneSlide()
         {
-            int slidesCount = presentationInfo.DisableOnFirstSlide
-                ? (presentationInfo.SlidesCount - 1)
-                : presentationInfo.SlidesCount;
-            return presentationInfo.Width/slidesCount;
+            int slidesCount = _presentationInfo.DisableOnFirstSlide
+                ? (_presentationInfo.SlidesCount - 1)
+                : _presentationInfo.SlidesCount;
+            return _presentationInfo.Width/slidesCount;
         }
     }
 }

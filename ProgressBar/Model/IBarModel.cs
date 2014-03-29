@@ -1,9 +1,13 @@
-﻿using ProgressBar.Bar;
-using ProgressBar.MVC;
+﻿#region
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
+using ProgressBar.Bar;
+using ProgressBar.DataStructs;
+using ProgressBar.MVC;
+
+#endregion
 
 namespace ProgressBar.Model
 {
@@ -12,10 +16,10 @@ namespace ProgressBar.Model
         event Action<IBar> BarCreatedEvent;
         event Action<List<IBar>> RegisteredBarsEvent;
         event Action BarRemovedEvent;
-        event Action<Bar.IBar> BarThemeChangedEvent;
-        event Action<Bar.IBar> BarResizedEvent;
+        event Action<IBar> BarThemeChangedEvent;
+        event Action<IBar> BarResizedEvent;
         event Action<IPositionOptions> AlignmentOptionsChanged;
-        event Action<Dictionary<DataStructs.ShapeType, System.Drawing.Color>> ColorsSetuped;
+        event Action<Dictionary<ShapeType, Color>> ColorsSetuped;
         event Action<int[]> SizesSetuped;
         event Action<int> DefaultSizeSetuped;
 
@@ -26,23 +30,17 @@ namespace ProgressBar.Model
         void RemoveBar();
 
 
-
         List<IBar> GetRegisteredBars();
         void RegisterBars();
 
 
+        Color ForegroundDefaultColor();
 
-
-        System.Drawing.Color ForegroundDefaultColor();
-
-        System.Drawing.Color BackgroundDefaultColor();
+        Color BackgroundDefaultColor();
 
         void ChangeTheme(IBar newBar);
 
         IBar GetCurrentBar();
-
-
-
 
         void Reposition(PositionOptions positionOptions);
 
