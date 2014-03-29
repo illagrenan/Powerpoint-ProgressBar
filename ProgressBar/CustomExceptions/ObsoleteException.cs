@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ProgressBar._CustomExceptions
+namespace ProgressBar.CustomExceptions
 {
     [Serializable]
     public class ObsoleteException : Exception

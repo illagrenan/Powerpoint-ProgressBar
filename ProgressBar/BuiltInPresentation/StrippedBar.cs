@@ -1,89 +1,40 @@
-﻿using ProgressBar.Bar;
+﻿#region
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using ProgressBar._CustomExceptions;
+using Microsoft.Office.Core;
+using ProgressBar.Bar;
+using ProgressBar.DataStructs;
+using ProgressBar.Model;
+using ProgressBar.Properties;
+using ProgressBar.CustomExceptions;
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
+
+#endregion
 
 namespace ProgressBar.BuiltInPresentation
 {
-    class StrippedBar : IBar
+    internal class StrippedBar : IBar
     {
+        private readonly IBarInfo info;
+        private readonly PositionOptions positionInfo;
         private PresentationInfo presentationInfo;
-        private PositionOptions positionInfo;
-        private IBarInfo info;
 
         public StrippedBar()
         {
-            this.positionInfo = new PositionOptions();
+            positionInfo = new PositionOptions();
 
             // (enabled, checked)
-            this.positionInfo.Top = new Location(true, true);
-            this.positionInfo.Right = new Location(false, false);
-            this.positionInfo.Bottom = new Location(true, false);
-            this.positionInfo.Left = new Location(false, false);
+            positionInfo.Top = new Location(true, true);
+            positionInfo.Right = new Location(false, false);
+            positionInfo.Bottom = new Location(true, false);
+            positionInfo.Left = new Location(false, false);
 
-            Image thumbnailImage = global::ProgressBar.Properties.Resources.theme_solid;
+            Image thumbnailImage = Resources.theme_solid;
             string friendlyName = "Stripped Bar";
 
-            this.info = new BarInfo(thumbnailImage, friendlyName);
-        }
-
-        public PositionOptions GetPositionOptions()
-        {
-            throw new ObsoleteException();
-        }
-
-        public List<Microsoft.Office.Interop.PowerPoint.Shape> Render(int currentPosition, PresentationInfo ppp)
-        {
-            throw new NotImplementedException();
-        }
-
-        private IBasicShape MakeShapeStub(PresentationInfo presentation)
-        {
-            IBasicShape shapeStub = new BasicShape();
-
-            shapeStub.Height = presentation.UserSize;
-
-            shapeStub.Top = 0;
-            shapeStub.Left = 0;
-            shapeStub.Type = Microsoft.Office.Core.MsoAutoShapeType.msoShapeRectangle;
-
-            return shapeStub;
-        }
-
-        private IBasicShape MakeBackground()
-        {
-            IBasicShape backgroundShape = this.MakeShapeStub(this.presentationInfo);
-
-            backgroundShape.Width = this.presentationInfo.Width;
-            backgroundShape.ColorType = DataStructs.ShapeType.BACKGROUND;
-
-            return backgroundShape;
-        }
-
-        private IBasicShape MakeProgressBar(int currentPosition)
-        {
-            IBasicShape backgroundShape = this.MakeShapeStub(this.presentationInfo);
-
-
-            if (this.presentationInfo.DisableOnFirstSlide)
-            {
-                currentPosition -= 1;
-            }
-
-
-            backgroundShape.Width = (CalculateWidthOfBarOnOneSlide()) * currentPosition;
-            backgroundShape.ColorType = DataStructs.ShapeType.PROGRESS_BAR;
-
-            return backgroundShape;
-        }
-
-        private float CalculateWidthOfBarOnOneSlide()
-        {
-            int slidesCount = this.presentationInfo.DisableOnFirstSlide ? (this.presentationInfo.SlidesCount - 1) : this.presentationInfo.SlidesCount;
-            return this.presentationInfo.Width / slidesCount;
+            info = new BarInfo(thumbnailImage, friendlyName);
         }
 
         List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
@@ -97,8 +48,16 @@ namespace ProgressBar.BuiltInPresentation
                 return shapes;
             }
 
-            shapes.Add(this.MakeBackground());
-            shapes.Add(this.MakeProgressBar(currentPosition));
+            shapes.Add(MakeBackground());
+            shapes.Add(MakeProgressBar(currentPosition));
+
+            if (positionInfo.Bottom.Checked)
+            {
+                foreach (IBasicShape basicShape in shapes)
+                {
+                    basicShape.Top = presentationInfo.Height - presentationInfo.UserSize;
+                }
+            }
 
             return shapes;
         }
@@ -106,17 +65,75 @@ namespace ProgressBar.BuiltInPresentation
 
         public IBarInfo GetInfo()
         {
-            return this.info;
+            return info;
         }
 
-        Model.IPositionOptions IBar.GetPositionOptions()
+        IPositionOptions IBar.GetPositionOptions()
         {
-            return this.positionInfo;
+            return positionInfo;
         }
 
-        public Model.IPositionOptions GetPositionOptions(Model.IPositionOptions positionOptions)
+        public IPositionOptions GetPositionOptions(IPositionOptions positionOptions)
         {
             throw new NotImplementedException();
+        }
+
+        public PositionOptions GetPositionOptions()
+        {
+            throw new ObsoleteException();
+        }
+
+        public List<Shape> Render(int currentPosition, PresentationInfo ppp)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IBasicShape MakeShapeStub(PresentationInfo presentation)
+        {
+            IBasicShape shapeStub = new BasicShape();
+
+            shapeStub.Height = presentation.UserSize;
+
+            shapeStub.Top = 0;
+            shapeStub.Left = 0;
+            shapeStub.Type = MsoAutoShapeType.msoShapeRectangle;
+
+            return shapeStub;
+        }
+
+        private IBasicShape MakeBackground()
+        {
+            IBasicShape backgroundShape = MakeShapeStub(presentationInfo);
+
+            backgroundShape.Width = presentationInfo.Width;
+            backgroundShape.ColorType = ShapeType.BACKGROUND;
+
+            return backgroundShape;
+        }
+
+        private IBasicShape MakeProgressBar(int currentPosition)
+        {
+            IBasicShape backgroundShape = MakeShapeStub(presentationInfo);
+
+
+            if (presentationInfo.DisableOnFirstSlide)
+            {
+                currentPosition -= 1;
+            }
+
+
+            backgroundShape.Width = (CalculateWidthOfBarOnOneSlide())*currentPosition;
+            backgroundShape.ColorType = ShapeType.PROGRESS_BAR;
+
+            return backgroundShape;
+        }
+
+        private float CalculateWidthOfBarOnOneSlide()
+        {
+            int slidesCount = presentationInfo.DisableOnFirstSlide
+                ? (presentationInfo.SlidesCount - 1)
+                : presentationInfo.SlidesCount;
+            return presentationInfo.Width/slidesCount;
         }
     }
 }

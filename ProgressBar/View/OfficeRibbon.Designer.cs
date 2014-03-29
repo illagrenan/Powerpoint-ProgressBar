@@ -145,8 +145,8 @@ namespace ProgressBar
             this.positionGroup.Items.Add(this.btn_AlignTop);
             this.positionGroup.Items.Add(this.btn_AlignBottom);
             this.positionGroup.Items.Add(this.checkBox1);
-            this.positionGroup.Items.Add(this.btn_AlignLeft);
             this.positionGroup.Items.Add(this.btn_AlignRight);
+            this.positionGroup.Items.Add(this.btn_AlignLeft);
             this.positionGroup.Label = "Bar Position";
             this.positionGroup.Name = "positionGroup";
             // 

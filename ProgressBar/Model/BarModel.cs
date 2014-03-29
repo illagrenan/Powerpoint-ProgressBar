@@ -135,6 +135,7 @@ namespace ProgressBar.Model
             this.GetCurrentBar().GetPositionOptions().Bottom.Checked = positionOptions.Bottom.Checked;
             this.GetCurrentBar().GetPositionOptions().Left.Checked = positionOptions.Left.Checked;
 
+            this.Add(this.GetCurrentBar());
             this.AlignmentOptionsChanged(this.GetCurrentBar().GetPositionOptions());
         }
 
