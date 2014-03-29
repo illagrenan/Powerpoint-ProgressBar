@@ -33,12 +33,6 @@ namespace ProgressBar.Controller
 
             Debug.WriteLine(string.Format("AddBarClicked theme=\"{0}\"", newTheme.GetInfo().FriendlyName));
 
-            if (this.Model.HasProgressBar())
-            {
-                this.Model.RemoveBar();
-                Debug.WriteLine("AddBarClicked: Removing old theme");
-            }
-
             this.Model.Add(newTheme);
         }
 
@@ -53,27 +47,6 @@ namespace ProgressBar.Controller
             throw new NotImplementedException();
         }
 
-        public int[] GetSizes()
-        {
-            return this.Model.GetSizes();
-        }
-
-
-        public int GetDefaultSize()
-        {
-            return this.Model.GetDefaultSize();
-        }
-
-
-        public System.Drawing.Color ForegroundDefaultColor()
-        {
-            return this.Model.ForegroundDefaultColor();
-        }
-
-        public System.Drawing.Color BackgroundDefaultColor()
-        {
-            return this.Model.BackgroundDefaultColor();
-        }
 
 
         public void ChangeThemeClicked(string selectedTheme)
@@ -82,20 +55,9 @@ namespace ProgressBar.Controller
 
             Debug.WriteLine(string.Format("ChangeThemeClicked param=\"{0}\"", selectedTheme));
 
-            if (this.Model.HasProgressBar() && (newTheme.GetInfo().FriendlyName != this.Model.GetCurrentBar().GetInfo().FriendlyName))
-            {
-                Debug.WriteLine(String.Format("Changing theme FROM=\"{0}\" TO=\"{1}\"",
-                                                this.Model.GetCurrentBar().GetInfo().FriendlyName,
-                                                newTheme.GetInfo().FriendlyName));
 
-                this.Model.RemoveBar();
-                this.Model.ChangeTheme(newTheme);
+            this.Model.ChangeTheme(newTheme);
             }
-            else
-            {
-                Debug.WriteLine("Ignoring change theme event. Nothing changed");
-            }
-        }
 
         private IBar GetThemeByString(string selectedTheme)
         {
@@ -123,11 +85,6 @@ namespace ProgressBar.Controller
         }
 
 
-        public bool HasBar()
-        {
-            return this.Model.HasProgressBar();
-        }
-
 
         public void PositionOptionsChanged(bool top, bool right, bool bottom, bool left)
         {
@@ -144,6 +101,25 @@ namespace ProgressBar.Controller
         public void ChangeSizeClicked(int newSize)
         {
             this.Model.Resize(newSize);
+        }
+
+
+        public void SetupColors()
+        {
+            this.Model.SetupColors();
+        }
+
+
+        void IBarController.SetupSizes()
+        {
+            this.Model.SetupSizes();
+            this.Model.SetupDefaultSize();
+        }
+
+
+        void IBarController.SetupDefaultSize()
+        {
+            throw new NotImplementedException();
         }
     }
 }

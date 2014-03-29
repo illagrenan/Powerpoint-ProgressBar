@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Interop.PowerPoint;
+using ProgressBar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,13 @@ namespace ProgressBar.Bar
 {
     public interface IBar
     {
-        PositionOptions GetPositionOptions();
+        IPositionOptions GetPositionOptions();
+        IPositionOptions GetPositionOptions(IPositionOptions positionOptions);
 
         List<IBasicShape> Render(int currentPosition, PresentationInfo ppp);
 
         IBarInfo GetInfo();
+
+
     }
 }

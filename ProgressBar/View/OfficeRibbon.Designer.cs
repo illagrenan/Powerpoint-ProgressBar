@@ -43,7 +43,11 @@ namespace ProgressBar
             this.btn_ChangeBackground = this.Factory.CreateRibbonButton();
             this.dropDown_BarHeight = this.Factory.CreateRibbonDropDown();
             this.positionGroup = this.Factory.CreateRibbonGroup();
+            this.btn_AlignTop = this.Factory.CreateRibbonToggleButton();
+            this.btn_AlignBottom = this.Factory.CreateRibbonToggleButton();
             this.checkBox1 = this.Factory.CreateRibbonCheckBox();
+            this.btn_AlignLeft = this.Factory.CreateRibbonToggleButton();
+            this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
             this.themeGroup = this.Factory.CreateRibbonGroup();
             this.themeGallery = this.Factory.CreateRibbonGallery();
             this.group4 = this.Factory.CreateRibbonGroup();
@@ -51,10 +55,6 @@ namespace ProgressBar
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
-            this.btn_AlignRight = this.Factory.CreateRibbonToggleButton();
-            this.btn_AlignLeft = this.Factory.CreateRibbonToggleButton();
-            this.btn_AlinBottom = this.Factory.CreateRibbonToggleButton();
-            this.btn_AlignTop = this.Factory.CreateRibbonToggleButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.styleGroup.SuspendLayout();
@@ -143,12 +143,31 @@ namespace ProgressBar
             // positionGroup
             // 
             this.positionGroup.Items.Add(this.btn_AlignTop);
-            this.positionGroup.Items.Add(this.btn_AlinBottom);
+            this.positionGroup.Items.Add(this.btn_AlignBottom);
             this.positionGroup.Items.Add(this.checkBox1);
             this.positionGroup.Items.Add(this.btn_AlignLeft);
             this.positionGroup.Items.Add(this.btn_AlignRight);
             this.positionGroup.Label = "Bar Position";
             this.positionGroup.Name = "positionGroup";
+            // 
+            // btn_AlignTop
+            // 
+            this.btn_AlignTop.Checked = true;
+            this.btn_AlignTop.Enabled = false;
+            this.btn_AlignTop.Image = global::ProgressBar.Properties.Resources.border_2_top;
+            this.btn_AlignTop.Label = "Top";
+            this.btn_AlignTop.Name = "btn_AlignTop";
+            this.btn_AlignTop.ShowImage = true;
+            this.btn_AlignTop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click_1);
+            // 
+            // btn_AlignBottom
+            // 
+            this.btn_AlignBottom.Enabled = false;
+            this.btn_AlignBottom.Image = global::ProgressBar.Properties.Resources.border_2_bottom;
+            this.btn_AlignBottom.Label = "Bottom";
+            this.btn_AlignBottom.Name = "btn_AlignBottom";
+            this.btn_AlignBottom.ShowImage = true;
+            this.btn_AlignBottom.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignBottom_Click);
             // 
             // checkBox1
             // 
@@ -156,6 +175,24 @@ namespace ProgressBar
             this.checkBox1.Label = "Disable on First slide";
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.checkBox1_Click);
+            // 
+            // btn_AlignLeft
+            // 
+            this.btn_AlignLeft.Enabled = false;
+            this.btn_AlignLeft.Image = global::ProgressBar.Properties.Resources.border_2_left;
+            this.btn_AlignLeft.Label = "Left";
+            this.btn_AlignLeft.Name = "btn_AlignLeft";
+            this.btn_AlignLeft.ShowImage = true;
+            this.btn_AlignLeft.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignLeft_Click);
+            // 
+            // btn_AlignRight
+            // 
+            this.btn_AlignRight.Enabled = false;
+            this.btn_AlignRight.Image = global::ProgressBar.Properties.Resources.border_2_right;
+            this.btn_AlignRight.Label = "Right";
+            this.btn_AlignRight.Name = "btn_AlignRight";
+            this.btn_AlignRight.ShowImage = true;
+            this.btn_AlignRight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignRight_Click);
             // 
             // themeGroup
             // 
@@ -212,43 +249,6 @@ namespace ProgressBar
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonAbout_Click);
             // 
-            // btn_AlignRight
-            // 
-            this.btn_AlignRight.Enabled = false;
-            this.btn_AlignRight.Image = global::ProgressBar.Properties.Resources.border_2_right;
-            this.btn_AlignRight.Label = "Right";
-            this.btn_AlignRight.Name = "btn_AlignRight";
-            this.btn_AlignRight.ShowImage = true;
-            this.btn_AlignRight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
-            // 
-            // btn_AlignLeft
-            // 
-            this.btn_AlignLeft.Enabled = false;
-            this.btn_AlignLeft.Image = global::ProgressBar.Properties.Resources.border_2_left;
-            this.btn_AlignLeft.Label = "Left";
-            this.btn_AlignLeft.Name = "btn_AlignLeft";
-            this.btn_AlignLeft.ShowImage = true;
-            this.btn_AlignLeft.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
-            // 
-            // btn_AlinBottom
-            // 
-            this.btn_AlinBottom.Enabled = false;
-            this.btn_AlinBottom.Image = global::ProgressBar.Properties.Resources.border_2_bottom;
-            this.btn_AlinBottom.Label = "Bottom";
-            this.btn_AlinBottom.Name = "btn_AlinBottom";
-            this.btn_AlinBottom.ShowImage = true;
-            this.btn_AlinBottom.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
-            // 
-            // btn_AlignTop
-            // 
-            this.btn_AlignTop.Checked = true;
-            this.btn_AlignTop.Enabled = false;
-            this.btn_AlignTop.Image = global::ProgressBar.Properties.Resources.border_2_top;
-            this.btn_AlignTop.Label = "Top";
-            this.btn_AlignTop.Name = "btn_AlignTop";
-            this.btn_AlignTop.ShowImage = true;
-            this.btn_AlignTop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click);
-            // 
             // BarRibbon1
             // 
             this.Name = "BarRibbon1";
@@ -293,7 +293,7 @@ namespace ProgressBar
         private System.Windows.Forms.ColorDialog colorDialog_Foreground;
         private System.Windows.Forms.ColorDialog colorDialog_Background;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignTop;
-        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlinBottom;
+        internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignBottom;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
     }

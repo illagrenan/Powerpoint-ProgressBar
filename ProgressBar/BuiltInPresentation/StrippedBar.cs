@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using ProgressBar._CustomExceptions;
 
 namespace ProgressBar.BuiltInPresentation
 {
@@ -31,7 +32,7 @@ namespace ProgressBar.BuiltInPresentation
 
         public PositionOptions GetPositionOptions()
         {
-            return this.positionInfo;
+            throw new ObsoleteException();
         }
 
         public List<Microsoft.Office.Interop.PowerPoint.Shape> Render(int currentPosition, PresentationInfo ppp)
@@ -106,6 +107,16 @@ namespace ProgressBar.BuiltInPresentation
         public IBarInfo GetInfo()
         {
             return this.info;
+        }
+
+        Model.IPositionOptions IBar.GetPositionOptions()
+        {
+            return this.positionInfo;
+        }
+
+        public Model.IPositionOptions GetPositionOptions(Model.IPositionOptions positionOptions)
+        {
+            throw new NotImplementedException();
         }
     }
 }

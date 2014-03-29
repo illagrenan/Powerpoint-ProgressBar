@@ -13,33 +13,45 @@ namespace ProgressBar.Model
         event Action<List<IBar>> RegisteredBarsEvent;
         event Action BarRemovedEvent;
         event Action<Bar.IBar> BarThemeChangedEvent;
+        event Action<Bar.IBar> BarResizedEvent;
+        event Action<IPositionOptions> AlignmentOptionsChanged;
+        event Action<Dictionary<DataStructs.ShapeType, System.Drawing.Color>> ColorsSetuped;
+        event Action<int[]> SizesSetuped;
+        event Action<int> DefaultSizeSetuped;
+
         void Add(IBar barToAdd);
 
         void CreateStrippedPresentation();
 
         void RemoveBar();
 
-        bool HasProgressBar();
+
 
         List<IBar> GetRegisteredBars();
         void RegisterBars();
 
-        int[] GetSizes();
 
-        int GetDefaultSize();
+
 
         System.Drawing.Color ForegroundDefaultColor();
 
         System.Drawing.Color BackgroundDefaultColor();
 
-        void ChangeTheme(IBar t);
+        void ChangeTheme(IBar newBar);
 
         IBar GetCurrentBar();
 
-        event Action<IPositionOptions> AlignmentOptionsChanged;
+
+
 
         void Reposition(PositionOptions positionOptions);
 
         void Resize(int newSize);
+
+        void SetupColors();
+
+        void SetupSizes();
+
+        void SetupDefaultSize();
     }
 }
