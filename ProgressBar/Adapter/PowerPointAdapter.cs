@@ -19,15 +19,14 @@ namespace ProgressBar.Adapter
 {
     internal class PowerPointAdapter : IPowerPointAdapter
     {
-        private const string TagKey = "5XQ8HZCIiAVwnvP7QDECuRd1ygcAHb";
-
         private const string ActiveColor = "ac";
+        private const string DisableFirstSlideChecked = "DisableFirstSlideChecked";
         private const string Getpositionoptions = "PositionOptions";
         private const string Iac = "iac";
+        private const string IbAr = "IBAr";
         private const string Sizeselecteditemindex = "SizeSelectedItemIndex";
+        private const string TagKey = "5XQ8HZCIiAVwnvP7QDECuRd1ygcAHb";
         private const string Themeselecteditemindex = "ThemeSelectedItemIndex";
-        private const string DisableFirstSlideChecked = "DisableFirstSlideChecked";
-        private const string IBAr = "IBAr";
         private readonly ShapeNameHelper _nameHelper;
         private readonly Application _powerPointApp;
 
@@ -37,49 +36,15 @@ namespace ProgressBar.Adapter
             _nameHelper = nameHelper;
         }
 
-        public float PresentationWidth()
+        public bool HasSlides
         {
-            if (VisibleSlides().Count <= 0)
-            {
-                throw new InvalidStateException("Height of slides is unknown. Presentation has no slides.");
-            }
-
-            return VisibleSlides()[0].Master.Width;
+            get { return (_powerPointApp.ActivePresentation.Slides.Count > 0); }
+            set { throw new NotImplementedException(); }
         }
-
-        public void InsertShape(Shape s)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Slide> VisibleSlides()
-        {
-            return
-                _powerPointApp.ActivePresentation.Slides.Cast<Slide>()
-                    .Where(slide => slide.SlideShowTransition.Hidden != MsoTriState.msoTrue)
-                    .ToList();
-        }
-
-        public int HiddenSlidesCount()
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public float PresentationHeight()
-        {
-            if (VisibleSlides().Count <= 0)
-            {
-                throw new InvalidStateException("Height of slides is unknown. Presentation has no slides.");
-            }
-
-            return VisibleSlides()[0].Master.Height;
-        }
-
 
         public List<Shape> AddInShapes()
         {
-            List<Shape> addInShapes = new List<Shape>();
+            var addInShapes = new List<Shape>();
 
             foreach (Slide slide in VisibleSlides())
             {
@@ -93,59 +58,62 @@ namespace ProgressBar.Adapter
             return addInShapes;
         }
 
-
-        public bool HasSlides
-        {
-            get { return (_powerPointApp.ActivePresentation.Slides.Count > 0); }
-            set { throw new NotImplementedException(); }
-        }
-
-
-        public bool HasBarInTags()
-        {
-            return Tags()[TagKey] != String.Empty;
-        }
-
         public IBarTag GetBarFromTag()
         {
             var jsonSerializerSettings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects
             };
-            BarTag bt = new BarTag
+
+            var bt = new BarTag
             {
                 ActiveColor = JsonConvert.DeserializeObject<Color>(GetTagByKey(ActiveColor)),
                 InactiveColor = JsonConvert.DeserializeObject<Color>(GetTagByKey(Iac)),
                 SizeSelectedItemIndex = JsonConvert.DeserializeObject<int>(GetTagByKey(Sizeselecteditemindex)),
                 ThemeSelectedItemIndex = JsonConvert.DeserializeObject<int>(GetTagByKey(Themeselecteditemindex)),
-                PositionOptions = JsonConvert.DeserializeObject<PositionOptions>(GetTagByKey(Getpositionoptions), jsonSerializerSettings),
+                PositionOptions =
+                    JsonConvert.DeserializeObject<PositionOptions>(GetTagByKey(Getpositionoptions),
+                        jsonSerializerSettings),
                 DisableFirstSlideChecked = JsonConvert.DeserializeObject<bool>(GetTagByKey(DisableFirstSlideChecked)),
-                IBar = JsonConvert.DeserializeObject<IBar>(GetTagByKey(IBAr), jsonSerializerSettings)
+                Bar = JsonConvert.DeserializeObject<IBar>(GetTagByKey(IbAr), jsonSerializerSettings)
             };
 
             return bt;
         }
 
-
-        public void SaveTag(string key, string value)
+        public bool HasBarInTags()
         {
-            if (key == string.Empty || value == string.Empty)
+            return Tags()[TagKey] != String.Empty;
+        }
+
+        public void InsertShape(Shape s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public float PresentationHeight()
+        {
+            if (VisibleSlides().Count <= 0)
             {
-                throw new InvalidArgumentException("Key nor the value cannot be empty.");
+                throw new InvalidStateException("Height of slides is unknown. Presentation has no slides.");
             }
 
-            _powerPointApp.ActivePresentation.Tags.Add(key, value);
+            return VisibleSlides()[0].Master.Height;
+        }
+
+        public float PresentationWidth()
+        {
+            if (VisibleSlides().Count <= 0)
+            {
+                throw new InvalidStateException("Height of slides is unknown. Presentation has no slides.");
+            }
+
+            return VisibleSlides()[0].Master.Width;
         }
 
         public void SavePresentationToTag(IBarTag bt)
         {
             SaveTag(TagKey, true.ToString());
-
-            // private const string ActiveColor = "ac";
-            // private const string Getpositionoptions = "PositionOptions";
-            // private const string Iac = "iac";
-            // private const string Sizeselecteditemindex = "SizeSelectedItemIndex";
-            // private const string Themeselecteditemindex = "ThemeSelectedItemIndex";
 
             var settings = new JsonSerializerSettings
             {
@@ -172,19 +140,42 @@ namespace ProgressBar.Adapter
             string dddisableFirstSlideChecked = JsonConvert.SerializeObject(bt.DisableFirstSlideChecked);
             SaveTag(DisableFirstSlideChecked, dddisableFirstSlideChecked);
 
-            
-            string ibbb = JsonConvert.SerializeObject(bt.IBar, Formatting.Indented, settings);
-            SaveTag(IBAr, ibbb);
+
+            string ibbb = JsonConvert.SerializeObject(bt.Bar, Formatting.Indented, settings);
+            SaveTag(IbAr, ibbb);
         }
 
-        private Tags Tags()
+        public List<Slide> VisibleSlides()
         {
-            return _powerPointApp.ActivePresentation.Tags;
+            return
+                _powerPointApp.ActivePresentation.Slides.Cast<Slide>()
+                    .Where(slide => slide.SlideShowTransition.Hidden != MsoTriState.msoTrue)
+                    .ToList();
+        }
+
+        public int HiddenSlidesCount()
+        {
+            throw new NotImplementedException();
         }
 
         private string GetTagByKey(string key)
         {
             return _powerPointApp.ActivePresentation.Tags[key];
+        }
+
+        private void SaveTag(string key, string value)
+        {
+            if (key == string.Empty || value == string.Empty)
+            {
+                throw new InvalidArgumentException("Key nor the value cannot be empty.");
+            }
+
+            _powerPointApp.ActivePresentation.Tags.Add(key, value);
+        }
+
+        private Tags Tags()
+        {
+            return _powerPointApp.ActivePresentation.Tags;
         }
     }
 }

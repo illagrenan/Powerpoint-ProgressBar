@@ -8,7 +8,8 @@ namespace ProgressBar.Bar
 {
     public interface IBarInfo
     {
-        Image Image { get; }
         string FriendlyName { get; }
+
+        Image Image { get; }
     }
 }

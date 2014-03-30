@@ -29,54 +29,22 @@ namespace ProgressBar.Model
             _colors.Add(ShapeType.Active, Color.SlateBlue);
         }
 
-        public event Action<IBar> BarCreatedEvent;
-        public event Action<IBar> BarThemeChangedEvent;
-        public event Action BarRemovedEvent;
         public event Action<IPositionOptions> AlignmentOptionsChanged;
-        public event Action<IBar> BarResizedEvent;
-        public event Action<Dictionary<ShapeType, Color>> ColorsSetuped;
-        public event Action<int[]> SizesSetuped;
-        public event Action<int> DefaultSizeSetuped;
-        public event Action<List<IBar>> RegisteredBarsEvent;
+        public event Action<IBar> BarCreated;
+        public event Action<IBar> BarInfoRetrieved;
 
+        public event Action BarRemoved;
 
-        public void CreateStrippedPresentation()
-        {
-        }
+        public event Action<IBar> BarSizeChanged;
 
-        public void RemoveBar()
-        {
-            _hasBar = false;
-            _currentBar = null;
+        public event Action<List<IBar>> BarsRegistered;
 
-            if (BarRemovedEvent != null)
-            {
-                BarRemovedEvent();
-            }
-        }
+        public event Action<Dictionary<ShapeType, Color>> ColorsSet;
 
+        public event Action<int> DefaultSizeSet;
 
-        public void RegisterBars()
-        {
-            _registeredBars.Add(new DottedBar());
-            _registeredBars.Add(new StrippedBar());
-
-            if (RegisteredBarsEvent != null)
-            {
-                RegisteredBarsEvent(_registeredBars);
-            }
-        }
-
-        public List<IBar> GetRegisteredBars()
-        {
-            if (!_registeredBars.Any())
-            {
-                throw new NoRegisteredBarException(
-                    "All bars you want to user must be registered in method \"RegisterBars\". Currently no bars are registered.");
-            }
-
-            return _registeredBars;
-        }
+        public event Action ExternalBarAdded;
+        public event Action<int[]> SizesSet;
 
         public void Add(IBar barToAdd)
         {
@@ -90,8 +58,38 @@ namespace ProgressBar.Model
             _hasBar = true;
             _currentBar = barToAdd;
 
-            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions());
-            BarCreatedEvent(barToAdd);
+            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions);
+            BarCreated(barToAdd);
+        }
+
+        public void AddExternalBar(IBar ibb, IPositionOptions po)
+        {
+            _currentBar = ibb;
+            _hasBar = true;
+            _currentBar.GetPositionOptions = po;
+
+            /*
+             * Událost ExternalBarAdded kromě aktivace Add tlačítka
+             * iteruje přes všechny ovládací prvky Ribbonu a povolí je.
+             * Problém nastává u StrippedBaru, který mí Right a Left zakázané.
+             * 
+             * Nejdříve tedy aktivujeme všechny prvky na liště a teprve poté případně
+             * zakážeme některá tlačítka pro zarovnání.
+             */
+
+            ExternalBarAdded();
+            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions);
+        }
+
+        public IEnumerable<IBar> GetRegisteredBars()
+        {
+            if (!_registeredBars.Any())
+            {
+                throw new NoRegisteredBarException(
+                    "All bars you want to user must be registered in method \"RegisterBars\". Currently no bars are registered.");
+            }
+
+            return _registeredBars;
         }
 
         public void ChangeTheme(IBar newBar)
@@ -106,7 +104,7 @@ namespace ProgressBar.Model
                 _currentBar = newBar;
                 _hasBar = true;
 
-                BarThemeChangedEvent(newBar);
+                Add(newBar);
             }
             else
             {
@@ -114,7 +112,87 @@ namespace ProgressBar.Model
             }
         }
 
-        public IBar GetCurrentBar()
+        public void RegisterBars()
+        {
+            _registeredBars.Add(new DottedBar());
+            _registeredBars.Add(new StrippedBar());
+
+            if (BarsRegistered != null)
+            {
+                BarsRegistered(_registeredBars);
+            }
+        }
+
+        public void RemoveBar()
+        {
+            _hasBar = false;
+            _currentBar = null;
+
+            if (BarRemoved != null)
+            {
+                BarRemoved();
+            }
+        }
+
+        public void Reposition(PositionOptions positionOptions)
+        {
+            GetCurrentBar().GetPositionOptions.Top.Selected = positionOptions.Top.Selected;
+            GetCurrentBar().GetPositionOptions.Right.Selected = positionOptions.Right.Selected;
+            GetCurrentBar().GetPositionOptions.Bottom.Selected = positionOptions.Bottom.Selected;
+            GetCurrentBar().GetPositionOptions.Left.Selected = positionOptions.Left.Selected;
+
+            Add(GetCurrentBar());
+            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions);
+        }
+
+        public void Resize(int newSize)
+        {
+            if (BarSizeChanged != null)
+            {
+                BarSizeChanged(GetCurrentBar());
+            }
+        }
+
+
+        public void SaveBarTo()
+        {
+            if (_hasBar == false)
+            {
+                throw new InvalidOperationException("Presentation has no bar.");
+            }
+
+            BarInfoRetrieved(GetCurrentBar());
+        }
+
+        public void SetupColors()
+        {
+            if (ColorsSet != null)
+            {
+                ColorsSet(_colors);
+            }
+        }
+
+        public void SetupDefaultSize()
+        {
+            int f = GetSizes()[GetSizes().Count()/4];
+
+            if (DefaultSizeSet != null)
+            {
+                DefaultSizeSet(f);
+            }
+        }
+
+        public void SetupSizes()
+        {
+            var x = GetSizes();
+
+            if (SizesSet != null)
+            {
+                SizesSet(x);
+            }
+        }
+
+        private IBar GetCurrentBar()
         {
             if (_hasBar == false)
             {
@@ -124,95 +202,10 @@ namespace ProgressBar.Model
             return _currentBar;
         }
 
-        public void Reposition(PositionOptions positionOptions)
-        {
-            GetCurrentBar().GetPositionOptions().Top.Selected = positionOptions.Top.Selected;
-            GetCurrentBar().GetPositionOptions().Right.Selected = positionOptions.Right.Selected;
-            GetCurrentBar().GetPositionOptions().Bottom.Selected = positionOptions.Bottom.Selected;
-            GetCurrentBar().GetPositionOptions().Left.Selected = positionOptions.Left.Selected;
-
-            Add(GetCurrentBar());
-            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions());
-        }
-
-        public void Resize(int newSize)
-        {
-            if (BarResizedEvent != null)
-            {
-                BarResizedEvent(GetCurrentBar());
-            }
-        }
-
-
-        public void SetupColors()
-        {
-            if (ColorsSetuped != null)
-            {
-                ColorsSetuped(_colors);
-            }
-        }
-
-        public void SetupSizes()
-        {
-            var x = GetSizes();
-
-            if (SizesSetuped != null)
-            {
-                SizesSetuped(x);
-            }
-        }
-
-
-        public void SetupDefaultSize()
-        {
-            int f = GetSizes()[GetSizes().Count()/4];
-
-            if (DefaultSizeSetuped != null)
-            {
-                DefaultSizeSetuped(f);
-            }
-        }
-
-
-        public Color ForegroundDefaultColor()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Color BackgroundDefaultColor()
-        {
-            throw new NotImplementedException();
-        }
-
         private int[] GetSizes()
         {
             var x = Enumerable.Range(1, 30).ToArray();
             return x;
-        }
-
-
-        public event Action BarDetected;
-
-        public void BarDeteccccccc(IBar ibb)
-        {
-            this._currentBar = ibb;
-            this._hasBar = true;
-
-            this.BarDetected();
-        }
-
-
-        public event Action<IBar> SaveBar;
-
-        public void SaveBarTo()
-        {
-            if (_hasBar == false)
-            {
-                throw new InvalidOperationException("Presentation has no bar.");
-            }
-
-            this.SaveBar(this.GetCurrentBar());
-
         }
     }
 }

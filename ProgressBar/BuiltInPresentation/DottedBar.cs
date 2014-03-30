@@ -14,9 +14,9 @@ namespace ProgressBar.BuiltInPresentation
 {
     internal class DottedBar : IBar
     {
+        private const int _gap = 10;
         private readonly IBarInfo _barInfo;
-        private readonly PositionOptions _positionOptions;
-        private int _gap;
+        private PositionOptions _positionOptions;
 
         public DottedBar()
         {
@@ -35,6 +35,17 @@ namespace ProgressBar.BuiltInPresentation
         }
 
 
+        IPositionOptions IBar.GetPositionOptions
+        {
+            get { return _positionOptions; }
+            set { _positionOptions = (PositionOptions) value; }
+        }
+
+        public IBarInfo GetInfo()
+        {
+            return _barInfo;
+        }
+
         IEnumerable<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
         {
             List<IBasicShape> shapes = new List<IBasicShape>();
@@ -48,15 +59,14 @@ namespace ProgressBar.BuiltInPresentation
             if (presentationInfo.DisableOnFirstSlide)
             {
                 currentPosition -= 1;
-                slidesCount -=  1;
+                slidesCount -= 1;
             }
-           
+
             for (int i = 0; i < slidesCount; i++)
             {
                 IBasicShape shape = new BasicShape();
                 shape.Height = shape.Width = presentationInfo.UserSize;
 
-                _gap = 10;
                 if (_positionOptions.Top.Selected)
                 {
                     shape.Top = _gap;
@@ -94,17 +104,6 @@ namespace ProgressBar.BuiltInPresentation
             }
 
             return shapes;
-        }
-
-
-        public IBarInfo GetInfo()
-        {
-            return _barInfo;
-        }
-
-        IPositionOptions IBar.GetPositionOptions()
-        {
-            return _positionOptions;
         }
     }
 }

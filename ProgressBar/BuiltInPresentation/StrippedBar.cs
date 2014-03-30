@@ -15,7 +15,7 @@ namespace ProgressBar.BuiltInPresentation
     internal class StrippedBar : IBar
     {
         private readonly IBarInfo _info;
-        private readonly PositionOptions _positionInfo;
+        private PositionOptions _positionInfo;
         private PresentationInfo _presentationInfo;
 
         public StrippedBar()
@@ -32,6 +32,17 @@ namespace ProgressBar.BuiltInPresentation
             const string friendlyName = "Stripped Bar";
 
             _info = new BarInfo(thumbnailImage, friendlyName);
+        }
+
+        IPositionOptions IBar.GetPositionOptions
+        {
+            get { return _positionInfo; }
+            set { _positionInfo = (PositionOptions) value; }
+        }
+
+        public IBarInfo GetInfo()
+        {
+            return _info;
         }
 
         IEnumerable<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
@@ -59,28 +70,12 @@ namespace ProgressBar.BuiltInPresentation
             return shapes;
         }
 
-
-        public IBarInfo GetInfo()
+        private float CalculateWidthOfBarOnOneSlide()
         {
-            return _info;
-        }
-
-        IPositionOptions IBar.GetPositionOptions()
-        {
-            return _positionInfo;
-        }
-
-        private IBasicShape MakeShapeStub(PresentationInfo presentation)
-        {
-            IBasicShape shapeStub = new BasicShape();
-
-            shapeStub.Height = presentation.UserSize;
-
-            shapeStub.Top = 0;
-            shapeStub.Left = 0;
-            shapeStub.Type = MsoAutoShapeType.msoShapeRectangle;
-
-            return shapeStub;
+            int slidesCount = _presentationInfo.DisableOnFirstSlide
+                ? (_presentationInfo.SlidesCount - 1)
+                : _presentationInfo.SlidesCount;
+            return _presentationInfo.Width/slidesCount;
         }
 
         private IBasicShape MakeBackground()
@@ -110,12 +105,17 @@ namespace ProgressBar.BuiltInPresentation
             return backgroundShape;
         }
 
-        private float CalculateWidthOfBarOnOneSlide()
+        private IBasicShape MakeShapeStub(PresentationInfo presentation)
         {
-            int slidesCount = _presentationInfo.DisableOnFirstSlide
-                ? (_presentationInfo.SlidesCount - 1)
-                : _presentationInfo.SlidesCount;
-            return _presentationInfo.Width/slidesCount;
+            IBasicShape shapeStub = new BasicShape();
+
+            shapeStub.Height = presentation.UserSize;
+
+            shapeStub.Top = 0;
+            shapeStub.Left = 0;
+            shapeStub.Type = MsoAutoShapeType.msoShapeRectangle;
+
+            return shapeStub;
         }
     }
 }

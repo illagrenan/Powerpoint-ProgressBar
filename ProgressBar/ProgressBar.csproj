@@ -330,40 +330,7 @@
     <None Include="Resources\color_wheel.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\border_2_top.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\border_2_bottom.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\globe_model.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\email_open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\update.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\bug.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Links.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\border_2_left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\border_2_right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\error.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\theme_dotted.png" />

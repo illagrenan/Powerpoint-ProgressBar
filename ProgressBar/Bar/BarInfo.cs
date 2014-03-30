@@ -24,14 +24,14 @@ namespace ProgressBar.Bar
             _friendlyName = friendlyName;
         }
 
-        public Image Image
-        {
-            get { return _thumbnailImage; }
-        }
-
         public string FriendlyName
         {
             get { return _friendlyName; }
+        }
+
+        public Image Image
+        {
+            get { return _thumbnailImage; }
         }
     }
 }

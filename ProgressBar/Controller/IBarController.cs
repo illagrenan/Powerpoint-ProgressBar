@@ -1,5 +1,6 @@
 ﻿#region
 
+using ProgressBar.Bar;
 using ProgressBar.Model;
 using ProgressBar.MVC;
 
@@ -24,8 +25,9 @@ namespace ProgressBar.Controller
 
         void SetupColors();
 
-        void BarDetected(Bar.IBar ibb);
 
         void SaveBarToMetadata();
+
+        void BarDetected(IBar bar, IPositionOptions positionOptions);
     }
 }

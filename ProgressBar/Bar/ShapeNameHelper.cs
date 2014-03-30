@@ -12,16 +12,15 @@
             return nameToCheck.StartsWith(ShapePrefix);
         }
 
-        public bool IsShapeForegroundShape(string nameToCheck)
-        {
-            return nameToCheck.EndsWith(ForegroundSuffix);
-        }
-
         public bool IsShapeBackgroundShape(string nameToCheck)
         {
             return nameToCheck.EndsWith(BackgroundSuffix);
         }
 
+        public bool IsShapeForegroundShape(string nameToCheck)
+        {
+            return nameToCheck.EndsWith(ForegroundSuffix);
+        }
 
         internal string GetBackgroundShapeName()
         {

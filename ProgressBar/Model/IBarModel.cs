@@ -13,50 +13,39 @@ namespace ProgressBar.Model
 {
     public interface IBarModel : IModel
     {
-        event Action<IBar> BarCreatedEvent;
-        event Action<List<IBar>> RegisteredBarsEvent;
-        event Action BarRemovedEvent;
-        event Action<IBar> BarThemeChangedEvent;
-        event Action<IBar> BarResizedEvent;
-        event Action<IBar> SaveBar;
         event Action<IPositionOptions> AlignmentOptionsChanged;
-        event Action<Dictionary<ShapeType, Color>> ColorsSetuped;
-        event Action<int[]> SizesSetuped;
-        event Action<int> DefaultSizeSetuped;
-        event Action BarDetected;
+
+        event Action<IBar> BarCreated;
+        event Action<IBar> BarInfoRetrieved;
+        event Action BarRemoved;
+        event Action<IBar> BarSizeChanged;
+        event Action<List<IBar>> BarsRegistered;
+        event Action<Dictionary<ShapeType, Color>> ColorsSet;
+        event Action<int> DefaultSizeSet;
+        event Action ExternalBarAdded;
+        event Action<int[]> SizesSet;
+
         void Add(IBar barToAdd);
 
-        void CreateStrippedPresentation();
+        void AddExternalBar(IBar ibb, IPositionOptions po);
 
-        void RemoveBar();
-
-
-        List<IBar> GetRegisteredBars();
-        void RegisterBars();
-
-
-        Color ForegroundDefaultColor();
-
-        Color BackgroundDefaultColor();
+        IEnumerable<IBar> GetRegisteredBars();
 
         void ChangeTheme(IBar newBar);
 
-        IBar GetCurrentBar();
+        void RegisterBars();
 
+        void RemoveBar();
         void Reposition(PositionOptions positionOptions);
 
         void Resize(int newSize);
 
-        void SetupColors();
+        void SaveBarTo();
 
-        void SetupSizes();
+        void SetupColors();
 
         void SetupDefaultSize();
 
-
-
-        void BarDeteccccccc(IBar ibb);
-
-        void SaveBarTo();
+        void SetupSizes();
     }
 }

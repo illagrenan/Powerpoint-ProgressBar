@@ -34,17 +34,15 @@ namespace ProgressBar.Controller
             Model.Add(newTheme);
         }
 
-        public void RemoveBarClicked()
+        public void BarDetected(IBar bar, IPositionOptions positionOptions)
         {
-            Debug.WriteLine("RemoveBarClicked");
-            Model.RemoveBar();
+            Model.AddExternalBar(bar, positionOptions);
         }
 
-        public void ResizeBarClicked()
+        public void ChangeSizeClicked(int newSize)
         {
-            throw new NotImplementedException();
+            Model.Resize(newSize);
         }
-
 
         public void ChangeThemeClicked(string selectedTheme)
         {
@@ -56,42 +54,45 @@ namespace ProgressBar.Controller
             Model.ChangeTheme(newTheme);
         }
 
-        public void SetupRegisteredBars()
-        {
-            Model.RegisterBars();
-        }
-
-
-        public void PositionOptionsChanged(bool top, bool right, bool bottom, bool left)
-        {
-            PositionOptions positionOptions = new PositionOptions();
-
-            positionOptions.Top = new Location(top);
-            positionOptions.Right = new Location(right);
-            positionOptions.Bottom = new Location(bottom);
-            positionOptions.Left = new Location(left);
-
-            Model.Reposition(positionOptions);
-        }
-
-        public void ChangeSizeClicked(int newSize)
-        {
-            Model.Resize(newSize);
-        }
-
-
-        public void SetupColors()
-        {
-            Model.SetupColors();
-        }
-
-
         void IBarController.SetupSizes()
         {
             Model.SetupSizes();
             Model.SetupDefaultSize();
         }
 
+        public void PositionOptionsChanged(bool top, bool right, bool bottom, bool left)
+        {
+            var positionOptions = new PositionOptions
+            {
+                Top = new Location(top),
+                Right = new Location(right),
+                Bottom = new Location(bottom),
+                Left = new Location(left)
+            };
+
+            Model.Reposition(positionOptions);
+        }
+
+        public void RemoveBarClicked()
+        {
+            Debug.WriteLine("RemoveBarClicked");
+            Model.RemoveBar();
+        }
+
+        public void SaveBarToMetadata()
+        {
+            Model.SaveBarTo();
+        }
+
+        public void SetupColors()
+        {
+            Model.SetupColors();
+        }
+
+        public void SetupRegisteredBars()
+        {
+            Model.RegisterBars();
+        }
 
         private IBar GetThemeByString(string selectedTheme)
         {
@@ -112,18 +113,6 @@ namespace ProgressBar.Controller
             }
 
             return newTheme;
-        }
-
-
-        public void BarDetected(IBar ibb)
-        {
-            this.Model.BarDeteccccccc(ibb);
-        }
-
-
-        public void SaveBarToMetadata()
-        {
-            this.Model.SaveBarTo();
         }
     }
 }
