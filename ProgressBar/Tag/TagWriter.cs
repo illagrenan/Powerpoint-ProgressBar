@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region
+
+using System;
+using Microsoft.Office.Interop.PowerPoint;
 using ProgressBar.CustomExceptions;
+
+#endregion
 
 namespace ProgressBar.Tag
 {
-    class TagWriter : ITagWriter
+    internal class TagWriter : ITagWriter
     {
-        private Microsoft.Office.Interop.PowerPoint.Tags tags;
+        private readonly Tags _tags;
 
-        public TagWriter(Microsoft.Office.Interop.PowerPoint.Tags tags)
+        public TagWriter(Tags tags)
         {
-            this.tags = tags;
+            _tags = tags;
         }
 
         public string GetTagByKey(string key)
         {
-            return tags[key];
+            return _tags[key];
+        }
+
+        public void RemoveTagByKey(string key)
+        {
+            _tags.Add(key, String.Empty);
         }
 
         public void SaveTag(string key, string value)
@@ -27,13 +34,7 @@ namespace ProgressBar.Tag
                 throw new InvalidArgumentException("Key nor the value cannot be empty.");
             }
 
-            tags.Add(key, value);
-        }
-
-
-        public void RemoveTagByKey(string p)
-        {
-            tags.Add(p, String.Empty);
+            _tags.Add(key, value);
         }
     }
 }

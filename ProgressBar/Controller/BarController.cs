@@ -94,6 +94,12 @@ namespace ProgressBar.Controller
             Model.RegisterBars();
         }
 
+
+        public void DisableOnFirstSlideClicked()
+        {
+            Model.DisableOnFirst();
+        }
+
         private IBar GetThemeByString(string selectedTheme)
         {
             IBar newTheme = null;
@@ -113,12 +119,6 @@ namespace ProgressBar.Controller
             }
 
             return newTheme;
-        }
-
-
-        public void DisableOnFirstSlideClicked()
-        {
-            Model.DisableOnFirst();
         }
     }
 }

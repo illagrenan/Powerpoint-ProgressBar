@@ -13,89 +13,86 @@ namespace ProgressBar.Tag
 {
     public class TagAdapter : ITagAdapter
     {
-        private readonly ITagWriter ttt;
-
-        public TagAdapter(ITagWriter ttt)
+        private readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
-            this.ttt = ttt;
+            TypeNameHandling = TypeNameHandling.Objects,
+            TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
+        };
+
+        private readonly ITagWriter _tagWriter;
+
+        public TagAdapter(ITagWriter tagWriter)
+        {
+            _tagWriter = tagWriter;
         }
 
-        public bool HasBarInTags()
+        public bool HasPersistedBar()
         {
-            return ttt.GetTagByKey(TagNameHelper.TagKey) != String.Empty;
-            throw new NotImplementedException();
+            return _tagWriter.GetTagByKey(TagNameHelper.MainTagKey) != String.Empty;
         }
 
-        public IBarTag GetBarFromTag()
+        public ITagContainer GetPersistedBar()
         {
-            var jsonSerializerSettings = new JsonSerializerSettings
+            var deserializedTagContainer = new TagContainer
             {
-                TypeNameHandling = TypeNameHandling.Objects
-            };
-
-            var bt = new BarTag
-            {
-                ActiveColor = JsonConvert.DeserializeObject<Color>(ttt.GetTagByKey(TagNameHelper.ActiveColor)),
-                InactiveColor = JsonConvert.DeserializeObject<Color>(ttt.GetTagByKey(TagNameHelper.Iac)),
+                ActiveColor =
+                    JsonConvert.DeserializeObject<Color>(_tagWriter.GetTagByKey(TagNameHelper.MakeKey("active_color"))),
+                InactiveColor =
+                    JsonConvert.DeserializeObject<Color>(_tagWriter.GetTagByKey(TagNameHelper.MakeKey("inactive_color"))),
                 SizeSelectedItemIndex =
-                    JsonConvert.DeserializeObject<int>(ttt.GetTagByKey(TagNameHelper.Sizeselecteditemindex)),
+                    JsonConvert.DeserializeObject<int>(
+                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("size_selected_item_index"))),
                 ThemeSelectedItemIndex =
-                    JsonConvert.DeserializeObject<int>(ttt.GetTagByKey(TagNameHelper.Themeselecteditemindex)),
+                    JsonConvert.DeserializeObject<int>(
+                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("theme_selected_item_index"))),
                 PositionOptions =
-                    JsonConvert.DeserializeObject<PositionOptions>(ttt.GetTagByKey(TagNameHelper.Getpositionoptions),
-                        jsonSerializerSettings),
+                    JsonConvert.DeserializeObject<PositionOptions>(
+                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("position_options")),
+                        _jsonSerializerSettings),
                 DisableFirstSlideChecked =
-                    JsonConvert.DeserializeObject<bool>(ttt.GetTagByKey(TagNameHelper.DisableFirstSlideChecked)),
-                Bar = JsonConvert.DeserializeObject<IBar>(ttt.GetTagByKey(TagNameHelper.IbAr), jsonSerializerSettings)
+                    JsonConvert.DeserializeObject<bool>(
+                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("disable_first_slide_checked"))),
+                Bar =
+                    JsonConvert.DeserializeObject<IBar>(_tagWriter.GetTagByKey(TagNameHelper.MakeKey("bar")),
+                        _jsonSerializerSettings)
             };
 
-            return bt;
-        }
-
-        public IBar Bar
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public void SavePresentationToTag(BarTag bt)
-        {
-            ttt.SaveTag(TagNameHelper.TagKey, true.ToString());
-
-            var settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Objects,
-                TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
-            };
-
-
-            string activeColor = JsonConvert.SerializeObject(bt.ActiveColor);
-            ttt.SaveTag(TagNameHelper.ActiveColor, activeColor);
-
-            string inactiveColor = JsonConvert.SerializeObject(bt.InactiveColor);
-            ttt.SaveTag(TagNameHelper.Iac, inactiveColor);
-
-            string positionOptions = JsonConvert.SerializeObject(bt.PositionOptions, Formatting.Indented, settings);
-            ttt.SaveTag(TagNameHelper.Getpositionoptions, positionOptions);
-
-            string sizeSelected = JsonConvert.SerializeObject(bt.SizeSelectedItemIndex);
-            ttt.SaveTag(TagNameHelper.Sizeselecteditemindex, sizeSelected);
-
-            string themeSelected = JsonConvert.SerializeObject(bt.ThemeSelectedItemIndex);
-            ttt.SaveTag(TagNameHelper.Themeselecteditemindex, themeSelected);
-
-            string dddisableFirstSlideChecked = JsonConvert.SerializeObject(bt.DisableFirstSlideChecked);
-            ttt.SaveTag(TagNameHelper.DisableFirstSlideChecked, dddisableFirstSlideChecked);
-
-
-            string ibbb = JsonConvert.SerializeObject(bt.Bar, Formatting.Indented, settings);
-            ttt.SaveTag(TagNameHelper.IbAr, ibbb);
+            return deserializedTagContainer;
         }
 
 
-        public void RemovePresentation()
+        public void PersistContainer(TagContainer containerToPersist)
         {
-            ttt.RemoveTagByKey(TagNameHelper.TagKey);
+            _tagWriter.SaveTag(TagNameHelper.MainTagKey, true.ToString());
+
+            string activeColor = JsonConvert.SerializeObject(containerToPersist.ActiveColor);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("active_color"), activeColor);
+
+            string inactiveColor = JsonConvert.SerializeObject(containerToPersist.InactiveColor);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("inactive_color"), inactiveColor);
+
+            string positionOptions = JsonConvert.SerializeObject(containerToPersist.PositionOptions, Formatting.Indented,
+                _jsonSerializerSettings);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("position_options"), positionOptions);
+
+            string sizeSelected = JsonConvert.SerializeObject(containerToPersist.SizeSelectedItemIndex);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("size_selected_item_index"), sizeSelected);
+
+            string themeSelected = JsonConvert.SerializeObject(containerToPersist.ThemeSelectedItemIndex);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("theme_selected_item_index"), themeSelected);
+
+            string dddisableFirstSlideChecked = JsonConvert.SerializeObject(containerToPersist.DisableFirstSlideChecked);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("disable_first_slide_checked"), dddisableFirstSlideChecked);
+
+
+            string ibbb = JsonConvert.SerializeObject(containerToPersist.Bar, Formatting.Indented,
+                _jsonSerializerSettings);
+            _tagWriter.SaveTag(TagNameHelper.MakeKey("bar"), ibbb);
+        }
+
+        public void RemoveTagContainer()
+        {
+            _tagWriter.RemoveTagByKey(TagNameHelper.MainTagKey);
         }
     }
 }

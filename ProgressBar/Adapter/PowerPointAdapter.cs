@@ -2,15 +2,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
-using Newtonsoft.Json;
 using ProgressBar.Bar;
 using ProgressBar.CustomExceptions;
-using ProgressBar.Tag;
+using ProgressBar.Helper;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 #endregion
@@ -49,7 +46,7 @@ namespace ProgressBar.Adapter
 
             return addInShapes;
         }
-        
+
         public float PresentationHeight()
         {
             if (VisibleSlides().Count <= 0)
@@ -78,7 +75,5 @@ namespace ProgressBar.Adapter
                     .Where(slide => slide.SlideShowTransition.Hidden != MsoTriState.msoTrue)
                     .ToList();
         }
-
-       
     }
 }

@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ProgressBar.Bar;
+﻿#region
+
+
+
+#endregion
 
 namespace ProgressBar.Tag
 {
     public interface ITagAdapter
     {
-        
+        bool HasPersistedBar();
 
-        bool HasBarInTags();
+        ITagContainer GetPersistedBar();
 
-        IBarTag GetBarFromTag();
+        void PersistContainer(TagContainer containerToPersist);
 
-        Bar.IBar Bar { get; set; }
-
-        void SavePresentationToTag(BarTag bt);
-
-        void RemovePresentation();
+        void RemoveTagContainer();
     }
 }

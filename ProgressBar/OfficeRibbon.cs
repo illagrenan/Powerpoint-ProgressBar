@@ -15,6 +15,7 @@ using ProgressBar.Bar;
 using ProgressBar.Controller;
 using ProgressBar.CustomExceptions;
 using ProgressBar.DataStructs;
+using ProgressBar.Helper;
 using ProgressBar.Model;
 using ProgressBar.Properties;
 using ProgressBar.Tag;
@@ -112,10 +113,10 @@ namespace ProgressBar
             SetupTagWriter();
             Debug.WriteLine("Detecting bar...");
 
-            if (_tagAdapter.HasBarInTags())
+            if (_tagAdapter.HasPersistedBar())
             {
                 Debug.WriteLine("Bar detected.");
-                var barFromTag = _tagAdapter.GetBarFromTag();
+                var barFromTag = _tagAdapter.GetPersistedBar();
                 Controller.BarDetected(barFromTag.Bar, barFromTag.PositionOptions);
             }
         }
@@ -381,7 +382,7 @@ namespace ProgressBar
 
         private void model_BarInfoRetrieved(IBar obj)
         {
-            var bt = new BarTag
+            var bt = new TagContainer
             {
                 ActiveColor = colorDialog_Active.Color,
                 InactiveColor = colorDialog_Inactive.Color,
@@ -392,7 +393,7 @@ namespace ProgressBar
                 PositionOptions = obj.GetPositionOptions
             };
 
-            _tagAdapter.SavePresentationToTag(bt);
+            _tagAdapter.PersistContainer(bt);
         }
 
         private void model_BarRemoved()
@@ -401,7 +402,7 @@ namespace ProgressBar
             shape.ForEach(s => s.Delete());
 
             _hasBar = false;
-            _tagAdapter.RemovePresentation();
+            _tagAdapter.RemoveTagContainer();
         }
 
         private void model_BarSizeChanged(IBar obj)
@@ -431,7 +432,7 @@ namespace ProgressBar
 
         private void model_ExternalBarAdded()
         {
-            var barFromTag = _tagAdapter.GetBarFromTag();
+            var barFromTag = _tagAdapter.GetPersistedBar();
 
             _hasBar = true;
 

@@ -1,4 +1,4 @@
-﻿namespace ProgressBar.Bar
+﻿namespace ProgressBar.Helper
 {
     internal sealed class ShapeNameHelper
     {

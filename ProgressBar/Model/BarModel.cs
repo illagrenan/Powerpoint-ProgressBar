@@ -188,6 +188,11 @@ namespace ProgressBar.Model
             }
         }
 
+        public void DisableOnFirst()
+        {
+            Add(_currentBar);
+        }
+
         private IBar GetCurrentBar()
         {
             if (_hasBar == false)
@@ -202,12 +207,6 @@ namespace ProgressBar.Model
         {
             var x = Enumerable.Range(1, 30).ToArray();
             return x;
-        }
-
-
-        public void DisableOnFirst()
-        {
-            Add(_currentBar);
         }
     }
 }

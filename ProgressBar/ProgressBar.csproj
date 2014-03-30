@@ -271,8 +271,8 @@
     <Compile Include="OfficeRibbon.Designer.cs">
       <DependentUpon>OfficeRibbon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tag\BarTag.cs" />
-    <Compile Include="Tag\IBarTag.cs" />
+    <Compile Include="Tag\TagContainer.cs" />
+    <Compile Include="Tag\ITagContainer.cs" />
     <Compile Include="Tag\ITagAdapter.cs" />
     <Compile Include="Tag\ITagWriter.cs" />
     <Compile Include="Tag\TagAdapter.cs" />

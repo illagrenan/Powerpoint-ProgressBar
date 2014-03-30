@@ -8,7 +8,7 @@ using ProgressBar.Model;
 
 namespace ProgressBar.Tag
 {
-    public class BarTag : IBarTag
+    public class TagContainer : ITagContainer
     {
         public Color ActiveColor { get; set; }
 
