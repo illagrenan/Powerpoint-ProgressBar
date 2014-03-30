@@ -231,17 +231,11 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="AboutBox1.cs">
+    <Compile Include="AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox1.Designer.cs">
-      <DependentUpon>AboutBox1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AboutInformations.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AboutInformations.Designer.cs">
-      <DependentUpon>AboutInformations.cs</DependentUpon>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Adapter\IPowerPointAdapter.cs" />
     <Compile Include="Adapter\PowerPointAdapter.cs" />
@@ -277,30 +271,14 @@
     <Compile Include="CustomExceptions\NoActiveBarException.cs" />
     <Compile Include="CustomExceptions\NoRegisteredBarException.cs" />
     <Compile Include="CustomExceptions\ObsoleteException.cs" />
-    <Compile Include="_DataStructs\Theme.cs" />
-    <Compile Include="_ProgressShape\DottedBar.cs" />
-    <Compile Include="_ProgressShape\PresentationBar.cs" />
-    <Compile Include="_RunningPresentation\Presentation.cs" />
     <Compile Include="CustomExceptions\InvalidArgumentException.cs" />
-    <Compile Include="_DataStructs\BarAlign.cs" />
-    <Compile Include="_DataStructs\BarColorableAreas.cs" />
-    <Compile Include="_ProgressShape\SolidBar.cs" />
-    <Compile Include="_DataStructs\ShapeType.cs" />
+    <Compile Include="DataStructs\ShapeType.cs" />
     <Compile Include="CustomExceptions\InvalidStateException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Ribbon_ProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ribbon_ProgressBar.Designer.cs">
-      <DependentUpon>Ribbon_ProgressBar.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="AboutBox1.resx">
-      <DependentUpon>AboutBox1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AboutInformations.resx">
-      <DependentUpon>AboutInformations.cs</DependentUpon>
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OfficeRibbon.resx">
       <DependentUpon>OfficeRibbon.cs</DependentUpon>
@@ -315,11 +293,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Ribbon_ProgressBar.resx">
-      <DependentUpon>Ribbon_ProgressBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="J44PERo0wfY2ynFr.p12" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -329,7 +302,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="_Slide\SlideProperties.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>

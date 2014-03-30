@@ -402,7 +402,7 @@ namespace ProgressBar
 
         private void buttonAbout_Click(object sender, RibbonControlEventArgs e)
         {
-            AboutBox1 aboutBox = new AboutBox1();
+            AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog();
         }
 
@@ -457,6 +457,16 @@ namespace ProgressBar
                 btn_AlignBottom.Checked,
                 btn_AlignLeft.Checked
                 );
+        }
+
+        private void button1_Click(object sender, RibbonControlEventArgs e)
+        {
+            Process.Start("https://www.presentation-progressbar.com/");
+        }
+
+        private void button2_Click(object sender, RibbonControlEventArgs e)
+        {
+            Process.Start("https://www.presentation-progressbar.com/report-bug");
         }
     }
 }

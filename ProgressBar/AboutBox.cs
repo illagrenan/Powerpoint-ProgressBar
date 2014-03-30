@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ProgressBar
 {
-    partial class AboutBox1 : Form
+    partial class AboutBox : Form
     {
-        public AboutBox1()
+        public AboutBox()
         {
             InitializeComponent();
             Text = String.Format("About {0}", AssemblyTitle);
