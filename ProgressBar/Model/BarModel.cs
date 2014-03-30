@@ -26,7 +26,7 @@ namespace ProgressBar.Model
         public BarModel()
         {
             _colors.Add(ShapeType.Inactive, Color.LightGray);
-            _colors.Add(ShapeType.Active, Color.SlateBlue);
+            _colors.Add(ShapeType.Active, Color.Crimson);
         }
 
         public event Action<IPositionOptions> AlignmentOptionsChanged;
@@ -58,7 +58,7 @@ namespace ProgressBar.Model
             _hasBar = true;
             _currentBar = barToAdd;
 
-            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions);
+            AlignmentOptionsChanged(_currentBar.GetPositionOptions);
             BarCreated(barToAdd);
         }
 
@@ -126,7 +126,6 @@ namespace ProgressBar.Model
         public void RemoveBar()
         {
             _hasBar = false;
-            _currentBar = null;
 
             if (BarRemoved != null)
             {
@@ -147,10 +146,7 @@ namespace ProgressBar.Model
 
         public void Resize(int newSize)
         {
-            if (BarSizeChanged != null)
-            {
-                BarSizeChanged(GetCurrentBar());
-            }
+            Add(_currentBar);
         }
 
 
@@ -174,21 +170,21 @@ namespace ProgressBar.Model
 
         public void SetupDefaultSize()
         {
-            int f = GetSizes()[GetSizes().Count()/4];
+            int defaultSize = GetSizes()[GetSizes().Count()/3];
 
             if (DefaultSizeSet != null)
             {
-                DefaultSizeSet(f);
+                DefaultSizeSet(defaultSize);
             }
         }
 
         public void SetupSizes()
         {
-            var x = GetSizes();
+            var availableSizes = GetSizes();
 
             if (SizesSet != null)
             {
-                SizesSet(x);
+                SizesSet(availableSizes);
             }
         }
 
@@ -206,6 +202,12 @@ namespace ProgressBar.Model
         {
             var x = Enumerable.Range(1, 30).ToArray();
             return x;
+        }
+
+
+        public void DisableOnFirst()
+        {
+            Add(_currentBar);
         }
     }
 }

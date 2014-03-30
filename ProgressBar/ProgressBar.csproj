@@ -251,13 +251,14 @@
     <Compile Include="Bar\Location.cs" />
     <Compile Include="Bar\PositionOptions.cs" />
     <Compile Include="Bar\PresentationInfo.cs" />
-    <Compile Include="Bar\ShapeNameHelper.cs" />
+    <Compile Include="Helper\ShapeNameHelper.cs" />
     <Compile Include="BuiltInPresentation\DottedBar.cs" />
     <Compile Include="BuiltInPresentation\StrippedBar.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controller\BarController.cs" />
     <Compile Include="Controller\IBarController.cs" />
     <Compile Include="extension\ExtensionMethods.cs" />
+    <Compile Include="Helper\TagNameHelper.cs" />
     <Compile Include="Model\BarModel.cs" />
     <Compile Include="Model\IBarModel.cs" />
     <Compile Include="Model\IPositionOptions.cs" />
@@ -272,6 +273,10 @@
     </Compile>
     <Compile Include="Tag\BarTag.cs" />
     <Compile Include="Tag\IBarTag.cs" />
+    <Compile Include="Tag\ITagAdapter.cs" />
+    <Compile Include="Tag\ITagWriter.cs" />
+    <Compile Include="Tag\TagAdapter.cs" />
+    <Compile Include="Tag\TagWriter.cs" />
     <Compile Include="View\IBarView.cs" />
     <Compile Include="CustomExceptions\NoActiveBarException.cs" />
     <Compile Include="CustomExceptions\NoRegisteredBarException.cs" />

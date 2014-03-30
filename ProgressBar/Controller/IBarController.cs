@@ -29,5 +29,7 @@ namespace ProgressBar.Controller
         void SaveBarToMetadata();
 
         void BarDetected(IBar bar, IPositionOptions positionOptions);
+
+        void DisableOnFirstSlideClicked();
     }
 }

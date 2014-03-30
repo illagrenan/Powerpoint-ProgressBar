@@ -31,6 +31,7 @@ namespace ProgressBar
         private IBarModel _model;
         private ShapeNameHelper _nameHelper;
         private IPowerPointAdapter _powerpointAdapter;
+        private ITagAdapter _tagAdapter;
 
         #region MVCLogic
 
@@ -44,16 +45,14 @@ namespace ProgressBar
 
         public void Register(IBarModel model)
         {
-            // Right now: Resizing == Creating
-            model.BarCreated += ModelBarCreated;
-            model.BarSizeChanged += ModelBarSizeChanged;
-            model.BarRemoved += ModelBarRemoved;
-            model.BarsRegistered += ModelBarsRegisteredBarEvents;
-            // model.BarThemeChangedEvent += model_themeChanged;
+            model.BarCreated += model_BarCreated;
+            model.BarSizeChanged += model_BarSizeChanged;
+            model.BarRemoved += model_BarRemoved;
+            model.BarsRegistered += model_BarsRegistered;
             model.AlignmentOptionsChanged += model_AlignmentOptionsChanged;
-            model.ColorsSet += ModelColorsSet;
-            model.ExternalBarAdded += ModelExternalBarDetectefff;
-            model.BarInfoRetrieved += Model;
+            model.ColorsSet += model_ColorsSet;
+            model.ExternalBarAdded += model_ExternalBarAdded;
+            model.BarInfoRetrieved += model_BarInfoRetrieved;
 
             model.SizesSet += ModelSizesSet;
             model.DefaultSizeSet += ModelDefaultSizeSet;
@@ -61,8 +60,8 @@ namespace ProgressBar
 
         public void Release(IBarModel model)
         {
-            model.BarCreated -= ModelBarCreated;
-            model.BarRemoved -= ModelBarRemoved;
+            model.BarCreated -= model_BarCreated;
+            model.BarRemoved -= model_BarRemoved;
         }
 
         internal void Setup(
@@ -88,6 +87,11 @@ namespace ProgressBar
             }
         }
 
+        private void ActivePresentationHandle(Presentation Pres)
+        {
+            SetupTagWriter();
+        }
+
         /// <summary>
         ///     Occurs after a presentation is created.
         ///     In MS 2010 when powerpoint is opened or when File -> New.
@@ -95,6 +99,7 @@ namespace ProgressBar
         /// <param name="pres"></param>
         private void AfterNewPresentationHandle(Presentation pres)
         {
+            SetupTagWriter();
         }
 
         /// <summary>
@@ -104,12 +109,13 @@ namespace ProgressBar
         /// <param name="pres"></param>
         private void AfterPresentationOpenHandle(Presentation pres)
         {
-            Debug.WriteLine("Occurs after an existing presentation is opened.");
+            SetupTagWriter();
+            Debug.WriteLine("Detecting bar...");
 
-            if (_powerpointAdapter.HasBarInTags())
+            if (_tagAdapter.HasBarInTags())
             {
                 Debug.WriteLine("Bar detected.");
-                var barFromTag = _powerpointAdapter.GetBarFromTag();
+                var barFromTag = _tagAdapter.GetBarFromTag();
                 Controller.BarDetected(barFromTag.Bar, barFromTag.PositionOptions);
             }
         }
@@ -127,6 +133,7 @@ namespace ProgressBar
 
             Globals.ThisAddIn.Application.AfterNewPresentation += AfterNewPresentationHandle;
             Globals.ThisAddIn.Application.AfterPresentationOpen += AfterPresentationOpenHandle;
+
             Globals.ThisAddIn.Application.SlideSelectionChanged += OnSlidesChanged;
             Globals.ThisAddIn.Application.PresentationBeforeClose += BeforePresentationClose;
 
@@ -143,14 +150,14 @@ namespace ProgressBar
         /// <summary>
         ///     Represents a Presentation object before it closes.
         /// </summary>
-        /// <param name="Pres"></param>
-        /// <param name="Cancel"></param>
-        private void BeforePresentationClose(Presentation Pres, ref bool Cancel)
+        /// <param name="pres"></param>
+        /// <param name="cancel"></param>
+        private void BeforePresentationClose(Presentation pres, ref bool cancel)
         {
-            if (_hasBar)
+            if (_hasBar && pres.Saved == MsoTriState.msoTrue)
             {
                 Controller.SaveBarToMetadata();
-                Pres.Save();
+                pres.Save();
             }
         }
 
@@ -316,24 +323,7 @@ namespace ProgressBar
 
         private void checkBox1_Click(object sender, RibbonControlEventArgs e)
         {
-            string selectedTheme = GetSelectedTheme();
-            Controller.AddBarClicked(selectedTheme);
-        }
-
-        private void Model(IBar obj)
-        {
-            var bt = new BarTag
-            {
-                ActiveColor = colorDialog_Active.Color,
-                InactiveColor = colorDialog_Inactive.Color,
-                SizeSelectedItemIndex = dropDown_BarSize.SelectedItemIndex,
-                ThemeSelectedItemIndex = themeGallery.SelectedItemIndex,
-                DisableFirstSlideChecked = checkBox1.Checked,
-                Bar = obj,
-                PositionOptions = obj.GetPositionOptions
-            };
-
-            _powerpointAdapter.SavePresentationToTag(bt);
+            Controller.DisableOnFirstSlideClicked();
         }
 
         private void model_AlignmentOptionsChanged(IPositionOptions newAlignmentOptions)
@@ -341,13 +331,7 @@ namespace ProgressBar
             SetPositionOptions(newAlignmentOptions);
         }
 
-        private void model_themeChanged(IBar obj)
-        {
-            SetPositionOptions(obj.GetPositionOptions);
-            ModelBarCreated(obj);
-        }
-
-        private void ModelBarCreated(IBar createdBar)
+        private void model_BarCreated(IBar createdBar)
         {
             int slideCounter = 1;
             List<Slide> visibleSlides = _powerpointAdapter.VisibleSlides();
@@ -395,21 +379,38 @@ namespace ProgressBar
             _hasBar = true;
         }
 
-        private void ModelBarRemoved()
+        private void model_BarInfoRetrieved(IBar obj)
+        {
+            var bt = new BarTag
+            {
+                ActiveColor = colorDialog_Active.Color,
+                InactiveColor = colorDialog_Inactive.Color,
+                SizeSelectedItemIndex = dropDown_BarSize.SelectedItemIndex,
+                ThemeSelectedItemIndex = themeGallery.SelectedItemIndex,
+                DisableFirstSlideChecked = checkBox1.Checked,
+                Bar = obj,
+                PositionOptions = obj.GetPositionOptions
+            };
+
+            _tagAdapter.SavePresentationToTag(bt);
+        }
+
+        private void model_BarRemoved()
         {
             List<Shape> shape = _powerpointAdapter.AddInShapes();
             shape.ForEach(s => s.Delete());
 
             _hasBar = false;
+            _tagAdapter.RemovePresentation();
         }
 
-        private void ModelBarSizeChanged(IBar obj)
+        private void model_BarSizeChanged(IBar obj)
         {
             Controller.RemoveBarClicked();
             Controller.AddBarClicked(GetSelectedTheme());
         }
 
-        private void ModelBarsRegisteredBarEvents(List<IBar> bars)
+        private void model_BarsRegistered(List<IBar> bars)
         {
             foreach (IBar item in bars)
             {
@@ -422,20 +423,15 @@ namespace ProgressBar
             }
         }
 
-        private void ModelColorsSet(Dictionary<ShapeType, Color> obj)
+        private void model_ColorsSet(Dictionary<ShapeType, Color> obj)
         {
             colorDialog_Inactive.Color = obj[ShapeType.Inactive];
             colorDialog_Active.Color = obj[ShapeType.Active];
         }
 
-        private void ModelDefaultSizeSet(int defaultSize)
+        private void model_ExternalBarAdded()
         {
-            dropDown_BarSize.SelectedItemIndex = defaultSize;
-        }
-
-        private void ModelExternalBarDetectefff()
-        {
-            var barFromTag = _powerpointAdapter.GetBarFromTag();
+            var barFromTag = _tagAdapter.GetBarFromTag();
 
             _hasBar = true;
 
@@ -447,6 +443,17 @@ namespace ProgressBar
 
             SwapStateBarRelatedItems();
             SwapAddRefreshButton();
+        }
+
+        private void model_themeChanged(IBar obj)
+        {
+            SetPositionOptions(obj.GetPositionOptions);
+            model_BarCreated(obj);
+        }
+
+        private void ModelDefaultSizeSet(int defaultSize)
+        {
+            dropDown_BarSize.SelectedItemIndex = defaultSize;
         }
 
         private void ModelSizesSet(int[] obj)
@@ -495,6 +502,15 @@ namespace ProgressBar
 
             btn_AlignLeft.Enabled = newAlignmentOptions.Left.Available;
             btn_AlignLeft.Checked = newAlignmentOptions.Left.Selected;
+        }
+
+        private void SetupTagWriter()
+        {
+            Debug.WriteLine("Tag Writer set");
+
+            var ww = new TagWriter(Globals.ThisAddIn.Application.ActivePresentation.Tags);
+            ITagAdapter adap = new TagAdapter(ww);
+            _tagAdapter = adap;
         }
 
         private void SwapAddRefreshButton()

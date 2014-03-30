@@ -47,5 +47,7 @@ namespace ProgressBar.Model
         void SetupDefaultSize();
 
         void SetupSizes();
+
+        void DisableOnFirst();
     }
 }

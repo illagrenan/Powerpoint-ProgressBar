@@ -5,6 +5,7 @@ using ProgressBar.Adapter;
 using ProgressBar.Bar;
 using ProgressBar.Controller;
 using ProgressBar.Model;
+using ProgressBar.Tag;
 using Office = Microsoft.Office.Core;
 
 #endregion
@@ -22,6 +23,7 @@ namespace ProgressBar
 
             ShapeNameHelper nameHelper = new ShapeNameHelper();
             IPowerPointAdapter powerpointAdapter = new PowerPointAdapter(Globals.ThisAddIn.Application, nameHelper);
+
 
             Globals.Ribbons.Ribbon.Setup(barController, barModel, powerpointAdapter, nameHelper);
 

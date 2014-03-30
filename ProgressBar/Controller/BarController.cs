@@ -114,5 +114,11 @@ namespace ProgressBar.Controller
 
             return newTheme;
         }
+
+
+        public void DisableOnFirstSlideClicked()
+        {
+            Model.DisableOnFirst();
+        }
     }
 }
