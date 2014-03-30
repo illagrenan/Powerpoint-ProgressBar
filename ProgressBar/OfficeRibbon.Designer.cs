@@ -1,6 +1,6 @@
 ﻿namespace ProgressBar
 {
-    partial class BarRibbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class BarRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
         /// <summary>
         /// Required designer variable.
@@ -83,7 +83,7 @@
             // 
             this.group1.Items.Add(this.btn_Add);
             this.group1.Items.Add(this.btn_Remove);
-            this.group1.Label = "Progress Bar";
+            this.group1.Label = "Progress bar";
             this.group1.Name = "group1";
             // 
             // btn_Add
@@ -110,14 +110,14 @@
             this.styleGroup.Items.Add(this.btn_ChangeForeground);
             this.styleGroup.Items.Add(this.btn_ChangeBackground);
             this.styleGroup.Items.Add(this.dropDown_BarHeight);
-            this.styleGroup.Label = "Style";
+            this.styleGroup.Label = "Color and size";
             this.styleGroup.Name = "styleGroup";
             // 
             // btn_ChangeForeground
             // 
             this.btn_ChangeForeground.Enabled = false;
             this.btn_ChangeForeground.Image = global::ProgressBar.Properties.Resources.color_wheel;
-            this.btn_ChangeForeground.Label = "Foreground";
+            this.btn_ChangeForeground.Label = "Active";
             this.btn_ChangeForeground.Name = "btn_ChangeForeground";
             this.btn_ChangeForeground.ShowImage = true;
             this.btn_ChangeForeground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeForeground_Click);
@@ -134,7 +134,7 @@
             // dropDown_BarHeight
             // 
             this.dropDown_BarHeight.Enabled = false;
-            this.dropDown_BarHeight.Label = "Height";
+            this.dropDown_BarHeight.Label = "Size";
             this.dropDown_BarHeight.Name = "dropDown_BarHeight";
             this.dropDown_BarHeight.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDown_BarHeight_SelectionChanged);
             // 
@@ -145,25 +145,25 @@
             this.positionGroup.Items.Add(this.checkBox1);
             this.positionGroup.Items.Add(this.btn_AlignRight);
             this.positionGroup.Items.Add(this.btn_AlignLeft);
-            this.positionGroup.Label = "Bar Position";
+            this.positionGroup.Label = "Bar position";
             this.positionGroup.Name = "positionGroup";
             // 
             // btn_AlignTop
             // 
             this.btn_AlignTop.Checked = true;
             this.btn_AlignTop.Enabled = false;
-            this.btn_AlignTop.Image = global::ProgressBar.Properties.Resources.border_2_top;
             this.btn_AlignTop.Label = "Top";
             this.btn_AlignTop.Name = "btn_AlignTop";
+            this.btn_AlignTop.OfficeImageId = "ObjectsAlignTop";
             this.btn_AlignTop.ShowImage = true;
             this.btn_AlignTop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignTop_Click_1);
             // 
             // btn_AlignBottom
             // 
             this.btn_AlignBottom.Enabled = false;
-            this.btn_AlignBottom.Image = global::ProgressBar.Properties.Resources.border_2_bottom;
             this.btn_AlignBottom.Label = "Bottom";
             this.btn_AlignBottom.Name = "btn_AlignBottom";
+            this.btn_AlignBottom.OfficeImageId = "ObjectsAlignBottom";
             this.btn_AlignBottom.ShowImage = true;
             this.btn_AlignBottom.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignBottom_Click);
             // 
@@ -177,18 +177,18 @@
             // btn_AlignRight
             // 
             this.btn_AlignRight.Enabled = false;
-            this.btn_AlignRight.Image = global::ProgressBar.Properties.Resources.border_2_right;
             this.btn_AlignRight.Label = "Right";
             this.btn_AlignRight.Name = "btn_AlignRight";
+            this.btn_AlignRight.OfficeImageId = "ObjectsAlignRight";
             this.btn_AlignRight.ShowImage = true;
             this.btn_AlignRight.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignRight_Click);
             // 
             // btn_AlignLeft
             // 
             this.btn_AlignLeft.Enabled = false;
-            this.btn_AlignLeft.Image = global::ProgressBar.Properties.Resources.border_2_left;
             this.btn_AlignLeft.Label = "Left";
             this.btn_AlignLeft.Name = "btn_AlignLeft";
+            this.btn_AlignLeft.OfficeImageId = "ObjectsAlignLeft";
             this.btn_AlignLeft.ShowImage = true;
             this.btn_AlignLeft.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AlignLeft_Click);
             // 
@@ -212,46 +212,47 @@
             // group4
             // 
             this.group4.Items.Add(this.menu1);
-            this.group4.Label = "Help and Support";
+            this.group4.Label = "Help";
             this.group4.Name = "group4";
             // 
             // menu1
             // 
+            this.menu1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.menu1.Items.Add(this.button1);
             this.menu1.Items.Add(this.button2);
             this.menu1.Items.Add(this.button3);
-            this.menu1.Label = "Help and Support";
+            this.menu1.Label = "Help and support";
             this.menu1.Name = "menu1";
             this.menu1.OfficeImageId = "Help";
             this.menu1.ShowImage = true;
             // 
             // button1
             // 
-            this.button1.Image = global::ProgressBar.Properties.Resources.globe_model;
-            this.button1.Label = "Visit AddIn Website";
+            this.button1.Label = "Visit add-in homepage";
             this.button1.Name = "button1";
+            this.button1.OfficeImageId = "ViewOnlineConnection";
             this.button1.ShowImage = true;
             this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.Image = global::ProgressBar.Properties.Resources.bug;
-            this.button2.Label = "Report Bug";
+            this.button2.Label = "Report problem";
             this.button2.Name = "button2";
             this.button2.ShowImage = true;
             this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Image = global::ProgressBar.Properties.Resources.information;
-            this.button3.Label = "About";
+            this.button3.Label = "About this add-in";
             this.button3.Name = "button3";
+            this.button3.OfficeImageId = "Info";
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonAbout_Click);
             // 
-            // BarRibbon1
+            // BarRibbon
             // 
-            this.Name = "BarRibbon1";
+            this.Name = "BarRibbon";
             this.RibbonType = "Microsoft.PowerPoint.Presentation";
             this.Tabs.Add(this.tab1);
             this.Close += new System.EventHandler(this.BarRibbon1_Close);
@@ -300,9 +301,9 @@
 
     partial class ThisRibbonCollection
     {
-        internal BarRibbon1 Ribbon1
+        internal BarRibbon Ribbon
         {
-            get { return this.GetRibbon<BarRibbon1>(); }
+            get { return this.GetRibbon<BarRibbon>(); }
         }
     }
 }

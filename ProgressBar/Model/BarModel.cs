@@ -16,7 +16,7 @@ namespace ProgressBar.Model
 {
     public class BarModel : IBarModel
     {
-        private readonly Dictionary<ShapeType, Color> _cols =
+        private readonly Dictionary<ShapeType, Color> _colors =
             new Dictionary<ShapeType, Color>();
 
         private readonly List<IBar> _registeredBars = new List<IBar>();
@@ -25,8 +25,8 @@ namespace ProgressBar.Model
 
         public BarModel()
         {
-            _cols.Add(ShapeType.Inactive, Color.LightGray);
-            _cols.Add(ShapeType.Active, Color.SlateBlue);
+            _colors.Add(ShapeType.Inactive, Color.LightGray);
+            _colors.Add(ShapeType.Active, Color.SlateBlue);
         }
 
         public event Action<IBar> BarCreatedEvent;
@@ -37,8 +37,6 @@ namespace ProgressBar.Model
         public event Action<Dictionary<ShapeType, Color>> ColorsSetuped;
         public event Action<int[]> SizesSetuped;
         public event Action<int> DefaultSizeSetuped;
-
-
         public event Action<List<IBar>> RegisteredBarsEvent;
 
 
@@ -150,7 +148,7 @@ namespace ProgressBar.Model
         {
             if (ColorsSetuped != null)
             {
-                ColorsSetuped(_cols);
+                ColorsSetuped(_colors);
             }
         }
 

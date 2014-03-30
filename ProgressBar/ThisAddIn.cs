@@ -23,7 +23,7 @@ namespace ProgressBar
             ShapeNameHelper nameHelper = new ShapeNameHelper();
             IPowerPointAdapter powerpointAdapter = new PowerPointAdapter(Globals.ThisAddIn.Application, nameHelper);
 
-            Globals.Ribbons.Ribbon1.Setup(barController, barModel, powerpointAdapter, nameHelper);
+            Globals.Ribbons.Ribbon.Setup(barController, barModel, powerpointAdapter, nameHelper);
 
             // Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(UpdateStatusBarMessage.ShowStatusMessage);
         }

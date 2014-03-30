@@ -23,7 +23,7 @@ using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 namespace ProgressBar
 {
-    public partial class BarRibbon1 : IBarView
+    public partial class BarRibbon : IBarView
     {
         private bool _hasBar;
         private IBarModel _model;
@@ -68,7 +68,7 @@ namespace ProgressBar
 
         #endregion
 
-        public BarRibbon1()
+        public BarRibbon()
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();

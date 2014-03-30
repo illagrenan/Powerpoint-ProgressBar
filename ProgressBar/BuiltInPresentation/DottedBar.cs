@@ -48,7 +48,7 @@ namespace ProgressBar.BuiltInPresentation
             if (presentationInfo.DisableOnFirstSlide)
             {
                 currentPosition -= 1;
-                slidesCount -=  - 2;
+                slidesCount -=  1;
             }
            
             for (int i = 0; i < slidesCount; i++)
