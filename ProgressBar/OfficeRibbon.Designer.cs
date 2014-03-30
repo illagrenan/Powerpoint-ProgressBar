@@ -30,8 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.colorDialog_Foreground = new System.Windows.Forms.ColorDialog();
-            this.colorDialog_Background = new System.Windows.Forms.ColorDialog();
+            this.colorDialog_Active = new System.Windows.Forms.ColorDialog();
+            this.colorDialog_Inactive = new System.Windows.Forms.ColorDialog();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.btn_Add = this.Factory.CreateRibbonButton();
@@ -39,7 +39,7 @@
             this.styleGroup = this.Factory.CreateRibbonGroup();
             this.btn_ChangeForeground = this.Factory.CreateRibbonButton();
             this.btn_ChangeBackground = this.Factory.CreateRibbonButton();
-            this.dropDown_BarHeight = this.Factory.CreateRibbonDropDown();
+            this.dropDown_BarSize = this.Factory.CreateRibbonDropDown();
             this.positionGroup = this.Factory.CreateRibbonGroup();
             this.btn_AlignTop = this.Factory.CreateRibbonToggleButton();
             this.btn_AlignBottom = this.Factory.CreateRibbonToggleButton();
@@ -53,6 +53,7 @@
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.button4 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.styleGroup.SuspendLayout();
@@ -60,13 +61,13 @@
             this.themeGroup.SuspendLayout();
             this.group4.SuspendLayout();
             // 
-            // colorDialog_Foreground
+            // colorDialog_Active
             // 
-            this.colorDialog_Foreground.AnyColor = true;
+            this.colorDialog_Active.AnyColor = true;
             // 
-            // colorDialog_Background
+            // colorDialog_Inactive
             // 
-            this.colorDialog_Background.AnyColor = true;
+            this.colorDialog_Inactive.AnyColor = true;
             // 
             // tab1
             // 
@@ -109,7 +110,7 @@
             // 
             this.styleGroup.Items.Add(this.btn_ChangeForeground);
             this.styleGroup.Items.Add(this.btn_ChangeBackground);
-            this.styleGroup.Items.Add(this.dropDown_BarHeight);
+            this.styleGroup.Items.Add(this.dropDown_BarSize);
             this.styleGroup.Label = "Color and size";
             this.styleGroup.Name = "styleGroup";
             // 
@@ -131,12 +132,12 @@
             this.btn_ChangeBackground.ShowImage = true;
             this.btn_ChangeBackground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeBackground_Click);
             // 
-            // dropDown_BarHeight
+            // dropDown_BarSize
             // 
-            this.dropDown_BarHeight.Enabled = false;
-            this.dropDown_BarHeight.Label = "Size";
-            this.dropDown_BarHeight.Name = "dropDown_BarHeight";
-            this.dropDown_BarHeight.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDown_BarHeight_SelectionChanged);
+            this.dropDown_BarSize.Enabled = false;
+            this.dropDown_BarSize.Label = "Size";
+            this.dropDown_BarSize.Name = "dropDown_BarSize";
+            this.dropDown_BarSize.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDown_BarHeight_SelectionChanged);
             // 
             // positionGroup
             // 
@@ -212,6 +213,7 @@
             // group4
             // 
             this.group4.Items.Add(this.menu1);
+            this.group4.Items.Add(this.button4);
             this.group4.Label = "Help";
             this.group4.Name = "group4";
             // 
@@ -281,7 +283,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup styleGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeForeground;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ChangeBackground;
-        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_BarHeight;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_BarSize;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup positionGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox checkBox1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup themeGroup;
@@ -291,12 +293,13 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
-        private System.Windows.Forms.ColorDialog colorDialog_Foreground;
-        private System.Windows.Forms.ColorDialog colorDialog_Background;
+        private System.Windows.Forms.ColorDialog colorDialog_Active;
+        private System.Windows.Forms.ColorDialog colorDialog_Inactive;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignTop;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignBottom;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignLeft;
         internal Microsoft.Office.Tools.Ribbon.RibbonToggleButton btn_AlignRight;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
     }
 
     partial class ThisRibbonCollection

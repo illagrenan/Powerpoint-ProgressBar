@@ -15,5 +15,7 @@ namespace ProgressBar.Bar
         public ILocation Right { get; set; }
 
         public ILocation Left { get; set; }
+
+   
     }
 }

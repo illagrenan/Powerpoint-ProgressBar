@@ -189,5 +189,30 @@ namespace ProgressBar.Model
             var x = Enumerable.Range(1, 30).ToArray();
             return x;
         }
+
+
+        public event Action BarDetected;
+
+        public void BarDeteccccccc(IBar ibb)
+        {
+            this._currentBar = ibb;
+            this._hasBar = true;
+
+            this.BarDetected();
+        }
+
+
+        public event Action<IBar> SaveBar;
+
+        public void SaveBarTo()
+        {
+            if (_hasBar == false)
+            {
+                throw new InvalidOperationException("Presentation has no bar.");
+            }
+
+            this.SaveBar(this.GetCurrentBar());
+
+        }
     }
 }

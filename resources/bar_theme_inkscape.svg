@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="bar_theme_inkscape.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -82,9 +82,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="146.83887"
-     inkscape:cy="782.47906"
+     inkscape:zoom="1.4"
+     inkscape:cx="315.29625"
+     inkscape:cy="804.70327"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -195,7 +195,10 @@ wgQ6cVKikMxi4/PJXlmPESKdT57n7qX6SkfqS5wbdZJf9qiQEUNmr6Wy2bIZbsrkSY0q2b2XSHzp
     <g
        id="g3805"
        transform="translate(3.0357143,10.178572)"
-       style="fill:#000000;fill-opacity:1;filter:url(#filter3833)">
+       style="fill:#000000;fill-opacity:1;filter:url(#filter3833)"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_solid.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <rect
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="rect3807"
@@ -217,17 +220,26 @@ wgQ6cVKikMxi4/PJXlmPESKdT57n7qX6SkfqS5wbdZJf9qiQEUNmr6Wy2bIZbsrkSY0q2b2XSHzp
        width="149.50258"
        height="25.75889"
        x="145.45671"
-       y="275.50745" />
+       y="275.50745"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_solid.png" />
     <rect
        style="fill:#ff0064;fill-opacity:1;fill-rule:nonzero;stroke:none"
        id="rect3007-1"
        width="64.145439"
        height="25.75889"
        x="145.45671"
-       y="275.50745" />
+       y="275.50745"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_solid.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
     <g
        id="g3920"
-       transform="translate(-192.93913,50.366077)">
+       transform="translate(-162.22485,116.08036)"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_dotted.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <rect
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3889)"
          id="rect3867"
@@ -245,7 +257,10 @@ wgQ6cVKikMxi4/PJXlmPESKdT57n7qX6SkfqS5wbdZJf9qiQEUNmr6Wy2bIZbsrkSY0q2b2XSHzp
     </g>
     <g
        id="g3920-5"
-       transform="translate(-151.77634,50.366077)">
+       transform="translate(-121.06206,116.08036)"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_dotted.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <rect
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3889-2)"
          id="rect3867-5"
@@ -263,8 +278,11 @@ wgQ6cVKikMxi4/PJXlmPESKdT57n7qX6SkfqS5wbdZJf9qiQEUNmr6Wy2bIZbsrkSY0q2b2XSHzp
     </g>
     <g
        id="g3920-1"
-       transform="translate(-110.61354,50.366077)"
-       style="fill:#ff0064;fill-opacity:1">
+       transform="translate(-79.899254,116.08036)"
+       style="fill:#ff0064;fill-opacity:1"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_dotted.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <rect
          style="fill:#ff0064;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3889-7)"
          id="rect3867-52"
@@ -282,7 +300,10 @@ wgQ6cVKikMxi4/PJXlmPESKdT57n7qX6SkfqS5wbdZJf9qiQEUNmr6Wy2bIZbsrkSY0q2b2XSHzp
     </g>
     <g
        id="g3920-2"
-       transform="translate(-69.450748,50.366077)">
+       transform="translate(-38.736462,116.08036)"
+       inkscape:export-filename="D:\Programming\C#\Powerpoint-ProgressBar\ProgressBar\Resources\theme_dotted.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <rect
          style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3889-6)"
          id="rect3867-3"

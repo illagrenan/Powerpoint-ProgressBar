@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
@@ -16,6 +17,7 @@ using ProgressBar.CustomExceptions;
 using ProgressBar.DataStructs;
 using ProgressBar.Model;
 using ProgressBar.Properties;
+using ProgressBar.Tag;
 using ProgressBar.View;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
@@ -42,6 +44,8 @@ namespace ProgressBar
             model.BarThemeChangedEvent += model_themeChanged;
             model.AlignmentOptionsChanged += model_AlignmentOptionsChanged;
             model.ColorsSetuped += model_ColorsSetuped;
+            model.BarDetected += model_BarDetectefff;
+            model.SaveBar += model_save;
 
             model.SizesSetuped += model_SizesSetuped;
             model.DefaultSizeSetuped += model_DefaultSizeSetuped;
@@ -74,11 +78,13 @@ namespace ProgressBar
             InitializeComponent();
         }
 
+        public object model_BarDetectef { get; set; }
+
         public IBarController Controller { get; set; }
 
         private void model_DefaultSizeSetuped(int defaultSize)
         {
-            dropDown_BarHeight.SelectedItemIndex = defaultSize;
+            dropDown_BarSize.SelectedItemIndex = defaultSize;
         }
 
         private void model_SizesSetuped(int[] obj)
@@ -86,15 +92,15 @@ namespace ProgressBar
             foreach (int size in obj)
             {
                 RibbonDropDownItem itemToAdd = Factory.CreateRibbonDropDownItem();
-                itemToAdd.Label = size.ToString();
-                dropDown_BarHeight.Items.Add(itemToAdd);
+                itemToAdd.Label = size.ToString(CultureInfo.InvariantCulture);
+                dropDown_BarSize.Items.Add(itemToAdd);
             }
         }
 
         private void model_ColorsSetuped(Dictionary<ShapeType, Color> obj)
         {
-            colorDialog_Background.Color = obj[ShapeType.Inactive];
-            colorDialog_Foreground.Color = obj[ShapeType.Active];
+            colorDialog_Inactive.Color = obj[ShapeType.Inactive];
+            colorDialog_Active.Color = obj[ShapeType.Active];
         }
 
         private void model_BarResizedEvent(IBar obj)
@@ -178,15 +184,38 @@ namespace ProgressBar
             _hasBar = true;
         }
 
+        private void model_save(IBar obj)
+        {
+            BarTag bt = new BarTag
+            {
+                ActiveColor = colorDialog_Active.Color,
+                InactiveColor = colorDialog_Inactive.Color,
+                SizeSelectedItemIndex = dropDown_BarSize.SelectedItemIndex,
+                ThemeSelectedItemIndex = themeGallery.SelectedItemIndex,
+                DisableFirstSlideChecked = checkBox1.Checked,
+                IBar = obj,
+                PositionOptions = obj.GetPositionOptions()
+            };
+
+            _powerpointAdapter.SavePresentationToTag(bt);
+        }
+
+        private IPositionOptions GetPositionOptions()
+        {
+            throw new NotImplementedException();
+        }
+
+
         private PresentationInfo CreateInfo(IEnumerable<Slide> visibleSlides)
         {
-            PresentationInfo presentationInfo = new PresentationInfo();
-
-            presentationInfo.Height = _powerpointAdapter.PresentationHeight();
-            presentationInfo.Width = _powerpointAdapter.PresentationWidth();
-            presentationInfo.SlidesCount = visibleSlides.Count();
-            presentationInfo.UserSize = BarSize();
-            presentationInfo.DisableOnFirstSlide = checkBox1.Checked;
+            PresentationInfo presentationInfo = new PresentationInfo
+            {
+                Height = _powerpointAdapter.PresentationHeight(),
+                Width = _powerpointAdapter.PresentationWidth(),
+                SlidesCount = visibleSlides.Count(),
+                UserSize = BarSize(),
+                DisableOnFirstSlide = checkBox1.Checked
+            };
 
             return presentationInfo;
         }
@@ -202,32 +231,33 @@ namespace ProgressBar
 
         private int BarSize()
         {
-            return int.Parse(dropDown_BarHeight.SelectedItem.Label);
+            return int.Parse(dropDown_BarSize.SelectedItem.Label);
         }
 
         private int GetSelectedForegroundColor()
         {
-            return ColorTranslator.ToOle(colorDialog_Foreground.Color);
+            return ColorTranslator.ToOle(colorDialog_Active.Color);
         }
 
         private int GetSelectedBackgroundColor()
         {
-            return ColorTranslator.ToOle(colorDialog_Background.Color);
+            return ColorTranslator.ToOle(colorDialog_Inactive.Color);
         }
 
         private void BarRibbon1_Load(object sender, RibbonUIEventArgs e)
         {
             Register(_model);
 
+            _hasBar = false;
+
             Globals.ThisAddIn.Application.AfterNewPresentation += AfterNewPresentationHandle;
             Globals.ThisAddIn.Application.AfterPresentationOpen += AfterPresentationOpenHandle;
             Globals.ThisAddIn.Application.SlideSelectionChanged += OnSlidesChanged;
-
-            _hasBar = false;
+            Globals.ThisAddIn.Application.PresentationBeforeClose += BeforePresentationClose;
 
             Controller.SetupColors();
             Controller.SetupSizes();
-            Controller.GetRegistered();
+            Controller.SetupRegisteredBars();
         }
 
         private void OnSlidesChanged(SlideRange sldRange)
@@ -259,22 +289,60 @@ namespace ProgressBar
 
         /// <summary>
         ///     Occurs after a presentation is created.
+        ///     In MS 2010 when powerpoint is opened or when File -> New.
         /// </summary>
         /// <param name="pres"></param>
         private void AfterNewPresentationHandle(Presentation pres)
         {
-            // throw new NotImplementedException();
-            Debug.WriteLine("Presentation was created");
         }
 
         /// <summary>
         ///     Occurs after an existing presentation is opened.
+        ///     Double click on file or File -> Open...
         /// </summary>
         /// <param name="pres"></param>
         private void AfterPresentationOpenHandle(Presentation pres)
         {
-            Debug.WriteLine("Existing presentation is opened");
-            throw new NotImplementedException();
+            Debug.WriteLine("Occurs after an existing presentation is opened.");
+
+            if (_powerpointAdapter.HasBarInTags())
+            {
+                Debug.WriteLine("Bar detected.");
+                var barFromTag = _powerpointAdapter.GetBarFromTag().IBar;
+                Controller.BarDetected(barFromTag);
+            }
+        }
+
+
+        private void model_BarDetectefff()
+        {
+            var barFromTag = _powerpointAdapter.GetBarFromTag();
+
+            _hasBar = true;
+
+            colorDialog_Inactive.Color = barFromTag.InactiveColor;
+            colorDialog_Active.Color = barFromTag.ActiveColor;
+            checkBox1.Checked = barFromTag.DisableFirstSlideChecked;
+            dropDown_BarSize.SelectedItemIndex = barFromTag.SizeSelectedItemIndex;
+            themeGallery.SelectedItemIndex = barFromTag.ThemeSelectedItemIndex;
+
+            SwapStateBarRelatedItems();
+            SwapAddRefreshButton();
+            SetPositionOptions(barFromTag.PositionOptions);
+        }
+
+        /// <summary>
+        /// Represents a Presentation object before it closes.
+        /// </summary>
+        /// <param name="Pres"></param>
+        /// <param name="Cancel"></param>
+        private void BeforePresentationClose(Presentation Pres, ref bool Cancel)
+        {
+            if (_hasBar)
+            {
+                Controller.SaveBarToMetadata();
+                Pres.Save();
+            }
         }
 
         private void BarRibbon1_Close(object sender, EventArgs e)
@@ -356,9 +424,9 @@ namespace ProgressBar
             // Microsoft.Office.Tools.Ribbon.RibbonButton b = (Microsoft.Office.Tools.Ribbon.RibbonButton)sender;
             // title.Contains("string", StringComparison.OrdinalIgnoreCase);
 
-            if (DialogResult.OK == colorDialog_Foreground.ShowDialog())
+            if (DialogResult.OK == colorDialog_Active.ShowDialog())
             {
-                colorDialog_Foreground.Color = colorDialog_Foreground.Color;
+                colorDialog_Active.Color = colorDialog_Active.Color;
 
                 _powerpointAdapter.AddInShapes().ForEach(
                     shape =>
@@ -373,9 +441,9 @@ namespace ProgressBar
 
         private void btn_ChangeBackground_Click(object sender, RibbonControlEventArgs e)
         {
-            if (DialogResult.OK == colorDialog_Background.ShowDialog())
+            if (DialogResult.OK == colorDialog_Inactive.ShowDialog())
             {
-                colorDialog_Background.Color = colorDialog_Background.Color;
+                colorDialog_Inactive.Color = colorDialog_Inactive.Color;
 
                 _powerpointAdapter.AddInShapes().ForEach(
                     shape =>

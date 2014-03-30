@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Runtime.Serialization;
 using ProgressBar.Bar;
 
 #endregion

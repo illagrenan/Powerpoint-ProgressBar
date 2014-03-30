@@ -18,11 +18,12 @@ namespace ProgressBar.Model
         event Action BarRemovedEvent;
         event Action<IBar> BarThemeChangedEvent;
         event Action<IBar> BarResizedEvent;
+        event Action<IBar> SaveBar;
         event Action<IPositionOptions> AlignmentOptionsChanged;
         event Action<Dictionary<ShapeType, Color>> ColorsSetuped;
         event Action<int[]> SizesSetuped;
         event Action<int> DefaultSizeSetuped;
-
+        event Action BarDetected;
         void Add(IBar barToAdd);
 
         void CreateStrippedPresentation();
@@ -51,5 +52,11 @@ namespace ProgressBar.Model
         void SetupSizes();
 
         void SetupDefaultSize();
+
+
+
+        void BarDeteccccccc(IBar ibb);
+
+        void SaveBarTo();
     }
 }

@@ -56,7 +56,7 @@ namespace ProgressBar.Controller
             Model.ChangeTheme(newTheme);
         }
 
-        public void GetRegistered()
+        public void SetupRegisteredBars()
         {
             Model.RegisterBars();
         }
@@ -112,6 +112,18 @@ namespace ProgressBar.Controller
             }
 
             return newTheme;
+        }
+
+
+        public void BarDetected(IBar ibb)
+        {
+            this.Model.BarDeteccccccc(ibb);
+        }
+
+
+        public void SaveBarToMetadata()
+        {
+            this.Model.SaveBarTo();
         }
     }
 }
