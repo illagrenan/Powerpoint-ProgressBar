@@ -267,10 +267,10 @@
     <Compile Include="MVC\IController.cs" />
     <Compile Include="MVC\IModel.cs" />
     <Compile Include="MVC\IView.cs" />
-    <Compile Include="View\OfficeRibbon.cs">
+    <Compile Include="OfficeRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\OfficeRibbon.Designer.cs">
+    <Compile Include="OfficeRibbon.Designer.cs">
       <DependentUpon>OfficeRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="View\IBarView.cs" />
@@ -302,6 +302,9 @@
     <EmbeddedResource Include="AboutInformations.resx">
       <DependentUpon>AboutInformations.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OfficeRibbon.resx">
+      <DependentUpon>OfficeRibbon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
@@ -314,9 +317,6 @@
     </Compile>
     <EmbeddedResource Include="Ribbon_ProgressBar.resx">
       <DependentUpon>Ribbon_ProgressBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\OfficeRibbon.resx">
-      <DependentUpon>OfficeRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="J44PERo0wfY2ynFr.p12" />

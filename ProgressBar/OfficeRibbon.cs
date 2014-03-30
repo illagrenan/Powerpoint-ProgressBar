@@ -1,42 +1,36 @@
-﻿using Microsoft.Office.Interop.PowerPoint;
-using Microsoft.Office.Tools.Ribbon;
-using ProgressBar.CustomExceptions;
-using ProgressBar.Adapter;
-using ProgressBar.Bar;
-using ProgressBar.Controller;
-using ProgressBar.Model;
-using ProgressBar.View;
+﻿#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.Office.Tools.Ribbon;
+using ProgressBar.Adapter;
+using ProgressBar.Bar;
+using ProgressBar.Controller;
+using ProgressBar.CustomExceptions;
+using ProgressBar.DataStructs;
+using ProgressBar.Model;
+using ProgressBar.Properties;
+using ProgressBar.View;
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
+
+#endregion
 
 namespace ProgressBar
 {
     public partial class BarRibbon1 : IBarView
     {
-        private IBarModel model;
-        public IBarController Controller { get; set; }
-        private IPowerPointAdapter powerpointAdapter;
-        private ShapeNameHelper nameHelper;
-        private bool HasBar;
+        private bool _hasBar;
+        private IBarModel _model;
+        private ShapeNameHelper _nameHelper;
+        private IPowerPointAdapter _powerpointAdapter;
 
         #region MVCLogic
-
-        internal void Setup(
-            IBarController controller,
-            IBarModel model,
-            IPowerPointAdapter powerpointAdapter,
-            ShapeNameHelper sn
-            )
-        {
-            this.model = new BarModel();
-            this.Controller = new BarController(this.model);
-            this.powerpointAdapter = powerpointAdapter;
-            this.nameHelper = sn;
-        }
 
         public void Register(IBarModel model)
         {
@@ -59,11 +53,32 @@ namespace ProgressBar
             model.BarRemovedEvent -= model_BarRemovedEvent;
         }
 
+        internal void Setup(
+            IBarController controller,
+            IBarModel model,
+            IPowerPointAdapter powerpointAdapter,
+            ShapeNameHelper sn
+            )
+        {
+            _model = new BarModel();
+            Controller = new BarController(_model);
+            _powerpointAdapter = powerpointAdapter;
+            _nameHelper = sn;
+        }
+
         #endregion
+
+        public BarRibbon1()
+            : base(Globals.Factory.GetRibbonFactory())
+        {
+            InitializeComponent();
+        }
+
+        public IBarController Controller { get; set; }
 
         private void model_DefaultSizeSetuped(int defaultSize)
         {
-            this.dropDown_BarHeight.SelectedItemIndex = defaultSize;
+            dropDown_BarHeight.SelectedItemIndex = defaultSize;
         }
 
         private void model_SizesSetuped(int[] obj)
@@ -76,49 +91,49 @@ namespace ProgressBar
             }
         }
 
-        private void model_ColorsSetuped(Dictionary<DataStructs.ShapeType, Color> obj)
+        private void model_ColorsSetuped(Dictionary<ShapeType, Color> obj)
         {
-            this.colorDialog_Background.Color = obj[DataStructs.ShapeType.BACKGROUND];
-            this.colorDialog_Foreground.Color = obj[DataStructs.ShapeType.PROGRESS_BAR];
+            colorDialog_Background.Color = obj[ShapeType.BACKGROUND];
+            colorDialog_Foreground.Color = obj[ShapeType.PROGRESS_BAR];
         }
 
         private void model_BarResizedEvent(IBar obj)
         {
-            this.Controller.RemoveBarClicked();
-            this.Controller.AddBarClicked(GetSelectedTheme());
+            Controller.RemoveBarClicked();
+            Controller.AddBarClicked(GetSelectedTheme());
         }
 
         private void model_AlignmentOptionsChanged(IPositionOptions newAlignmentOptions)
         {
-            this.SetPositionOptions(newAlignmentOptions);
+            SetPositionOptions(newAlignmentOptions);
         }
 
 
         private void model_themeChanged(IBar obj)
         {
             SetPositionOptions(obj.GetPositionOptions());
-            this.model_BarCreatedEvent(obj);
+            model_BarCreatedEvent(obj);
         }
 
         private void SetPositionOptions(IPositionOptions newAlignmentOptions)
         {
-            this.btn_AlignTop.Enabled = newAlignmentOptions.Top.Enabled;
-            this.btn_AlignTop.Checked = newAlignmentOptions.Top.Checked;
+            btn_AlignTop.Enabled = newAlignmentOptions.Top.Enabled;
+            btn_AlignTop.Checked = newAlignmentOptions.Top.Checked;
 
-            this.btn_AlignRight.Enabled = newAlignmentOptions.Right.Enabled;
-            this.btn_AlignRight.Checked = newAlignmentOptions.Right.Checked;
+            btn_AlignRight.Enabled = newAlignmentOptions.Right.Enabled;
+            btn_AlignRight.Checked = newAlignmentOptions.Right.Checked;
 
-            this.btn_AlignBottom.Enabled = newAlignmentOptions.Bottom.Enabled;
-            this.btn_AlignBottom.Checked = newAlignmentOptions.Bottom.Checked;
+            btn_AlignBottom.Enabled = newAlignmentOptions.Bottom.Enabled;
+            btn_AlignBottom.Checked = newAlignmentOptions.Bottom.Checked;
 
-            this.btn_AlignLeft.Enabled = newAlignmentOptions.Left.Enabled;
-            this.btn_AlignLeft.Checked = newAlignmentOptions.Left.Checked;
+            btn_AlignLeft.Enabled = newAlignmentOptions.Left.Enabled;
+            btn_AlignLeft.Checked = newAlignmentOptions.Left.Checked;
         }
 
-        private void model_BarCreatedEvent(Bar.IBar createdBar)
+        private void model_BarCreatedEvent(IBar createdBar)
         {
             int slideCounter = 1;
-            List<Slide> visibleSlides = this.powerpointAdapter.VisibleSlides();
+            List<Slide> visibleSlides = _powerpointAdapter.VisibleSlides();
 
             PresentationInfo presentationInfo = CreateInfo(visibleSlides);
 
@@ -136,98 +151,95 @@ namespace ProgressBar
 
                     switch (shape.ColorType)
                     {
-                        case ProgressBar.DataStructs.ShapeType.BACKGROUND:
+                        case ShapeType.BACKGROUND:
                             addedShape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
-                            addedShape.Name = this.nameHelper.GetBackgroundShapeName();
+                            addedShape.Name = _nameHelper.GetBackgroundShapeName();
                             break;
 
-                        case ProgressBar.DataStructs.ShapeType.PROGRESS_BAR:
+                        case ShapeType.PROGRESS_BAR:
                             addedShape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
-                            addedShape.Name = this.nameHelper.GetForegroundShapeName();
+                            addedShape.Name = _nameHelper.GetForegroundShapeName();
                             break;
 
                         default:
 
-                            string message = String.Format("Unknown shape type \"{0}\".", shape.ColorType.ToString());
+                            string message = String.Format("Unknown shape type \"{0}\".", shape.ColorType);
                             throw new InvalidStateException(message);
                     }
 
 
                     addedShape.Line.Weight = 0;
-                    addedShape.Line.Visible = Microsoft.Office.Core.MsoTriState.msoFalse;
+                    addedShape.Line.Visible = MsoTriState.msoFalse;
                 }
 
                 slideCounter++;
             }
 
-            this.HasBar = true;
+            _hasBar = true;
         }
 
         private PresentationInfo CreateInfo(List<Slide> visibleSlides)
         {
             PresentationInfo presentationInfo = new PresentationInfo();
 
-            presentationInfo.Height = this.powerpointAdapter.PresentationHeight();
-            presentationInfo.Width = this.powerpointAdapter.PresentationWidth();
+            presentationInfo.Height = _powerpointAdapter.PresentationHeight();
+            presentationInfo.Width = _powerpointAdapter.PresentationWidth();
             presentationInfo.SlidesCount = visibleSlides.Count();
-            presentationInfo.UserSize = this.BarSize();
-            presentationInfo.DisableOnFirstSlide = this.checkBox1.Checked;
+            presentationInfo.UserSize = BarSize();
+            presentationInfo.DisableOnFirstSlide = checkBox1.Checked;
 
             return presentationInfo;
         }
 
         private void model_BarRemovedEvent()
         {
-            List<Shape> shape = this.powerpointAdapter.AddInShapes();
+            List<Shape> shape = _powerpointAdapter.AddInShapes();
             shape.ForEach(e => e.Delete());
 
-            this.HasBar = false;
+            _hasBar = false;
         }
 
 
         private int BarSize()
         {
-            return int.Parse(this.dropDown_BarHeight.SelectedItem.Label);
+            return int.Parse(dropDown_BarHeight.SelectedItem.Label);
         }
 
         private int GetSelectedForegroundColor()
         {
-            return ColorTranslator.ToOle(this.colorDialog_Foreground.Color);
+            return ColorTranslator.ToOle(colorDialog_Foreground.Color);
         }
 
         private int GetSelectedBackgroundColor()
         {
-            return ColorTranslator.ToOle(this.colorDialog_Background.Color);
+            return ColorTranslator.ToOle(colorDialog_Background.Color);
         }
 
         private void BarRibbon1_Load(object sender, RibbonUIEventArgs e)
         {
-            Register(model);
+            Register(_model);
 
             Globals.ThisAddIn.Application.AfterNewPresentation += AfterNewPresentationHandle;
             Globals.ThisAddIn.Application.AfterPresentationOpen += AfterPresentationOpenHandle;
             Globals.ThisAddIn.Application.SlideSelectionChanged += OnSlidesChanged;
 
-            this.HasBar = false;
+            _hasBar = false;
 
-            this.Controller.SetupColors();
-            this.Controller.SetupSizes();
-            this.Controller.GetRegistered();
+            Controller.SetupColors();
+            Controller.SetupSizes();
+            Controller.GetRegistered();
         }
 
         private void OnSlidesChanged(SlideRange sldRange)
         {
-            if (this.powerpointAdapter.HasSlides == false && this.HasBar)
+            if (_powerpointAdapter.HasSlides == false && _hasBar)
             {
                 // When a user deletes all slides,
                 // we can simulate Remove Event with button
-                this.btn_Remove_Click(null, null);
+                btn_Remove_Click(null, null);
             }
 
-            Debug.WriteLine(String.Format(
-                "OnSlidesChanged={0}",
-                this.powerpointAdapter.VisibleSlides().Count()
-                ));
+            Debug.WriteLine("OnSlidesChanged={0}", _powerpointAdapter.VisibleSlides().Count());
             // http://social.msdn.microsoft.com/Forums/en-US/22a64e2b-32eb-4eab-930f-f3ca526d9d3b/powerpoint-events-for-adding-a-shape-deleting-a-shape-and-deleting-a-slide?forum=vsto
         }
 
@@ -235,28 +247,28 @@ namespace ProgressBar
         {
             foreach (IBar item in bars)
             {
-                Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItem =
-                    this.Factory.CreateRibbonDropDownItem();
+                RibbonDropDownItem ribbonDropDownItem =
+                    Factory.CreateRibbonDropDownItem();
                 ribbonDropDownItem.Image = item.GetInfo().Image;
                 ribbonDropDownItem.Label = item.GetInfo().FriendlyName;
 
-                this.themeGallery.Items.Add(ribbonDropDownItem);
+                themeGallery.Items.Add(ribbonDropDownItem);
             }
         }
 
 
         /// <summary>
-        /// Occurs after a presentation is created.
+        ///     Occurs after a presentation is created.
         /// </summary>
-        /// <param name="Pres"></param>
-        private void AfterNewPresentationHandle(Presentation Pres)
+        /// <param name="pres"></param>
+        private void AfterNewPresentationHandle(Presentation pres)
         {
             // throw new NotImplementedException();
             Debug.WriteLine("Presentation was created");
         }
 
         /// <summary>
-        /// Occurs after an existing presentation is opened.
+        ///     Occurs after an existing presentation is opened.
         /// </summary>
         /// <param name="pres"></param>
         private void AfterPresentationOpenHandle(Presentation pres)
@@ -267,22 +279,16 @@ namespace ProgressBar
 
         private void BarRibbon1_Close(object sender, EventArgs e)
         {
-            Release(model);
-        }
-
-        public BarRibbon1()
-            : base(Globals.Factory.GetRibbonFactory())
-        {
-            InitializeComponent();
+            Release(_model);
         }
 
         private void btn_Add_Click(object sender, RibbonControlEventArgs e)
         {
-            if (this.powerpointAdapter.HasSlides == false)
+            if (_powerpointAdapter.HasSlides == false)
             {
                 MessageBox.Show(
-                    "This presentation has no slides.",
-                    "Unable to add bar",
+                    Resources.BarRibbon1_btn_Add_Click_This_presentation_has_no_slides_,
+                    Resources.BarRibbon1_btn_Add_Click_Unable_to_add_bar,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                     );
@@ -291,11 +297,11 @@ namespace ProgressBar
 
 
             string selectedTheme = GetSelectedTheme();
-            this.Controller.AddBarClicked(selectedTheme);
+            Controller.AddBarClicked(selectedTheme);
 
             // Enable items only when adding new bar
             // If users is refresing bar, all items remain enabled
-            if (this.btn_Add.Label == "Add")
+            if (btn_Add.Label == "Add")
             {
                 SwapStateBarRelatedItems();
             }
@@ -305,14 +311,14 @@ namespace ProgressBar
 
         private void SwapStateBarRelatedItems()
         {
-            bool newState = this.HasBar;
+            bool newState = _hasBar;
 
-            SwapItemsStateInGroup(this.styleGroup.Items, newState);
-            SwapItemsStateInGroup(this.positionGroup.Items, newState);
-            SwapItemsStateInGroup(this.themeGroup.Items, newState);
+            SwapItemsStateInGroup(styleGroup.Items, newState);
+            SwapItemsStateInGroup(positionGroup.Items, newState);
+            SwapItemsStateInGroup(themeGroup.Items, newState);
         }
 
-        private static void SwapItemsStateInGroup(IList<RibbonControl> groupItems, bool newState)
+        private static void SwapItemsStateInGroup(IEnumerable<RibbonControl> groupItems, bool newState)
         {
             foreach (var anItem in groupItems)
             {
@@ -323,26 +329,26 @@ namespace ProgressBar
 
         private void SwapAddRefreshButton()
         {
-            this.btn_Remove.Enabled = this.HasBar;
+            btn_Remove.Enabled = _hasBar;
 
-            if (this.HasBar)
+            if (_hasBar)
             {
-                this.btn_Add.Label = "Refresh";
-                this.btn_Add.Image = null;
-                this.btn_Add.OfficeImageId = "Refresh";
+                btn_Add.Label = "Refresh";
+                btn_Add.Image = null;
+                btn_Add.OfficeImageId = "Refresh";
             }
             else
             {
-                this.btn_Add.Image = global::ProgressBar.Properties.Resources.progressbar;
-                this.btn_Add.Label = "Add";
+                btn_Add.Image = Resources.progressbar;
+                btn_Add.Label = "Add";
             }
         }
 
         private void btn_Remove_Click(object sender, RibbonControlEventArgs e)
         {
-            this.Controller.RemoveBarClicked();
-            this.SwapAddRefreshButton();
-            this.SwapStateBarRelatedItems();
+            Controller.RemoveBarClicked();
+            SwapAddRefreshButton();
+            SwapStateBarRelatedItems();
         }
 
         private void btn_ChangeForeground_Click(object sender, RibbonControlEventArgs e)
@@ -354,10 +360,10 @@ namespace ProgressBar
             {
                 colorDialog_Foreground.Color = colorDialog_Foreground.Color;
 
-                this.powerpointAdapter.AddInShapes().ForEach(
+                _powerpointAdapter.AddInShapes().ForEach(
                     shape =>
                     {
-                        if (this.nameHelper.IsShapeForegroundShape(shape.Name))
+                        if (_nameHelper.IsShapeForegroundShape(shape.Name))
                         {
                             shape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
                         }
@@ -371,10 +377,10 @@ namespace ProgressBar
             {
                 colorDialog_Background.Color = colorDialog_Background.Color;
 
-                this.powerpointAdapter.AddInShapes().ForEach(
+                _powerpointAdapter.AddInShapes().ForEach(
                     shape =>
                     {
-                        if (this.nameHelper.IsShapeBackgroundShape(shape.Name))
+                        if (_nameHelper.IsShapeBackgroundShape(shape.Name))
                         {
                             shape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
                         }
@@ -384,8 +390,8 @@ namespace ProgressBar
 
         private void galleryTheme_Click(object sender, RibbonControlEventArgs e)
         {
-            string selectedTheme = this.GetSelectedTheme();
-            this.Controller.ChangeThemeClicked(selectedTheme);
+            string selectedTheme = GetSelectedTheme();
+            Controller.ChangeThemeClicked(selectedTheme);
         }
 
         private string GetSelectedTheme()
@@ -403,53 +409,53 @@ namespace ProgressBar
         private void checkBox1_Click(object sender, RibbonControlEventArgs e)
         {
             string selectedTheme = GetSelectedTheme();
-            this.Controller.AddBarClicked(selectedTheme);
+            Controller.AddBarClicked(selectedTheme);
         }
 
         private void dropDown_BarHeight_SelectionChanged(object sender, RibbonControlEventArgs e)
         {
-            this.Controller.ChangeSizeClicked(this.BarSize());
+            Controller.ChangeSizeClicked(BarSize());
         }
 
         private void btn_AlignTop_Click_1(object sender, RibbonControlEventArgs e)
         {
-            this.btn_AlignBottom.Checked = false;
-            this.btn_AlignTop.Checked = true;
+            btn_AlignBottom.Checked = false;
+            btn_AlignTop.Checked = true;
 
             PositionOptionsChanged();
         }
 
         private void btn_AlignBottom_Click(object sender, RibbonControlEventArgs e)
         {
-            this.btn_AlignTop.Checked = false;
-            this.btn_AlignBottom.Checked = true;
+            btn_AlignTop.Checked = false;
+            btn_AlignBottom.Checked = true;
 
             PositionOptionsChanged();
         }
 
         private void btn_AlignLeft_Click(object sender, RibbonControlEventArgs e)
         {
-            this.btn_AlignLeft.Checked = true;
-            this.btn_AlignRight.Checked = false;
+            btn_AlignLeft.Checked = true;
+            btn_AlignRight.Checked = false;
 
             PositionOptionsChanged();
         }
 
         private void btn_AlignRight_Click(object sender, RibbonControlEventArgs e)
         {
-            this.btn_AlignRight.Checked = true;
-            this.btn_AlignLeft.Checked = false;
+            btn_AlignRight.Checked = true;
+            btn_AlignLeft.Checked = false;
 
             PositionOptionsChanged();
         }
 
         private void PositionOptionsChanged()
         {
-            this.Controller.PositionOptionsChanged(
-                this.btn_AlignTop.Checked,
-                this.btn_AlignRight.Checked,
-                this.btn_AlignBottom.Checked,
-                this.btn_AlignLeft.Checked
+            Controller.PositionOptionsChanged(
+                btn_AlignTop.Checked,
+                btn_AlignRight.Checked,
+                btn_AlignBottom.Checked,
+                btn_AlignLeft.Checked
                 );
         }
     }

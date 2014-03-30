@@ -1,6 +1,4 @@
-﻿using ProgressBar.Controller;
-using ProgressBar.Model;
-namespace ProgressBar
+﻿namespace ProgressBar
 {
     partial class BarRibbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
