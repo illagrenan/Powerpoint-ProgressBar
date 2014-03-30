@@ -12,17 +12,17 @@ namespace ProgressBar.Controller
 {
     internal class BarController : IBarController
     {
-        private readonly IBarModel model;
+        private readonly IBarModel _model;
 
         public BarController(IBarModel model)
         {
-            this.model = model;
+            _model = model;
         }
 
 
         public IBarModel Model
         {
-            get { return model; }
+            get { return _model; }
         }
 
         public void AddBarClicked(string selectedTheme)

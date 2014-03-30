@@ -93,8 +93,8 @@ namespace ProgressBar
 
         private void model_ColorsSetuped(Dictionary<ShapeType, Color> obj)
         {
-            colorDialog_Background.Color = obj[ShapeType.BACKGROUND];
-            colorDialog_Foreground.Color = obj[ShapeType.PROGRESS_BAR];
+            colorDialog_Background.Color = obj[ShapeType.Inactive];
+            colorDialog_Foreground.Color = obj[ShapeType.Active];
         }
 
         private void model_BarResizedEvent(IBar obj)
@@ -117,17 +117,17 @@ namespace ProgressBar
 
         private void SetPositionOptions(IPositionOptions newAlignmentOptions)
         {
-            btn_AlignTop.Enabled = newAlignmentOptions.Top.Enabled;
-            btn_AlignTop.Checked = newAlignmentOptions.Top.Checked;
+            btn_AlignTop.Enabled = newAlignmentOptions.Top.Available;
+            btn_AlignTop.Checked = newAlignmentOptions.Top.Selected;
 
-            btn_AlignRight.Enabled = newAlignmentOptions.Right.Enabled;
-            btn_AlignRight.Checked = newAlignmentOptions.Right.Checked;
+            btn_AlignRight.Enabled = newAlignmentOptions.Right.Available;
+            btn_AlignRight.Checked = newAlignmentOptions.Right.Selected;
 
-            btn_AlignBottom.Enabled = newAlignmentOptions.Bottom.Enabled;
-            btn_AlignBottom.Checked = newAlignmentOptions.Bottom.Checked;
+            btn_AlignBottom.Enabled = newAlignmentOptions.Bottom.Available;
+            btn_AlignBottom.Checked = newAlignmentOptions.Bottom.Selected;
 
-            btn_AlignLeft.Enabled = newAlignmentOptions.Left.Enabled;
-            btn_AlignLeft.Checked = newAlignmentOptions.Left.Checked;
+            btn_AlignLeft.Enabled = newAlignmentOptions.Left.Available;
+            btn_AlignLeft.Checked = newAlignmentOptions.Left.Selected;
         }
 
         private void model_BarCreatedEvent(IBar createdBar)
@@ -151,12 +151,12 @@ namespace ProgressBar
 
                     switch (shape.ColorType)
                     {
-                        case ShapeType.BACKGROUND:
+                        case ShapeType.Inactive:
                             addedShape.Fill.ForeColor.RGB = GetSelectedBackgroundColor();
                             addedShape.Name = _nameHelper.GetBackgroundShapeName();
                             break;
 
-                        case ShapeType.PROGRESS_BAR:
+                        case ShapeType.Active:
                             addedShape.Fill.ForeColor.RGB = GetSelectedForegroundColor();
                             addedShape.Name = _nameHelper.GetForegroundShapeName();
                             break;
@@ -178,7 +178,7 @@ namespace ProgressBar
             _hasBar = true;
         }
 
-        private PresentationInfo CreateInfo(List<Slide> visibleSlides)
+        private PresentationInfo CreateInfo(IEnumerable<Slide> visibleSlides)
         {
             PresentationInfo presentationInfo = new PresentationInfo();
 
@@ -194,7 +194,7 @@ namespace ProgressBar
         private void model_BarRemovedEvent()
         {
             List<Shape> shape = _powerpointAdapter.AddInShapes();
-            shape.ForEach(e => e.Delete());
+            shape.ForEach(s => s.Delete());
 
             _hasBar = false;
         }

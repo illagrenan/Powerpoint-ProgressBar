@@ -25,8 +25,8 @@ namespace ProgressBar.Model
 
         public BarModel()
         {
-            _cols.Add(ShapeType.BACKGROUND, Color.LightGray);
-            _cols.Add(ShapeType.PROGRESS_BAR, Color.SlateBlue);
+            _cols.Add(ShapeType.Inactive, Color.LightGray);
+            _cols.Add(ShapeType.Active, Color.SlateBlue);
         }
 
         public event Action<IBar> BarCreatedEvent;
@@ -128,10 +128,10 @@ namespace ProgressBar.Model
 
         public void Reposition(PositionOptions positionOptions)
         {
-            GetCurrentBar().GetPositionOptions().Top.Checked = positionOptions.Top.Checked;
-            GetCurrentBar().GetPositionOptions().Right.Checked = positionOptions.Right.Checked;
-            GetCurrentBar().GetPositionOptions().Bottom.Checked = positionOptions.Bottom.Checked;
-            GetCurrentBar().GetPositionOptions().Left.Checked = positionOptions.Left.Checked;
+            GetCurrentBar().GetPositionOptions().Top.Selected = positionOptions.Top.Selected;
+            GetCurrentBar().GetPositionOptions().Right.Selected = positionOptions.Right.Selected;
+            GetCurrentBar().GetPositionOptions().Bottom.Selected = positionOptions.Bottom.Selected;
+            GetCurrentBar().GetPositionOptions().Left.Selected = positionOptions.Left.Selected;
 
             Add(GetCurrentBar());
             AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions());

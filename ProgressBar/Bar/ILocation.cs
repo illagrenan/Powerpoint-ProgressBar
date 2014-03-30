@@ -2,7 +2,7 @@
 {
     public interface ILocation
     {
-        bool Enabled { get; set; }
-        bool Checked { get; set; }
+        bool Available { get; set; }
+        bool Selected { get; set; }
     }
 }

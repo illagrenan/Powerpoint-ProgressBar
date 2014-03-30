@@ -126,7 +126,7 @@
             // 
             this.btn_ChangeBackground.Enabled = false;
             this.btn_ChangeBackground.Image = global::ProgressBar.Properties.Resources.color_wheel;
-            this.btn_ChangeBackground.Label = "Background";
+            this.btn_ChangeBackground.Label = "Inactive";
             this.btn_ChangeBackground.Name = "btn_ChangeBackground";
             this.btn_ChangeBackground.ShowImage = true;
             this.btn_ChangeBackground.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ChangeBackground_Click);

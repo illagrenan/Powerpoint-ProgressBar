@@ -12,24 +12,24 @@ namespace ProgressBar.Bar
         {
         }
 
-        public Location(bool enabled, bool cheked)
+        public Location(bool available, bool selected)
         {
-            if (!enabled && cheked)
+            if (!available && selected)
             {
                 throw new InvalidArgumentException("Location cannot be disabled and checked.");
             }
 
-            Enabled = enabled;
-            Checked = cheked;
+            Available = available;
+            Selected = selected;
         }
 
-        public Location(bool cheked)
+        public Location(bool selected)
         {
-            Checked = cheked;
+            Selected = selected;
         }
 
-        public bool Enabled { get; set; }
+        public bool Available { get; set; }
 
-        public bool Checked { get; set; }
+        public bool Selected { get; set; }
     }
 }

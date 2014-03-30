@@ -10,7 +10,7 @@ namespace ProgressBar.Bar
     public interface IBar
     {
         IPositionOptions GetPositionOptions();
-        List<IBasicShape> Render(int currentPosition, PresentationInfo ppp);
+        IEnumerable<IBasicShape> Render(int currentPosition, PresentationInfo ppp);
         IBarInfo GetInfo();
     }
 }

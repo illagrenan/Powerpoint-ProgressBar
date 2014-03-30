@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
 using System.Drawing;
-using System.Linq;
-using System.Text;
+
+#endregion
 
 namespace ProgressBar.Bar
 {
     public interface IBarInfo
     {
         Image Image { get; }
-        string FriendlyName { get;  }
+        string FriendlyName { get; }
     }
 }

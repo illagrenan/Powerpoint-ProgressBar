@@ -22,11 +22,10 @@ namespace ProgressBar.BuiltInPresentation
         {
             _positionInfo = new PositionOptions
             {
-                // (enabled, checked)
-                Top = new Location(true, true),
-                Right = new Location(false, false),
-                Bottom = new Location(true, false),
-                Left = new Location(false, false)
+                Top = new Location(available: true, selected: true),
+                Right = new Location(available: false, selected: false),
+                Bottom = new Location(available: true, selected: false),
+                Left = new Location(available: false, selected: false)
             };
 
             Image thumbnailImage = Resources.theme_solid;
@@ -35,7 +34,7 @@ namespace ProgressBar.BuiltInPresentation
             _info = new BarInfo(thumbnailImage, friendlyName);
         }
 
-        List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
+        IEnumerable<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
         {
             _presentationInfo = presentationInfo;
 
@@ -49,7 +48,7 @@ namespace ProgressBar.BuiltInPresentation
             shapes.Add(MakeBackground());
             shapes.Add(MakeProgressBar(currentPosition));
 
-            if (_positionInfo.Bottom.Checked)
+            if (_positionInfo.Bottom.Selected)
             {
                 foreach (IBasicShape basicShape in shapes)
                 {
@@ -89,7 +88,7 @@ namespace ProgressBar.BuiltInPresentation
             IBasicShape backgroundShape = MakeShapeStub(_presentationInfo);
 
             backgroundShape.Width = _presentationInfo.Width;
-            backgroundShape.ColorType = ShapeType.BACKGROUND;
+            backgroundShape.ColorType = ShapeType.Inactive;
 
             return backgroundShape;
         }
@@ -106,7 +105,7 @@ namespace ProgressBar.BuiltInPresentation
 
 
             backgroundShape.Width = (CalculateWidthOfBarOnOneSlide())*currentPosition;
-            backgroundShape.ColorType = ShapeType.PROGRESS_BAR;
+            backgroundShape.ColorType = ShapeType.Active;
 
             return backgroundShape;
         }

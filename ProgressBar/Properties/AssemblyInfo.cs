@@ -10,7 +10,7 @@ using System.Security;
 [assembly: AssemblyDescription("Presentation progress bar for Microsoft Office PowerPoint 2007+")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("www.presentation-progressbar.com")]
-[assembly: AssemblyProduct("ProgressBar For PowerPoint")]
+[assembly: AssemblyProduct("Selected For PowerPoint")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

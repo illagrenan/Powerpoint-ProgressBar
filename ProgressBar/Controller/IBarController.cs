@@ -10,7 +10,6 @@ namespace ProgressBar.Controller
     public interface IBarController : IController<IBarModel>
     {
         void RemoveBarClicked();
-        void ResizeBarClicked();
         void GetRegistered();
 
         void SetupSizes();

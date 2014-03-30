@@ -1,6 +1,5 @@
 ﻿#region
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Microsoft.Office.Core;
@@ -8,8 +7,6 @@ using ProgressBar.Bar;
 using ProgressBar.DataStructs;
 using ProgressBar.Model;
 using ProgressBar.Properties;
-using ProgressBar.CustomExceptions;
-using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 #endregion
 
@@ -19,6 +16,7 @@ namespace ProgressBar.BuiltInPresentation
     {
         private readonly IBarInfo _barInfo;
         private readonly PositionOptions _positionOptions;
+        private int _gap;
 
         public DottedBar()
         {
@@ -29,46 +27,53 @@ namespace ProgressBar.BuiltInPresentation
 
             _positionOptions = new PositionOptions
             {
-                // (enabled, checked)
-                Top = new Location(true, true),
-                Right = new Location(true, false),
-                Bottom = new Location(true, false),
-                Left = new Location(true, true)
+                Top = new Location(available: true, selected: true),
+                Right = new Location(available: true, selected: false),
+                Bottom = new Location(available: true, selected: false),
+                Left = new Location(available: true, selected: true)
             };
         }
 
 
-        List<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
+        IEnumerable<IBasicShape> IBar.Render(int currentPosition, PresentationInfo presentationInfo)
         {
             List<IBasicShape> shapes = new List<IBasicShape>();
+            int slidesCount = presentationInfo.SlidesCount;
 
             if (presentationInfo.DisableOnFirstSlide && currentPosition == 1)
             {
                 return shapes;
             }
 
-            for (int i = 0; i < presentationInfo.SlidesCount; i++)
+            if (presentationInfo.DisableOnFirstSlide)
+            {
+                currentPosition -= 1;
+                slidesCount -=  - 2;
+            }
+           
+            for (int i = 0; i < slidesCount; i++)
             {
                 IBasicShape shape = new BasicShape();
                 shape.Height = shape.Width = presentationInfo.UserSize;
 
-                if (_positionOptions.Top.Checked)
+                _gap = 10;
+                if (_positionOptions.Top.Selected)
                 {
-                    shape.Top = 10;
+                    shape.Top = _gap;
                 }
                 else
                 {
-                    shape.Top = presentationInfo.Height - presentationInfo.UserSize - 10;
+                    shape.Top = presentationInfo.Height - presentationInfo.UserSize - _gap;
                 }
 
-                shape.Left = 10 + (i*(presentationInfo.UserSize + 10));
+                shape.Left = _gap + (i*(presentationInfo.UserSize + _gap));
 
 
-                if (_positionOptions.Right.Checked)
+                if (_positionOptions.Right.Selected)
                 {
-                    float leftConstant = presentationInfo.SlidesCount*presentationInfo.UserSize;
-                    leftConstant = presentationInfo.Width - leftConstant - (presentationInfo.SlidesCount*10) - 10;
-                    
+                    float leftConstant = slidesCount*presentationInfo.UserSize;
+                    leftConstant = presentationInfo.Width - leftConstant - (slidesCount*_gap) - _gap;
+
                     // Add constant to left margin
                     shape.Left = leftConstant + shape.Left;
                 }
@@ -78,11 +83,11 @@ namespace ProgressBar.BuiltInPresentation
                 // Slides are NOT indexed from 0!
                 if ((i + 1) == currentPosition)
                 {
-                    shape.ColorType = ShapeType.PROGRESS_BAR;
+                    shape.ColorType = ShapeType.Active;
                 }
                 else
                 {
-                    shape.ColorType = ShapeType.BACKGROUND;
+                    shape.ColorType = ShapeType.Inactive;
                 }
 
                 shapes.Add(shape);
@@ -100,21 +105,6 @@ namespace ProgressBar.BuiltInPresentation
         IPositionOptions IBar.GetPositionOptions()
         {
             return _positionOptions;
-        }
-
-        public IPositionOptions GetPositionOptions(IPositionOptions positionOptions)
-        {
-            throw new ObsoleteException();
-        }
-
-        public PositionOptions GetPositionOptions()
-        {
-            throw new ObsoleteException();
-        }
-
-        public List<Shape> Render(int currentPosition, PresentationInfo presentationInfo)
-        {
-            throw new NotImplementedException();
         }
     }
 }
