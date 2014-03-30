@@ -254,7 +254,6 @@
     <Compile Include="Helper\ShapeNameHelper.cs" />
     <Compile Include="BuiltInPresentation\DottedBar.cs" />
     <Compile Include="BuiltInPresentation\StrippedBar.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Controller\BarController.cs" />
     <Compile Include="Controller\IBarController.cs" />
     <Compile Include="extension\ExtensionMethods.cs" />
