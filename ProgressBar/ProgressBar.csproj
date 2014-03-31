@@ -254,6 +254,7 @@
     <Compile Include="Bar\Location.cs" />
     <Compile Include="Bar\PositionOptions.cs" />
     <Compile Include="Bar\PresentationInfo.cs" />
+    <Compile Include="CustomExceptions\InvalidSerializedContainer.cs" />
     <Compile Include="Helper\ShapeNameHelper.cs" />
     <Compile Include="BuiltInPresentation\DottedBar.cs" />
     <Compile Include="BuiltInPresentation\StrippedBar.cs" />
@@ -261,7 +262,6 @@
     <Compile Include="Controller\IBarController.cs" />
     <Compile Include="extension\ExtensionMethods.cs" />
     <Compile Include="Helper\TagNameHelper.cs" />
-    <Compile Include="Logger\Logger.cs" />
     <Compile Include="Model\BarModel.cs" />
     <Compile Include="Model\IBarModel.cs" />
     <Compile Include="Model\IPositionOptions.cs" />

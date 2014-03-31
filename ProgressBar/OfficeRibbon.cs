@@ -30,12 +30,12 @@ namespace ProgressBar
 {
     public partial class BarRibbon : IBarView
     {
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private bool _hasBar;
         private IBarModel _model;
         private ShapeNameHelper _nameHelper;
         private IPowerPointAdapter _powerpointAdapter;
         private ITagAdapter _tagAdapter;
-        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         #region MVCLogic
 
@@ -43,18 +43,13 @@ namespace ProgressBar
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
-
-            
+            _log.Info("Ribbon initialized.");
         }
 
         public IBarController Controller { get; set; }
 
         public void Register(IBarModel model)
         {
-
-            this.log.Debug("Debug message");
-            this.log.Info("haha");
-
             model.BarCreated += model_BarCreated;
             model.BarSizeChanged += model_BarSizeChanged;
             model.BarRemoved += model_BarRemoved;
@@ -115,13 +110,22 @@ namespace ProgressBar
         private void AfterPresentationOpenHandle(Presentation pres)
         {
             SetupTagWriter();
-            Debug.WriteLine("Detecting bar...");
+
+            _log.Info("Detecting bar.");
 
             if (_tagAdapter.HasPersistedBar())
             {
-                Debug.WriteLine("Bar detected.");
-                var barFromTag = _tagAdapter.GetPersistedBar();
-                Controller.BarDetected(barFromTag.Bar, barFromTag.PositionOptions);
+                _log.Info("Bar detected.");
+
+                try
+                {
+                    ITagContainer barFromTag = _tagAdapter.GetPersistedBar();
+                    Controller.BarDetected(barFromTag.Bar, barFromTag.PositionOptions);
+                }
+                catch (InvaidSerializedContainerException e)
+                {
+                    _log.Error("Bar was detected but cannot be deserialized.", e);
+                }
             }
         }
 
@@ -381,8 +385,9 @@ namespace ProgressBar
                             break;
 
                         default:
-
                             string message = String.Format("Unknown shape type \"{0}\".", shape.ColorType);
+                            _log.Fatal(message);
+
                             throw new InvalidStateException(message);
                     }
 

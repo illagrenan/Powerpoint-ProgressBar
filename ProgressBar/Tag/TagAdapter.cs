@@ -1,8 +1,11 @@
 ﻿#region
 
 using System;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters;
+using log4net;
 using Newtonsoft.Json;
+using ProgressBar.CustomExceptions;
 using ProgressBar.Helper;
 
 #endregion
@@ -11,6 +14,9 @@ namespace ProgressBar.Tag
 {
     public class TagAdapter : ITagAdapter
     {
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+
         private readonly JsonSerializerSettings _jsonSerializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Objects,
@@ -35,6 +41,12 @@ namespace ProgressBar.Tag
                 _tagWriter.GetTagByKey(TagNameHelper.ContainerKey),
                 _jsonSerializerSettings
                 );
+
+            if (deserializedContainer == null)
+            {
+                _log.Fatal("deserializedContainer is null");
+                throw new InvaidSerializedContainerException();
+            }
 
             return deserializedContainer;
         }

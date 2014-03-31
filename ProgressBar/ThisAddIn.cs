@@ -19,9 +19,6 @@ namespace ProgressBar
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             // http://stackoverflow.com/a/12030801/752142
-
-            // Logger.Logger.Setup();
-
             // http://stackoverflow.com/a/4317263/752142            
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(Resources.log4net);
@@ -33,10 +30,7 @@ namespace ProgressBar
             ShapeNameHelper nameHelper = new ShapeNameHelper();
             IPowerPointAdapter powerpointAdapter = new PowerPointAdapter(Globals.ThisAddIn.Application, nameHelper);
 
-
             Globals.Ribbons.Ribbon.Setup(barController, barModel, powerpointAdapter, nameHelper);
-
-            // Application.PresentationOpen += new PowerPoint.EApplication_PresentationOpenEventHandler(UpdateStatusBarMessage.ShowStatusMessage);
         }
 
 
