@@ -41,7 +41,7 @@
     <PublishUrl>D:\ProgressBar\</PublishUrl>
     <InstallUrl>http://www.presentation-progressbar.com/files/latest/</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.44</ApplicationVersion>
+    <ApplicationVersion>1.0.0.45</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -163,7 +163,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>7D8B355E8BD33B7B8DF63B47F09A032B51E26C96</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>7D43BC57EDC0A9817A8EACE6F1A22E47FE924CD5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -173,8 +173,7 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestTimestampUrl>
-    </ManifestTimestampUrl>
+    <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timstamp.dll</ManifestTimestampUrl>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -366,7 +365,7 @@
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="PowerPoint" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="14.0" VstxVersion="4.0" ApplicationType="PowerPoint" Language="cs" TemplatesPath="VSTOTemplates" DebugInfoExeName="#Software\Microsoft\Office\14.0\PowerPoint\InstallRoot\Path#powerpnt.exe" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
         <Host Name="PowerPoint" GeneratedCodeNamespace="ProgressBar" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="30D27934242791CDB6706441B1DB0D668255E1A7" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="C7069378E8E13AFE948F062BA503A7FB93E07A5C" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

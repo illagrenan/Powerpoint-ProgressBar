@@ -31,6 +31,9 @@ Presentation Progress Bar Add-In for Microsoft Office PowerPoint 2007+
 - **FatCow Icons**: 3800 Free "Farm-Fresh Web Icons"
 	- URL: [http://www.fatcow.com/free-icons](http://www.fatcow.com/free-icons)
 	- License: Creative Commons Attribution 3.0
+- **Apache log4net&trade;**
+	- URL: [https://logging.apache.org/log4net/](https://logging.apache.org/log4net/)
+	- License: [Apache License, Version 2.0](https://logging.apache.org/log4net/license.html)
 
 
 ## License ##
