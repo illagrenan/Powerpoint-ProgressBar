@@ -1,6 +1,8 @@
 Powerpoint-ProgressBar
 ======================
 
+![](http://i.imgur.com/qSUlyfg.png)
+
 Presentation Progress Bar Add-In for Microsoft Office PowerPoint 2007+
 
 ## Todos ##
