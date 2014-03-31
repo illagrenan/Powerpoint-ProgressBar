@@ -2,7 +2,6 @@
 
 using System;
 using ProgressBar.Adapter;
-using ProgressBar.Bar;
 using ProgressBar.Controller;
 using ProgressBar.Helper;
 using ProgressBar.Model;

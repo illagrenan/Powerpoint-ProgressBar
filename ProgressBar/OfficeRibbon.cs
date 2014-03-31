@@ -88,11 +88,6 @@ namespace ProgressBar
             }
         }
 
-        private void ActivePresentationHandle(Presentation Pres)
-        {
-            SetupTagWriter();
-        }
-
         /// <summary>
         ///     Occurs after a presentation is created.
         ///     In MS 2010 when powerpoint is opened or when File -> New.
@@ -244,27 +239,6 @@ namespace ProgressBar
                         }
                     });
             }
-        }
-
-        private bool ProceedWithSameColors()
-        {
-            if (colorDialog_Inactive.Color == colorDialog_Active.Color)
-            {
-                var userResult = MessageBox.Show(
-                    Resources.BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_,
-                    Resources.BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same,
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                    );
-
-                if (userResult == DialogResult.No)
-                {
-                    return false;
-                }
-            }
-
-
-            return true;
         }
 
         private void btn_ChangeForeground_Click(object sender, RibbonControlEventArgs e)
@@ -480,12 +454,6 @@ namespace ProgressBar
             SwapAddRefreshButton();
         }
 
-        private void model_themeChanged(IBar obj)
-        {
-            SetPositionOptions(obj.PositionOptions);
-            model_BarCreated(obj);
-        }
-
         private void ModelDefaultSizeSet(int defaultSize)
         {
             dropDown_BarSize.SelectedItemIndex = defaultSize;
@@ -522,6 +490,26 @@ namespace ProgressBar
                 btn_AlignBottom.Checked,
                 btn_AlignLeft.Checked
                 );
+        }
+
+        private bool ProceedWithSameColors()
+        {
+            if (colorDialog_Inactive.Color == colorDialog_Active.Color)
+            {
+                var userResult = MessageBox.Show(
+                    Resources.BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_,
+                    Resources.BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                    );
+
+                if (userResult == DialogResult.No)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void SetPositionOptions(IPositionOptions newAlignmentOptions)

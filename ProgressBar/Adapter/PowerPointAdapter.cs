@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
-using ProgressBar.Bar;
 using ProgressBar.CustomExceptions;
 using ProgressBar.Helper;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
