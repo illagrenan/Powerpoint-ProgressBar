@@ -252,6 +252,11 @@
             this.button3.ShowImage = true;
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonAbout_Click);
             // 
+            // button4
+            // 
+            this.button4.Label = "";
+            this.button4.Name = "button4";
+            // 
             // BarRibbon
             // 
             this.Name = "BarRibbon";

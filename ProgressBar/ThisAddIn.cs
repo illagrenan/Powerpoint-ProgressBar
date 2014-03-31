@@ -1,10 +1,13 @@
 ﻿#region
 
 using System;
+using System.Xml;
+using log4net.Config;
 using ProgressBar.Adapter;
 using ProgressBar.Controller;
 using ProgressBar.Helper;
 using ProgressBar.Model;
+using ProgressBar.Properties;
 using Office = Microsoft.Office.Core;
 
 #endregion
@@ -16,6 +19,13 @@ namespace ProgressBar
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             // http://stackoverflow.com/a/12030801/752142
+
+            // Logger.Logger.Setup();
+
+            // http://stackoverflow.com/a/4317263/752142            
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(Resources.log4net);
+            XmlConfigurator.Configure(doc.DocumentElement);
 
             IBarModel barModel = new BarModel();
             IBarController barController = new BarController(barModel);

@@ -185,6 +185,9 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-client\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -258,6 +261,7 @@
     <Compile Include="Controller\IBarController.cs" />
     <Compile Include="extension\ExtensionMethods.cs" />
     <Compile Include="Helper\TagNameHelper.cs" />
+    <Compile Include="Logger\Logger.cs" />
     <Compile Include="Model\BarModel.cs" />
     <Compile Include="Model\IBarModel.cs" />
     <Compile Include="Model\IPositionOptions.cs" />
@@ -344,6 +348,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\log4net.xml" />
   </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <PropertyGroup>

@@ -6,7 +6,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using log4net;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
@@ -33,6 +35,7 @@ namespace ProgressBar
         private ShapeNameHelper _nameHelper;
         private IPowerPointAdapter _powerpointAdapter;
         private ITagAdapter _tagAdapter;
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         #region MVCLogic
 
@@ -40,12 +43,18 @@ namespace ProgressBar
             : base(Globals.Factory.GetRibbonFactory())
         {
             InitializeComponent();
+
+            
         }
 
         public IBarController Controller { get; set; }
 
         public void Register(IBarModel model)
         {
+
+            this.log.Debug("Debug message");
+            this.log.Info("haha");
+
             model.BarCreated += model_BarCreated;
             model.BarSizeChanged += model_BarSizeChanged;
             model.BarRemoved += model_BarRemoved;

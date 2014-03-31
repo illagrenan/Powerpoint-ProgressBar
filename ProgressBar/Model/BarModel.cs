@@ -193,6 +193,11 @@ namespace ProgressBar.Model
             Add(_currentBar);
         }
 
+        public void RefreshBar()
+        {
+            Add(_currentBar);
+        }
+
         private IBar GetCurrentBar()
         {
             if (_hasBar == false)
@@ -207,12 +212,6 @@ namespace ProgressBar.Model
         {
             var x = Enumerable.Range(1, 30).ToArray();
             return x;
-        }
-
-
-        public void RefreshBar()
-        {
-            this.Add(_currentBar);
         }
     }
 }

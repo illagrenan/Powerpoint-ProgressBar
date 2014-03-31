@@ -100,6 +100,12 @@ namespace ProgressBar.Controller
             Model.DisableOnFirst();
         }
 
+
+        public void RefreshBarClicked()
+        {
+            Model.RefreshBar();
+        }
+
         private IBar GetThemeByString(string selectedTheme)
         {
             IBar newTheme = null;
@@ -119,12 +125,6 @@ namespace ProgressBar.Controller
             }
 
             return newTheme;
-        }
-
-
-        public void RefreshBarClicked()
-        {
-            this.Model.RefreshBar();
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿#region
-
-
-
-#endregion
-
-namespace ProgressBar.Tag
+﻿namespace ProgressBar.Tag
 {
     public interface ITagAdapter
     {

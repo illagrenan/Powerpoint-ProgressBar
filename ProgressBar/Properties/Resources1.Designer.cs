@@ -126,6 +126,25 @@ namespace ProgressBar.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;log4net&gt;
+        ///  &lt;appender name=&quot;LogFileAppender&quot; type=&quot;log4net.Appender.RollingFileAppender&quot;&gt;
+        ///    &lt;param name=&quot;File&quot; value=&quot;MyFirstLogger.log&quot;/&gt;
+        ///    &lt;lockingModel type=&quot;log4net.Appender.FileAppender+MinimalLock&quot; /&gt;
+        ///    &lt;appendToFile value=&quot;true&quot; /&gt;
+        ///    &lt;rollingStyle value=&quot;Size&quot; /&gt;
+        ///    &lt;maxSizeRollBackups value=&quot;2&quot; /&gt;
+        ///    &lt;maximumFileSize value=&quot;1MB&quot; /&gt;
+        ///    &lt;staticLogFileName value=&quot;true&quot; /&gt;
+        ///    &lt;layout type=&quot;log4net.Layout.PatternLayout&quot;&gt;
+        ///      &lt;param name=&quot;ConversionPattern&quot; value=&quot;%d [%t] %-5p %c % [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string log4net {
+            get {
+                return ResourceManager.GetString("log4net", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap progressbar {
