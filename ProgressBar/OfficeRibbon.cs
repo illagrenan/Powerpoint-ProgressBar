@@ -174,16 +174,19 @@ namespace ProgressBar
                     );
                 return;
             }
-
-
-            string selectedTheme = GetSelectedTheme();
-            Controller.AddBarClicked(selectedTheme);
+            
 
             // Enable items only when adding new bar
             // If users is refresing bar, all items remain enabled
             if (btn_Add.Label == "Add")
             {
+                string selectedTheme = GetSelectedTheme();
+                Controller.AddBarClicked(selectedTheme);
                 SwapStateBarRelatedItems();
+            }
+            else
+            {
+                this.Controller.RefreshBarClicked();
             }
 
             SwapAddRefreshButton();
@@ -390,7 +393,7 @@ namespace ProgressBar
                 ThemeSelectedItemIndex = themeGallery.SelectedItemIndex,
                 DisableFirstSlideChecked = checkBox1.Checked,
                 Bar = obj,
-                PositionOptions = obj.GetPositionOptions
+                PositionOptions = obj.PositionOptions
             };
 
             _tagAdapter.PersistContainer(bt);
@@ -448,7 +451,7 @@ namespace ProgressBar
 
         private void model_themeChanged(IBar obj)
         {
-            SetPositionOptions(obj.GetPositionOptions);
+            SetPositionOptions(obj.PositionOptions);
             model_BarCreated(obj);
         }
 

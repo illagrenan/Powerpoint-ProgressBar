@@ -49,5 +49,7 @@ namespace ProgressBar.Model
         void SetupSizes();
 
         void DisableOnFirst();
+
+        void RefreshBar();
     }
 }

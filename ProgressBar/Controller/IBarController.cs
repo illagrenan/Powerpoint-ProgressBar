@@ -31,5 +31,7 @@ namespace ProgressBar.Controller
         void BarDetected(IBar bar, IPositionOptions positionOptions);
 
         void DisableOnFirstSlideClicked();
+
+        void RefreshBarClicked();
     }
 }

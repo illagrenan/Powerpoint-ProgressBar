@@ -33,31 +33,13 @@ namespace ProgressBar.Tag
 
         public ITagContainer GetPersistedBar()
         {
-            var deserializedTagContainer = new TagContainer
-            {
-                ActiveColor =
-                    JsonConvert.DeserializeObject<Color>(_tagWriter.GetTagByKey(TagNameHelper.MakeKey("active_color"))),
-                InactiveColor =
-                    JsonConvert.DeserializeObject<Color>(_tagWriter.GetTagByKey(TagNameHelper.MakeKey("inactive_color"))),
-                SizeSelectedItemIndex =
-                    JsonConvert.DeserializeObject<int>(
-                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("size_selected_item_index"))),
-                ThemeSelectedItemIndex =
-                    JsonConvert.DeserializeObject<int>(
-                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("theme_selected_item_index"))),
-                PositionOptions =
-                    JsonConvert.DeserializeObject<PositionOptions>(
-                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("position_options")),
-                        _jsonSerializerSettings),
-                DisableFirstSlideChecked =
-                    JsonConvert.DeserializeObject<bool>(
-                        _tagWriter.GetTagByKey(TagNameHelper.MakeKey("disable_first_slide_checked"))),
-                Bar =
-                    JsonConvert.DeserializeObject<IBar>(_tagWriter.GetTagByKey(TagNameHelper.MakeKey("bar")),
-                        _jsonSerializerSettings)
-            };
 
-            return deserializedTagContainer;
+            var r = JsonConvert.DeserializeObject<TagContainer>(
+                _tagWriter.GetTagByKey(TagNameHelper.MakeKey("bar")),
+                _jsonSerializerSettings
+                );
+
+            return r;
         }
 
 
@@ -65,6 +47,7 @@ namespace ProgressBar.Tag
         {
             _tagWriter.SaveTag(TagNameHelper.MainTagKey, true.ToString());
 
+            /*
             string activeColor = JsonConvert.SerializeObject(containerToPersist.ActiveColor);
             _tagWriter.SaveTag(TagNameHelper.MakeKey("active_color"), activeColor);
 
@@ -83,10 +66,14 @@ namespace ProgressBar.Tag
 
             string dddisableFirstSlideChecked = JsonConvert.SerializeObject(containerToPersist.DisableFirstSlideChecked);
             _tagWriter.SaveTag(TagNameHelper.MakeKey("disable_first_slide_checked"), dddisableFirstSlideChecked);
+            */
 
+            string ibbb = JsonConvert.SerializeObject(
+                containerToPersist,
+                Formatting.Indented,
+                _jsonSerializerSettings
+                );
 
-            string ibbb = JsonConvert.SerializeObject(containerToPersist.Bar, Formatting.Indented,
-                _jsonSerializerSettings);
             _tagWriter.SaveTag(TagNameHelper.MakeKey("bar"), ibbb);
         }
 

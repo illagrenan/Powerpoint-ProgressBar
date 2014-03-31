@@ -120,5 +120,11 @@ namespace ProgressBar.Controller
 
             return newTheme;
         }
+
+
+        public void RefreshBarClicked()
+        {
+            this.Model.RefreshBar();
+        }
     }
 }

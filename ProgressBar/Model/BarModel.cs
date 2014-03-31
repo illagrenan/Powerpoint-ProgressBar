@@ -58,15 +58,15 @@ namespace ProgressBar.Model
             _hasBar = true;
             _currentBar = barToAdd;
 
-            AlignmentOptionsChanged(_currentBar.GetPositionOptions);
             BarCreated(barToAdd);
+            AlignmentOptionsChanged(_currentBar.PositionOptions);
         }
 
         public void AddExternalBar(IBar ibb, IPositionOptions po)
         {
             _currentBar = ibb;
             _hasBar = true;
-            _currentBar.GetPositionOptions = po;
+            _currentBar.PositionOptions = po;
 
             /*
              * Událost ExternalBarAdded kromě aktivace Add tlačítka
@@ -78,7 +78,7 @@ namespace ProgressBar.Model
              */
 
             ExternalBarAdded();
-            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions);
+            AlignmentOptionsChanged(GetCurrentBar().PositionOptions);
         }
 
         public IEnumerable<IBar> GetRegisteredBars()
@@ -135,13 +135,13 @@ namespace ProgressBar.Model
 
         public void Reposition(PositionOptions positionOptions)
         {
-            GetCurrentBar().GetPositionOptions.Top.Selected = positionOptions.Top.Selected;
-            GetCurrentBar().GetPositionOptions.Right.Selected = positionOptions.Right.Selected;
-            GetCurrentBar().GetPositionOptions.Bottom.Selected = positionOptions.Bottom.Selected;
-            GetCurrentBar().GetPositionOptions.Left.Selected = positionOptions.Left.Selected;
+            GetCurrentBar().PositionOptions.Top.Selected = positionOptions.Top.Selected;
+            GetCurrentBar().PositionOptions.Right.Selected = positionOptions.Right.Selected;
+            GetCurrentBar().PositionOptions.Bottom.Selected = positionOptions.Bottom.Selected;
+            GetCurrentBar().PositionOptions.Left.Selected = positionOptions.Left.Selected;
 
             Add(GetCurrentBar());
-            AlignmentOptionsChanged(GetCurrentBar().GetPositionOptions);
+            AlignmentOptionsChanged(GetCurrentBar().PositionOptions);
         }
 
         public void Resize(int newSize)
@@ -207,6 +207,12 @@ namespace ProgressBar.Model
         {
             var x = Enumerable.Range(1, 30).ToArray();
             return x;
+        }
+
+
+        public void RefreshBar()
+        {
+            this.Add(_currentBar);
         }
     }
 }

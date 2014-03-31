@@ -34,7 +34,7 @@ namespace ProgressBar.BuiltInPresentation
             _info = new BarInfo(thumbnailImage, friendlyName);
         }
 
-        IPositionOptions IBar.GetPositionOptions
+        IPositionOptions IBar.PositionOptions
         {
             get { return _positionInfo; }
             set { _positionInfo = (PositionOptions) value; }
