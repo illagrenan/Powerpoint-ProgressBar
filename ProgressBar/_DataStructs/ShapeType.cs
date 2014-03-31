@@ -1,10 +1,8 @@
-﻿
-namespace ProgressBar.DataStructs
+﻿namespace ProgressBar.DataStructs
 {
-    enum ShapeType
+    public enum ShapeType
     {
-        BACKGROUND,
-        PROGRESS_BAR,
-        UNKNOWN
+        Inactive = 1,
+        Active = 2
     }
 }

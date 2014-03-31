@@ -119,6 +119,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -194,6 +195,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Tools.Applications.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Office, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -230,34 +234,64 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="AboutInformations.cs">
+    <Compile Include="AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutInformations.Designer.cs">
-      <DependentUpon>AboutInformations.cs</DependentUpon>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataStructs\Theme.cs" />
-    <Compile Include="ProgressShape\DottedBar.cs" />
-    <Compile Include="ProgressShape\PresentationBar.cs" />
-    <Compile Include="RunningPresentation\Presentation.cs" />
+    <Compile Include="Adapter\IPowerPointAdapter.cs" />
+    <Compile Include="Adapter\PowerPointAdapter.cs" />
+    <Compile Include="Bar\BarInfo.cs" />
+    <Compile Include="Bar\BasicShape.cs" />
+    <Compile Include="Bar\IBar.cs" />
+    <Compile Include="Bar\IBarInfo.cs" />
+    <Compile Include="Bar\IBasicShape.cs" />
+    <Compile Include="Bar\ILocation.cs" />
+    <Compile Include="Bar\Location.cs" />
+    <Compile Include="Bar\PositionOptions.cs" />
+    <Compile Include="Bar\PresentationInfo.cs" />
+    <Compile Include="Helper\ShapeNameHelper.cs" />
+    <Compile Include="BuiltInPresentation\DottedBar.cs" />
+    <Compile Include="BuiltInPresentation\StrippedBar.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Controller\BarController.cs" />
+    <Compile Include="Controller\IBarController.cs" />
+    <Compile Include="extension\ExtensionMethods.cs" />
+    <Compile Include="Helper\TagNameHelper.cs" />
+    <Compile Include="Model\BarModel.cs" />
+    <Compile Include="Model\IBarModel.cs" />
+    <Compile Include="Model\IPositionOptions.cs" />
+    <Compile Include="MVC\IController.cs" />
+    <Compile Include="MVC\IModel.cs" />
+    <Compile Include="MVC\IView.cs" />
+    <Compile Include="OfficeRibbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OfficeRibbon.Designer.cs">
+      <DependentUpon>OfficeRibbon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag\TagContainer.cs" />
+    <Compile Include="Tag\ITagContainer.cs" />
+    <Compile Include="Tag\ITagAdapter.cs" />
+    <Compile Include="Tag\ITagWriter.cs" />
+    <Compile Include="Tag\TagAdapter.cs" />
+    <Compile Include="Tag\TagWriter.cs" />
+    <Compile Include="View\IBarView.cs" />
+    <Compile Include="CustomExceptions\NoActiveBarException.cs" />
+    <Compile Include="CustomExceptions\NoRegisteredBarException.cs" />
+    <Compile Include="CustomExceptions\ObsoleteException.cs" />
     <Compile Include="CustomExceptions\InvalidArgumentException.cs" />
-    <Compile Include="DataStructs\BarAlign.cs" />
-    <Compile Include="DataStructs\BarColorableAreas.cs" />
-    <Compile Include="ProgressShape\SolidBar.cs" />
     <Compile Include="DataStructs\ShapeType.cs" />
     <Compile Include="CustomExceptions\InvalidStateException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Ribbon_ProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ribbon_ProgressBar.Designer.cs">
-      <DependentUpon>Ribbon_ProgressBar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StatusBarMessage\UpdateStatusBarMessage.cs" />
-    <EmbeddedResource Include="AboutInformations.resx">
-      <DependentUpon>AboutInformations.cs</DependentUpon>
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OfficeRibbon.resx">
+      <DependentUpon>OfficeRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -269,10 +303,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Ribbon_ProgressBar.resx">
-      <DependentUpon>Ribbon_ProgressBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="J44PERo0wfY2ynFr.p12" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -282,7 +313,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Slide\SlideProperties.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -305,40 +335,7 @@
     <None Include="Resources\color_wheel.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\border_2_top.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\border_2_bottom.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\globe_model.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\email_open.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\update.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\bug.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Links.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\border_2_left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\border_2_right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\error.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\theme_dotted.png" />
