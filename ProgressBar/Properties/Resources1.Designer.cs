@@ -70,6 +70,24 @@ namespace ProgressBar.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active and inactive colors are the same.
+        /// </summary>
+        internal static string BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same {
+            get {
+                return ResourceManager.GetString("BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to cancel this change?.
+        /// </summary>
+        internal static string BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_ {
+            get {
+                return ResourceManager.GetString("BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This presentation has no slides..
         /// </summary>
         internal static string BarRibbon1_btn_Add_Click_This_presentation_has_no_slides_ {

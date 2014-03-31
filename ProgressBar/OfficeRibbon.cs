@@ -174,7 +174,7 @@ namespace ProgressBar
                     );
                 return;
             }
-            
+
 
             // Enable items only when adding new bar
             // If users is refresing bar, all items remain enabled
@@ -186,7 +186,7 @@ namespace ProgressBar
             }
             else
             {
-                this.Controller.RefreshBarClicked();
+                Controller.RefreshBarClicked();
             }
 
             SwapAddRefreshButton();
@@ -228,6 +228,11 @@ namespace ProgressBar
         {
             if (DialogResult.OK == colorDialog_Inactive.ShowDialog())
             {
+                if (ProceedWithSameColors() == false)
+                {
+                    return;
+                }
+
                 colorDialog_Inactive.Color = colorDialog_Inactive.Color;
 
                 _powerpointAdapter.AddInShapes().ForEach(
@@ -241,6 +246,27 @@ namespace ProgressBar
             }
         }
 
+        private bool ProceedWithSameColors()
+        {
+            if (colorDialog_Inactive.Color == colorDialog_Active.Color)
+            {
+                var userResult = MessageBox.Show(
+                    Resources.BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_,
+                    Resources.BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                    );
+
+                if (userResult == DialogResult.No)
+                {
+                    return false;
+                }
+            }
+
+
+            return true;
+        }
+
         private void btn_ChangeForeground_Click(object sender, RibbonControlEventArgs e)
         {
             // Microsoft.Office.Tools.Ribbon.RibbonButton b = (Microsoft.Office.Tools.Ribbon.RibbonButton)sender;
@@ -248,6 +274,11 @@ namespace ProgressBar
 
             if (DialogResult.OK == colorDialog_Active.ShowDialog())
             {
+                if (ProceedWithSameColors() == false)
+                {
+                    return;
+                }
+
                 colorDialog_Active.Color = colorDialog_Active.Color;
 
                 _powerpointAdapter.AddInShapes().ForEach(
