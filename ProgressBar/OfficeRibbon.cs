@@ -51,7 +51,6 @@ namespace ProgressBar
         public void Register(IBarModel model)
         {
             model.BarCreated += model_BarCreated;
-            model.BarSizeChanged += model_BarSizeChanged;
             model.BarRemoved += model_BarRemoved;
             model.BarsRegistered += model_BarsRegistered;
             model.AlignmentOptionsChanged += model_AlignmentOptionsChanged;
@@ -427,11 +426,6 @@ namespace ProgressBar
             _tagAdapter.RemoveTagContainer();
         }
 
-        private void model_BarSizeChanged(IBar obj)
-        {
-            Controller.RemoveBarClicked();
-            Controller.AddBarClicked(GetSelectedTheme());
-        }
 
         private void model_BarsRegistered(List<IBar> bars)
         {

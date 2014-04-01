@@ -18,7 +18,6 @@ namespace ProgressBar.Model
         event Action<IBar> BarCreated;
         event Action<IBar> BarInfoRetrieved;
         event Action BarRemoved;
-        event Action<IBar> BarSizeChanged;
         event Action<List<IBar>> BarsRegistered;
         event Action<Dictionary<ShapeType, Color>> ColorsSet;
         event Action<int> DefaultSizeSet;
