@@ -1,13 +1,5 @@
 ﻿#region
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
 using log4net;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
@@ -22,6 +14,14 @@ using ProgressBar.Model;
 using ProgressBar.Properties;
 using ProgressBar.Tag;
 using ProgressBar.View;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
 #endregion
@@ -181,7 +181,6 @@ namespace ProgressBar
                     );
                 return;
             }
-
 
             // Enable items only when adding new bar
             // If users is refresing bar, all items remain enabled
@@ -390,7 +389,6 @@ namespace ProgressBar
                             throw new InvalidStateException(message);
                     }
 
-
                     addedShape.Line.Weight = 0;
                     addedShape.Line.Visible = MsoTriState.msoFalse;
                 }
@@ -425,7 +423,6 @@ namespace ProgressBar
             _hasBar = false;
             _tagAdapter.RemoveTagContainer();
         }
-
 
         private void model_BarsRegistered(List<IBar> bars)
         {

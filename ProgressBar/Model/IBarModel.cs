@@ -1,11 +1,11 @@
 ﻿#region
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 using ProgressBar.Bar;
 using ProgressBar.DataStructs;
 using ProgressBar.MVC;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 #endregion
 
@@ -16,12 +16,19 @@ namespace ProgressBar.Model
         event Action<IPositionOptions> AlignmentOptionsChanged;
 
         event Action<IBar> BarCreated;
+
         event Action<IBar> BarInfoRetrieved;
+
         event Action BarRemoved;
+
         event Action<List<IBar>> BarsRegistered;
+
         event Action<Dictionary<ShapeType, Color>> ColorsSet;
+
         event Action<int> DefaultSizeSet;
+
         event Action ExternalBarAdded;
+
         event Action<int[]> SizesSet;
 
         void Add(IBar barToAdd);
@@ -35,6 +42,7 @@ namespace ProgressBar.Model
         void RegisterBars();
 
         void RemoveBar();
+
         void Reposition(PositionOptions positionOptions);
 
         void Resize(int newSize);
