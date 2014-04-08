@@ -115,7 +115,7 @@ namespace ProgressBar.Model
         public void RegisterBars()
         {
             _registeredBars.Add(new DottedBar());
-            _registeredBars.Add(new StrippedBar());
+            _registeredBars.Add(new StripedBar());
 
             if (BarsRegistered != null)
             {

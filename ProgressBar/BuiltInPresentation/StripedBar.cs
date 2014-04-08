@@ -12,13 +12,13 @@ using ProgressBar.Properties;
 
 namespace ProgressBar.BuiltInPresentation
 {
-    internal class StrippedBar : IBar
+    internal class StripedBar : IBar
     {
         private readonly IBarInfo _info;
         private PositionOptions _positionInfo;
         private PresentationInfo _presentationInfo;
 
-        public StrippedBar()
+        public StripedBar()
         {
             _positionInfo = new PositionOptions
             {
@@ -29,7 +29,7 @@ namespace ProgressBar.BuiltInPresentation
             };
 
             Image thumbnailImage = Resources.theme_solid;
-            const string friendlyName = "Stripped Bar";
+            const string friendlyName = "Striped Bar";
 
             _info = new BarInfo(thumbnailImage, friendlyName);
         }

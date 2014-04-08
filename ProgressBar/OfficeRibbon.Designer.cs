@@ -171,7 +171,7 @@
             // checkBox1
             // 
             this.checkBox1.Enabled = false;
-            this.checkBox1.Label = "Disable on First slide";
+            this.checkBox1.Label = "Disable on first slide";
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.checkBox1_Click);
             // 

@@ -70,7 +70,7 @@ namespace ProgressBar.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active and inactive colors are the same.
+        ///   Looks up a localized string similar to Same active and inactive colour.
         /// </summary>
         internal static string BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same {
             get {
@@ -79,7 +79,7 @@ namespace ProgressBar.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to cancel this change?.
+        ///   Looks up a localized string similar to Active and inactive colours are the same. Do you want to cancel this change?.
         /// </summary>
         internal static string BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_ {
             get {

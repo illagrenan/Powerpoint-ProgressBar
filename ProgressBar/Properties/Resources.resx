@@ -149,10 +149,10 @@
     <value>Unable to add bar</value>
   </data>
   <data name="BarRibbon_ProceedWithSameColors_Do_you_want_to_cancel_this_change_" xml:space="preserve">
-    <value>Do you want to cancel this change?</value>
+    <value>Active and inactive colours are the same. Do you want to cancel this change?</value>
   </data>
   <data name="BarRibbon_ProceedWithSameColors_Active_and_inactive_colors_are_the_same" xml:space="preserve">
-    <value>Active and inactive colors are the same</value>
+    <value>Same active and inactive colour</value>
   </data>
   <data name="log4net" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\log4net.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
