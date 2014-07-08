@@ -41,11 +41,11 @@
     <PublishUrl>D:\Programming\django\presentation_progressbar_com\data\files\latest\</PublishUrl>
     <InstallUrl>https://www.presentation-progressbar.com/files/latest/</InstallUrl>
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>2.0.0.7</ApplicationVersion>
+    <ApplicationVersion>2.0.0.8</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateInterval>0</UpdateInterval>
-    <UpdateIntervalUnits>days</UpdateIntervalUnits>
+    <UpdateInterval>1</UpdateInterval>
+    <UpdateIntervalUnits>weeks</UpdateIntervalUnits>
     <ProductName>Progress Bar for Microsoft PowerPoint</ProductName>
     <PublisherName>Václav Dohnal</PublisherName>
     <SupportUrl>http://www.presentation-progressbar.com/</SupportUrl>
